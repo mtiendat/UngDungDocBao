@@ -4,5 +4,13 @@
     <string name="title_setting">Cài đặt</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_dang_nhap">Đăng nhập</string>
+    <string name="password">Password</string>
+    <string name="dang_nhap_bang_google">Đăng nhập bằng google</string>
+    <string name="dang_nhap_bang_facebok">Đăng nhập bằng facebok</string>
+    <string name="dang_nhap">Đăng nhập</string>
+    <string name="quen_mat_khau">Quên mật khẩu ?</string>
+    <string name="tao_tai_khoan">Tạo tài khoản</string>
+    <string name="email">Email</string>
 
 </resources>
