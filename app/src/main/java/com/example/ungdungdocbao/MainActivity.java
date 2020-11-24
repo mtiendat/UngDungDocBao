@@ -2,14 +2,18 @@ package com.example.ungdungdocbao;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
 
-import com.example.ungdungdocbao.ui.home.HomeFragment;
+//import com.example.ungdungdocbao.ui.home.HomeFragment;
+//import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -23,7 +27,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
-
+    public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
     private ViewPager viewPager;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -45,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
         final BottomNavigationView navigation = findViewById(R.id.bot_nav_view);
@@ -79,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         BottomNavPagerAdapter adapter = new BottomNavPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         adapter.addFragment(new FirstFragment());
-        adapter.addFragment(new HomeFragment());
+       // adapter.addFragment(new HomeFragment());
         adapter.addFragment(new SettingFragment());
         viewPager.setAdapter(adapter);
     }
