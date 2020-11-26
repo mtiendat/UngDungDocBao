@@ -14,9 +14,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
-
-import com.example.ungdungdocbao.Newspaper;
-import com.example.ungdungdocbao.NewspaperAdapter;
 import com.example.ungdungdocbao.R;
 import com.google.android.material.tabs.TabLayout;
 

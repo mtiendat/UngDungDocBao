@@ -108,7 +108,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/imgBtn_dangnhap"
             android:layout_width="0dp"
             android:layout_height="22dp"
             android:layout_marginStart="220dp"
@@ -116,6 +116,7 @@
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="4dp"
             android:background="#FFFFFF"
+            android:onClick="nextActivityDangNhap"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
@@ -123,7 +124,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/imgBtn_dangki"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginStart="196dp"

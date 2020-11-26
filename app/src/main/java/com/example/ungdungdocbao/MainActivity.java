@@ -1,11 +1,18 @@
 package com.example.ungdungdocbao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Toolbar;
 
 //import com.example.ungdungdocbao.ui.home.HomeFragment;
 //import com.example.ungdungdocbao.ui.setting.SettingFragment;
+import com.example.ungdungdocbao.ui.favorite.FavoriteFragment;
+import com.example.ungdungdocbao.ui.home.HomeFragment;
 import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
     private ViewPager viewPager;
+    private ImageButton imgBtnSetting;
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -38,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_home:
                     viewPager.setCurrentItem(0);
                     return true;
-                case R.id.navigation_setting:
+                case R.id.navigation_favorite:
                     viewPager.setCurrentItem(1);
                     return true;
             }
@@ -49,11 +57,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
+        nextActivitySetting();
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
         final BottomNavigationView navigation = findViewById(R.id.bot_nav_view);
@@ -72,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                         navigation.setSelectedItemId(R.id.navigation_home);
                         break;
                     case 1:
-                        navigation.setSelectedItemId(R.id.navigation_setting);
+                        navigation.setSelectedItemId(R.id.navigation_favorite);
                         break;
                 }
             }
@@ -86,9 +92,19 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         BottomNavPagerAdapter adapter = new BottomNavPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         adapter.addFragment(new FirstFragment());
-       // adapter.addFragment(new HomeFragment());
-        adapter.addFragment(new SettingFragment());
+        adapter.addFragment(new HomeFragment());
+        adapter.addFragment(new FavoriteFragment());
         viewPager.setAdapter(adapter);
     }
 
+    public void nextActivitySetting() {
+        imgBtnSetting=findViewById(R.id.imgBtn_setting);
+        imgBtnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,SettingFragment.class);
+                startActivity(intent);
+            }
+        });
+    }
 }

@@ -2,6 +2,7 @@
     <string name="app_name">UngDungDocBao</string>
     <string name="title_home">Trang chủ</string>
     <string name="title_setting">Cài đặt</string>
+    <string name="title_favorite">Tin yêu thích</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_dang_nhap">Đăng nhập</string>

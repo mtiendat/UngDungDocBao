@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.LinkedList;
 
 /**
@@ -61,7 +60,7 @@ public class ThoiSu extends Fragment {
         for(int i=0;i<10;i++)
         {
             Newspaper news = new Newspaper("TIÊU ĐỀ SỐ"+i,"MÔ TẢ THỨ "+i);
-            listNews.addLast(news);
+            listNews.add(news);
         }
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview);
         mAdapter=new NewspaperAdapter(getContext(),listNews);
