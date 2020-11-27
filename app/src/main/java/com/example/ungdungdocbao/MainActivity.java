@@ -56,10 +56,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTheme(R.style.SplashScreenTheme);//SplashScreen
         setContentView(R.layout.activity_main);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        nextActivitySetting();
+
+        nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
         final BottomNavigationView navigation = findViewById(R.id.bot_nav_view);
