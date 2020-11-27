@@ -15,6 +15,27 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_dangky"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/vien"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/actionBarTheme"
+                app:titleTextColor="@color/cardview_dark_background">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="?android:attr/actionBarSize"
+                    android:gravity="center"
+                    android:text="Đăng Ký"
+                    android:textColor="@color/cardview_dark_background"
+                    android:textSize="20dp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="14dp" />
+            </androidx.appcompat.widget.Toolbar>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

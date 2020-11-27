@@ -28,5 +28,17 @@ public class DangKy extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dang_ky);
+        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar_dangky);
+        setSupportActionBar(toolbar);; //sudung toolbar nhu actionbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nut back cho toolbar
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+            }
+        });
+
+
     }
 }

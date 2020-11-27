@@ -124,7 +124,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/imgBtn_dangki"
+            android:id="@+id/imgBtn_dangky"
             android:layout_width="0dp"
             android:layout_height="28dp"
             android:layout_marginStart="196dp"
@@ -132,11 +132,15 @@
             android:layout_marginEnd="37dp"
             android:layout_marginBottom="4dp"
             android:background="#FFFFFF"
+            android:onClick="nextActivityDangKy"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

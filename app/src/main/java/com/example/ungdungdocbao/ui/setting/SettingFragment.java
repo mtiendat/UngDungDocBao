@@ -17,12 +17,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.ungdungdocbao.DangKy;
 import com.example.ungdungdocbao.DangNhap;
 import com.example.ungdungdocbao.R;
 
 public class SettingFragment extends FragmentActivity {
 
     private ImageButton imgBtnDangNhap;
+    private ImageButton imgBtnDangKy;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -41,6 +43,17 @@ public class SettingFragment extends FragmentActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingFragment.this, DangNhap.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void nextActivityDangKy(View view) {
+        imgBtnDangKy=findViewById(R.id.imgBtn_dangky);
+        imgBtnDangKy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingFragment.this, DangKy.class);
                 startActivity(intent);
             }
         });

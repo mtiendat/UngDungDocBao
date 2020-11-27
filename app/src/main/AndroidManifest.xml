@@ -30,6 +30,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.setting.SettingFragment"/>
         </activity>
+        <activity android:name=".DangKy" android:parentActivityName=".ui.setting.SettingFragment">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.setting.SettingFragment"/>
+        </activity>
+
     </application>
 
 </manifest>
