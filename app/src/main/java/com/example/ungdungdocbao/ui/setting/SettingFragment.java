@@ -1,27 +1,20 @@
 package com.example.ungdungdocbao.ui.setting;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.example.ungdungdocbao.DangKy;
 import com.example.ungdungdocbao.DangNhap;
@@ -32,7 +25,8 @@ public class SettingFragment extends AppCompatActivity {
 
     private ImageButton imgBtnDangNhap;
     private ImageButton imgBtnDangKy;
-    public  static Boolean mInNightMode=false;
+    private Switch switch_btn;
+    SaveState saveState ;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -53,24 +47,27 @@ public class SettingFragment extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        SwitchCompat switchCompat=findViewById(R.id.switch_nen_toi);
-        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        switch_btn= findViewById(R.id.switch_nen_toi);
+        if(saveState.getState()==true)
+            switch_btn.setChecked(true);
+
+        switch_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                mInNightMode=isChecked;
-                int delaytime=200;
-
-                buttonView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(mInNightMode){
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                        }
-                        else{
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                        }
-                    }
-                },delaytime);
+                if(isChecked){
+                    saveState.setState(true);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                }
+                else{
+                    saveState.setState(false);
+                    getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                }
             }
         });
 
