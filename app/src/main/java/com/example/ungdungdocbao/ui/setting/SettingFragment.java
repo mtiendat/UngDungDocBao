@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -28,6 +32,7 @@ public class SettingFragment extends AppCompatActivity {
 
     private ImageButton imgBtnDangNhap;
     private ImageButton imgBtnDangKy;
+    public  static Boolean mInNightMode=false;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -46,6 +51,26 @@ public class SettingFragment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
+        SwitchCompat switchCompat=findViewById(R.id.switch_nen_toi);
+        switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mInNightMode=isChecked;
+                int delaytime=200;
+
+                buttonView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(mInNightMode){
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        }
+                        else{
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        }
+                    }
+                },delaytime);
             }
         });
 

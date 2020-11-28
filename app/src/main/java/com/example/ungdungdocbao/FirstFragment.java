@@ -48,6 +48,7 @@ public class FirstFragment extends Fragment {
         // Inflate the layout for this fragment
         someMethodThatUsesActivity(getActivity());//ẨN THANH STATUS TRẠNG THÁI
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
+
         mFirstViewPager = (ViewPager) rootView.findViewById(R.id.viewpage_content);
         mTabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
         //Drawer Toolbar

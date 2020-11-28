@@ -23,17 +23,16 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:drawable/screen_background_light_transparent"
-            android:minHeight="?attr/actionBarSize"
-             />
+            android:minHeight="?attr/actionBarSize" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            app:tabIndicatorColor="@color/colorThemeVNExpress"
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorThemeVNExpress"
-            app:tabIndicatorColor="@color/colorThemeVNExpress"/>
+            app:tabSelectedTextColor="@color/colorThemeVNExpress" />
     </LinearLayout>
 
     <androidx.viewpager.widget.ViewPager

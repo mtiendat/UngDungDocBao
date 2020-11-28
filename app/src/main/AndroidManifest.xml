@@ -15,29 +15,33 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashScreenTheme">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.setting.SettingFragment" android:parentActivityName=".MainActivity">
+        <activity android:name=".ui.setting.SettingFragment" android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>
         </activity>
-        <activity android:name=".DangNhap" android:parentActivityName=".ui.setting.SettingFragment">
+        <activity android:name=".DangNhap" android:parentActivityName=".ui.setting.SettingFragment"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.setting.SettingFragment"/>
         </activity>
-        <activity android:name=".DangKy" android:parentActivityName=".ui.setting.SettingFragment">
+        <activity android:name=".DangKy" android:parentActivityName=".ui.setting.SettingFragment"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.setting.SettingFragment"/>
         </activity>
-        <activity android:name=".TrangChiTiet" android:parentActivityName=".MainActivity">
+        <activity android:name=".TrangChiTiet" android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity"/>

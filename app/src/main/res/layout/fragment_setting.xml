@@ -231,20 +231,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="0dp"
-            android:layout_height="28dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="37dp"
-            android:layout_marginBottom="6dp"
-            android:background="#FFFFFF"
-            android:src="@drawable/ic_baseline_radio_button_checked_24"
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_nen_toi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.898"
             app:layout_constraintStart_toEndOf="@+id/textView11"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.538" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
