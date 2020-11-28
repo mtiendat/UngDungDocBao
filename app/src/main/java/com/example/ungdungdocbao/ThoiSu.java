@@ -60,6 +60,7 @@ public class ThoiSu extends Fragment {
         for(int i=0;i<10;i++)
         {
             Newspaper news = new Newspaper("TIÊU ĐỀ SỐ"+i,"MÔ TẢ THỨ "+i);
+
             listNews.add(news);
         }
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview);
