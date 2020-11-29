@@ -2,11 +2,14 @@ package com.example.ungdungdocbao;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ungdungdocbao.ui.setting.SaveState;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +17,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class CongNghe extends Fragment {
+    SaveState saveState;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,13 +56,16 @@ public class CongNghe extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_cong_nghe, container, false);
     }
 }

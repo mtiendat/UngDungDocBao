@@ -13,6 +13,7 @@ import android.widget.Toolbar;
 //import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.example.ungdungdocbao.ui.favorite.FavoriteFragment;
 import com.example.ungdungdocbao.ui.home.HomeFragment;
+import com.example.ungdungdocbao.ui.setting.SaveState;
 import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private ImageButton imgBtnSetting;
     private ImageButton imgBtnSearch;
+    SaveState saveState;
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
@@ -59,9 +62,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setTheme(R.style.SplashScreenTheme);//SplashScreen
         setContentView(R.layout.activity_main);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
         nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -98,8 +98,16 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new FavoriteFragment());
         viewPager.setAdapter(adapter);
+
     }
 
+    public  void DarkMode(){
+        saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
     public void nextActivitySetting() {
         imgBtnSetting=findViewById(R.id.imgBtn_setting);
         imgBtnSetting.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     public void nextTrangChiTiet(View view) {
@@ -122,4 +131,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }

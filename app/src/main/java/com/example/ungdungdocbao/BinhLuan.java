@@ -22,4 +22,6 @@ public class BinhLuan {
     public void setContent(String content) {
         this.content = content;
     }
+
+
 }

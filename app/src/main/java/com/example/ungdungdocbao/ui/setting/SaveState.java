@@ -2,6 +2,8 @@ package com.example.ungdungdocbao.ui.setting;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class SaveState {
     Context context;
     SharedPreferences sharedPreferences;
@@ -19,6 +21,7 @@ public class SaveState {
     public  boolean getState(){
         return sharedPreferences.getBoolean("bkey",false);
     }
+
 }
 
 

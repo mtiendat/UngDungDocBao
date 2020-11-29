@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ungdungdocbao.ui.setting.SaveState;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
@@ -29,6 +31,7 @@ public class FirstFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
+    SaveState saveState;
     public FirstFragment() {
 
     }
@@ -36,7 +39,6 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     public void someMethodThatUsesActivity(Activity myActivityReference){
@@ -45,6 +47,8 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
         someMethodThatUsesActivity(getActivity());//ẨN THANH STATUS TRẠNG THÁI
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);

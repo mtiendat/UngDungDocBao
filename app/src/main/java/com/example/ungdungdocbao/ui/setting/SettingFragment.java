@@ -27,6 +27,8 @@ public class SettingFragment extends AppCompatActivity {
     private ImageButton imgBtnDangKy;
     private Switch switch_btn;
     SaveState saveState ;
+    SaveData saveData;
+    Switch aSwitch;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_setting, container, false);
@@ -70,6 +72,8 @@ public class SettingFragment extends AppCompatActivity {
                 }
             }
         });
+
+
 
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.ungdungdocbao.ui.setting.SaveState;
+
 import java.util.LinkedList;
 
 /**
@@ -22,6 +26,7 @@ public class ThoiSu extends Fragment {
     private RecyclerView recyclerView;
     private NewspaperAdapter mAdapter;
     private LinkedList<Newspaper> listNews = new LinkedList<>();
+    SaveState saveState;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,6 +62,7 @@ public class ThoiSu extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         for(int i=0;i<10;i++)
         {
             Newspaper news = new Newspaper("TIÊU ĐỀ SỐ"+i,"MÔ TẢ THỨ "+i);
@@ -76,12 +82,12 @@ public class ThoiSu extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_thoi_su, container, false);
     }
