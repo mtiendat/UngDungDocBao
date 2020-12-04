@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFEB3B"
     tools:context=".ThoiSu">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview"
+        android:id="@+id/recyclerview_thoisu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-         />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

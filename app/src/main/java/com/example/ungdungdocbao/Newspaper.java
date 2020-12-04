@@ -1,25 +1,76 @@
 package com.example.ungdungdocbao;
 
 public class Newspaper {
-    private String title;
-    private String description;
-    public Newspaper(String title, String description){
-        this.title=title;
-        this.description=description;
+    private String TieuDe;
+    private String DanhMuc;
+    private String MoTa;
+    private String NoiDung;
+    private String NgayDang;
+    private String HinhAnh;
+    private String TieuDeHinhAnh;
+    public Newspaper(String TieuDe,String DanhMuc,String MoTa,String NoiDung,String NgayDang, String HinhAnh,String TieuDeHinhAnh){
+        this.TieuDe=TieuDe;
+        this.DanhMuc=DanhMuc;
+        this.MoTa=MoTa;
+        this.NoiDung=NoiDung;
+        this.NgayDang=NgayDang;
+        this.HinhAnh = HinhAnh;
+        this.TieuDeHinhAnh= TieuDeHinhAnh;
+
     }
-    public String getTitle() {
-        return title;
+    public String getTieuDe() {
+        return TieuDe;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTieuDe(String tieuDe) {
+        TieuDe = tieuDe;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDanhMuc() {
+        return DanhMuc;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDanhMuc(String danhMuc) {
+        DanhMuc = danhMuc;
+    }
+
+    public String getMoTa() {
+        return MoTa;
+    }
+
+    public void setMoTa(String moTa) {
+        MoTa = moTa;
+    }
+
+    public String getNoiDung() {
+        return NoiDung;
+    }
+
+    public void setNoiDung(String noiDung) {
+        NoiDung = noiDung;
+    }
+
+    public String getNgayDang() {
+        return NgayDang;
+    }
+
+    public void setNgayDang(String ngayDang) {
+        NgayDang = ngayDang;
+    }
+
+    public String getHinhAnh() {
+        return HinhAnh;
+    }
+
+    public void setHinhAnh(String hinhAnh) {
+        HinhAnh = hinhAnh;
+    }
+
+    public String getTieuDeHinhAnh() {
+        return TieuDeHinhAnh;
+    }
+
+    public void setTieuDeHinhAnh(String tieuDeHinhAnh) {
+        TieuDeHinhAnh = tieuDeHinhAnh;
     }
 }

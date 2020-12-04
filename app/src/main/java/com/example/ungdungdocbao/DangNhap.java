@@ -41,6 +41,7 @@ public class DangNhap extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
+
         saveState=new SaveState(this);
         if(saveState.getState()==true)
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);

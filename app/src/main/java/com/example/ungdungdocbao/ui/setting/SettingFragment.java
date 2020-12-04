@@ -27,7 +27,6 @@ public class SettingFragment extends AppCompatActivity {
     private ImageButton imgBtnDangKy;
     private Switch switch_btn;
     SaveState saveState ;
-    SaveData saveData;
     Switch aSwitch;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +48,8 @@ public class SettingFragment extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
-        saveState=new SaveState(this);
-        if(saveState.getState()==true)
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
+        DarkMode();
 
         switch_btn= findViewById(R.id.switch_nen_toi);
         if(saveState.getState()==true)
@@ -76,7 +72,13 @@ public class SettingFragment extends AppCompatActivity {
 
 
     }
-
+    public void DarkMode(){
+        saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+    }
     public void nextActivityDangNhap(View view) {
         imgBtnDangNhap=findViewById(R.id.imgBtn_dangnhap);
         imgBtnDangNhap.setOnClickListener(new View.OnClickListener() {

@@ -10,15 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.LinkedList;
+import java.util.List;
 
 public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.NewspaperViewHolder> {
 
-    private final LinkedList<Newspaper> listNews;
+    private final List<Newspaper> listNews;
     private LayoutInflater mInflater;
-    public NewspaperAdapter(Context context, LinkedList<Newspaper> newsList) {
+    private Context context;
+    public NewspaperAdapter(Context context, List<Newspaper> newsList) {
         mInflater=LayoutInflater.from(context);
         this.listNews = newsList;
+        this.context=context;
     }
 
     @NonNull
@@ -31,8 +36,12 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
     @Override
     public void onBindViewHolder(@NonNull NewspaperViewHolder holder, int position) {
         Newspaper newspaper = listNews.get(position);
-        holder.mTitle.setText(newspaper.getTitle().toString());
-        holder.mDesciption.setText(newspaper.getDescription().toString());
+        Picasso.get()
+                .load(newspaper.getHinhAnh())
+                .into(holder.mHinhAnh);
+        holder.mTieuDe.setText(newspaper.getTieuDe().toString());
+        holder.mMoTa.setText(newspaper.getMoTa().toString());
+
     }
 
     @Override
@@ -42,15 +51,16 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 
     public class NewspaperViewHolder extends RecyclerView.ViewHolder{
 
-        private  final ImageView imageView;
-        private final TextView mTitle;
-        private final TextView mDesciption;
+        final ImageView mHinhAnh;
+        final TextView mTieuDe;
+        final TextView mMoTa;
+
         final NewspaperAdapter mAdapter;
         public NewspaperViewHolder(@NonNull View itemView, NewspaperAdapter mAdapter) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.img_main);
-            mTitle=itemView.findViewById(R.id.txt_title);
-            mDesciption=itemView.findViewById(R.id.txt_desciption);
+            mHinhAnh=itemView.findViewById(R.id.img_main);
+            mTieuDe=itemView.findViewById(R.id.txt_title);
+            mMoTa=itemView.findViewById(R.id.txt_desciption);
             this.mAdapter = mAdapter;
         }
     }

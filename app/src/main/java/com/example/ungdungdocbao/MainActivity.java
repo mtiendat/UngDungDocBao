@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.SplashScreenTheme);//SplashScreen
         setContentView(R.layout.activity_main);
         nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public  void DarkMode(){
+    public void DarkMode(){
         saveState=new SaveState(this);
         if(saveState.getState()==true)
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
