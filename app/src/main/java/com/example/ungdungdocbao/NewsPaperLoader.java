@@ -40,7 +40,8 @@ public class NewsPaperLoader extends AsyncTaskLoader<List<Newspaper>> {
                 String ngayDang =item.getString("NgayDang");
                 String hinhAnh = item.getString("HinhAnh");
                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
-                Newspaper aNewspaper = new Newspaper(tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh);
+                String tacGia = item.getString("TacGia");
+                Newspaper aNewspaper = new Newspaper(tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh, tacGia);
                 listNewspaper.add(aNewspaper);
             }
             return listNewspaper;
