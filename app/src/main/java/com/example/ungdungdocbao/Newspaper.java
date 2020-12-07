@@ -1,6 +1,7 @@
 package com.example.ungdungdocbao;
 
 public class Newspaper {
+    private Integer ID;
     private String TieuDe;
     private String DanhMuc;
     private String MoTa;
@@ -8,8 +9,9 @@ public class Newspaper {
     private String NgayDang;
     private String HinhAnh;
     private String TieuDeHinhAnh;
-    public Newspaper(String TieuDe,String DanhMuc,String MoTa,String NoiDung,String NgayDang, String HinhAnh,String TieuDeHinhAnh){
+    public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh){
         this.TieuDe=TieuDe;
+        this.ID = Id;
         this.DanhMuc=DanhMuc;
         this.MoTa=MoTa;
         this.NoiDung=NoiDung;
@@ -17,6 +19,13 @@ public class Newspaper {
         this.HinhAnh = HinhAnh;
         this.TieuDeHinhAnh= TieuDeHinhAnh;
 
+    }
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        ID = ID;
     }
     public String getTieuDe() {
         return TieuDe;

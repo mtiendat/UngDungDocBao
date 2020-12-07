@@ -76,7 +76,7 @@ public class TheGioi extends Fragment implements LoaderManager.LoaderCallbacks<L
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.recyclerview_thoisu);
+        recyclerView=view.findViewById(R.id.recyclerview_thegioi);
         mAdapter=new NewspaperAdapter(getContext(),listNews);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);

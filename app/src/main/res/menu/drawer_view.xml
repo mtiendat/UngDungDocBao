@@ -2,9 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav"
-            android:icon="@drawable/ic_baseline_calendar_today_24"
-            android:title="Calendar" />
+            android:id="@+id/thegioi"
+            android:title="Thế Giới" />
+        <item
+            android:id="@+id/thoisu"
+            android:title="Thời Sự" />
+        <item
+            android:id="@+id/thethao"
+            android:title="Thể Thao" />
+        <item
+            android:id="@+id/congnghe"
+            android:title="Công Nghệ" />
+        <item
+            android:id="@+id/giaitri"
+            android:title="Giải Trí" />
+        <item
+            android:id="@+id/khoahoc"
+            android:title="Khoa Học" />
 
     </group>
 </menu>

@@ -116,19 +116,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-    public void nextTrangChiTiet(View view) {
-        imgBtnSearch=findViewById(R.id.imgBtn_search);
-        imgBtnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,TrangChiTiet.class);
-                startActivity(intent);
-            }
-        });
-
-    }
-
 }
