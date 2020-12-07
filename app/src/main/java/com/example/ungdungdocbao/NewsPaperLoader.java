@@ -56,4 +56,5 @@ public class NewsPaperLoader extends AsyncTaskLoader<List<Newspaper>> {
         super.onStartLoading();
         forceLoad();
     }
+
 }

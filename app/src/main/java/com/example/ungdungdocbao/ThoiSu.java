@@ -81,7 +81,7 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     @NonNull
     @Override
     public Loader<List<Newspaper>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsPaperLoader(getContext(),"2");
+        return new NewsPaperLoader(getContext(),"1");
     }
 
     @Override
