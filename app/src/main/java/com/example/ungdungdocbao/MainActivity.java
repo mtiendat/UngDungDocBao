@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 //import com.example.ungdungdocbao.ui.home.HomeFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
     private ViewPager viewPager;
+    private TextView txt_tile;
     private ImageButton imgBtnSetting;
     private ImageButton imgBtnSearch;
     SaveState saveState;
@@ -120,12 +122,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nextTrangChiTiet(View view) {
-        imgBtnSearch=findViewById(R.id.imgBtn_search);
-        imgBtnSearch.setOnClickListener(new View.OnClickListener() {
+        txt_tile=findViewById(R.id.txt_title);
+        txt_tile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,TrangChiTiet.class);
                 startActivity(intent);
+
             }
         });
 
