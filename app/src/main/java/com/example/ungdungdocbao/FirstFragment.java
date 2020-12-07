@@ -62,9 +62,33 @@ public class FirstFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 // set item as selected to persist highlight
-                item.setChecked(true);
+                switch (item.getItemId()){
+                    case R.id.thoisu:
+                        mFirstViewPager.setCurrentItem(0);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    case R.id.thegioi:
+                        mFirstViewPager.setCurrentItem(1);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    case R.id.thethao:
+                        mFirstViewPager.setCurrentItem(2);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    case R.id.congnghe:
+                        mFirstViewPager.setCurrentItem(3);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    case R.id.giaitri:
+                        mFirstViewPager.setCurrentItem(4);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                    case R.id.khoahoc:
+                        mFirstViewPager.setCurrentItem(5);
+                        mDrawerLayout.closeDrawers();
+                        return true;
+                }
                 // close drawer when item is tapped
-                mDrawerLayout.closeDrawers();
                 return true;
                 //Nếu Item được chạm , đoạn code này sẽ thiết lập lựa chon item và Drawer cũng được đóng bởi hàm closeDrawers().
             }
@@ -89,7 +113,6 @@ public class FirstFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         TabViewPagerAdapter adapter = new TabViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new ThoiSu(), "Thời Sự");
-        adapter.addFragment(new GocNhin(),"Góc Nhìn");
         adapter.addFragment(new TheGioi(), "Thế Giới");
         adapter.addFragment(new TheThao(),"Thể Thao");
         adapter.addFragment(new CongNghe(),"Công Nghệ");
