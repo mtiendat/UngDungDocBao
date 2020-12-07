@@ -33,7 +33,7 @@ public class NewsPaperLoader extends AsyncTaskLoader<List<Newspaper>> {
             JSONArray newspaper = jsonObject.getJSONArray("data");
             for (int i=0;i<newspaper.length();i++){
                 JSONObject item = newspaper.getJSONObject(i);
-                Integer id= item.getInt("ID");
+                Integer id= item.getInt("id");
                 String tieuDe = item.getString("TieuDe");
                 String danhMuc= item.getString("DanhMuc");
                 String noiDung = item.getString("NoiDung");
