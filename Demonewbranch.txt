@@ -1,0 +1,8 @@
+đây là thư mục đã clone về của đồ án nè
+chuột phải chọn git bash here
+Mới vô sẽ ở branch master
+Làm gì cũng phải git pull về trước để k bị conflict nhiều
+sau đó tạo branch mới
+chuyển qua branch đó
+bắt đầu làm việc trên branch mới tạo
+ví dụ tui tạo 1 file nha
