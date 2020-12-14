@@ -43,7 +43,6 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
         txt_tacgia=findViewById(R.id.txt_tacgia);
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
-
         saveState=new SaveState(this);
         if(saveState.getState()==true)
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -57,13 +56,20 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new ListCommentAdapter(this,listBinhLuan);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        loaderManager = LoaderManager.getInstance(this);
+        Loader loader = loaderManager.getLoader(1000);
+        if (loader == null) {
+            loaderManager.initLoader(1000, null, this);
+        } else {
+            loaderManager.restartLoader(1000, null,this);
+        }
 
     }
 
     @NonNull
     @Override
     public Loader<Newspaper> onCreateLoader(int id, @Nullable Bundle args) {
-        return dt = new DetailNewspaperLoader(getApplicationContext(),Integer.valueOf(this.id));
+        return new DetailNewspaperLoader(this,Integer.valueOf(this.id));
     }
 
     @Override

@@ -36,11 +36,22 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 
     @Override
     public void onBindViewHolder(@NonNull NewspaperViewHolder holder, int position) {
-        Newspaper newspaper = listNews.get(position);
+        final Newspaper newspaper = listNews.get(position);
         Picasso.get()
                 .load(newspaper.getHinhAnh())
                 .into(holder.mHinhAnh);
         holder.mTieuDe.setText(newspaper.getTieuDe().toString());
+        holder.mTieuDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
+                String id = String.valueOf(newspaper.getID());
+                intent.putExtra("ID",id);
+                //dstindaxem.addTinDaXem(mID.getText().toString());
+                v.getContext().startActivity(intent);
+
+            }
+        });
         holder.mMoTa.setText(newspaper.getMoTa().toString());
 
     }
@@ -64,16 +75,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
             mMoTa=itemView.findViewById(R.id.txt_desciption);
             mID=itemView.findViewById(R.id.txt_ID);
             this.mAdapter = mAdapter;
-            this.mTieuDe.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
-                    intent.putExtra("ID",mID.getText());
-                    dstindaxem.addTinDaXem(mID.getText().toString());
-                    v.getContext().startActivity(intent);
 
-                }
-            });
 //            this.mMoTa.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
