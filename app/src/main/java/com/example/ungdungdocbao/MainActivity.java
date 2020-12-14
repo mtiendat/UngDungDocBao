@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 //import com.example.ungdungdocbao.ui.home.HomeFragment;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
     private ViewPager viewPager;
+    private TextView txt_tile;
     private ImageButton imgBtnSetting;
     private ImageButton imgBtnSearch;
     SaveState saveState;
@@ -116,5 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }

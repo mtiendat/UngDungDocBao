@@ -19,6 +19,5 @@
         <item
             android:id="@+id/khoahoc"
             android:title="Khoa Học" />
-
     </group>
 </menu>

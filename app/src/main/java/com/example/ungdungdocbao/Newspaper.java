@@ -9,7 +9,9 @@ public class Newspaper {
     private String NgayDang;
     private String HinhAnh;
     private String TieuDeHinhAnh;
+
     public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh){
+    private String TacGia;
         this.TieuDe=TieuDe;
         this.ID = Id;
         this.DanhMuc=DanhMuc;
@@ -18,6 +20,7 @@ public class Newspaper {
         this.NgayDang=NgayDang;
         this.HinhAnh = HinhAnh;
         this.TieuDeHinhAnh= TieuDeHinhAnh;
+        this.TacGia = TacGia;
 
     }
     public int getID() {
@@ -81,5 +84,13 @@ public class Newspaper {
 
     public void setTieuDeHinhAnh(String tieuDeHinhAnh) {
         TieuDeHinhAnh = tieuDeHinhAnh;
+    }
+
+    public String getTacGia() {
+        return TacGia;
+    }
+
+    public void setTacGia(String tacGia) {
+        TacGia = tacGia;
     }
 }

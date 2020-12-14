@@ -93,7 +93,7 @@ public class TheGioi extends Fragment implements LoaderManager.LoaderCallbacks<L
     @NonNull
     @Override
     public Loader<List<Newspaper>> onCreateLoader(int id, @Nullable Bundle args) {
-        return new NewsPaperLoader(getContext(),"1");
+        return new NewsPaperLoader(getContext(),"2");
     }
 
     @Override

@@ -21,6 +21,7 @@
         android:layout_height="300dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/no_img" />
@@ -33,6 +34,7 @@
         android:text="Tiêu đề"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:onClick="nextTrangChiTiet"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.096"
         app:layout_constraintStart_toStartOf="parent"
