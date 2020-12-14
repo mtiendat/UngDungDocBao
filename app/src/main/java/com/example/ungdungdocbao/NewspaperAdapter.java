@@ -1,6 +1,7 @@
 package com.example.ungdungdocbao;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
     private final List<Newspaper> listNews;
     private LayoutInflater mInflater;
     private Context context;
+    TinDaXem dstindaxem;
     public NewspaperAdapter(Context context, List<Newspaper> newsList) {
         mInflater=LayoutInflater.from(context);
         this.listNews = newsList;
@@ -34,11 +36,22 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 
     @Override
     public void onBindViewHolder(@NonNull NewspaperViewHolder holder, int position) {
-        Newspaper newspaper = listNews.get(position);
+        final Newspaper newspaper = listNews.get(position);
         Picasso.get()
                 .load(newspaper.getHinhAnh())
                 .into(holder.mHinhAnh);
         holder.mTieuDe.setText(newspaper.getTieuDe().toString());
+        holder.mTieuDe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
+                String id = String.valueOf(newspaper.getID());
+                intent.putExtra("ID",id);
+                //dstindaxem.addTinDaXem(mID.getText().toString());
+                v.getContext().startActivity(intent);
+
+            }
+        });
         holder.mMoTa.setText(newspaper.getMoTa().toString());
 
     }
@@ -53,14 +66,37 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
         final ImageView mHinhAnh;
         final TextView mTieuDe;
         final TextView mMoTa;
-
+        final TextView mID;
         final NewspaperAdapter mAdapter;
         public NewspaperViewHolder(@NonNull View itemView, NewspaperAdapter mAdapter) {
             super(itemView);
             mHinhAnh=itemView.findViewById(R.id.img_main);
             mTieuDe=itemView.findViewById(R.id.txt_title);
             mMoTa=itemView.findViewById(R.id.txt_desciption);
+            mID=itemView.findViewById(R.id.txt_ID);
             this.mAdapter = mAdapter;
+
+//            this.mMoTa.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
+//                    intent.putExtra("Title",mTieuDe.getText());
+//                    intent.putExtra("Mota",mMoTa.getText());
+//
+//                }
+//            });
+//            this.mHinhAnh.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
+//                    intent.putExtra("Title",mTieuDe.getText());
+//                    intent.putExtra("Mota",mMoTa.getText());
+//
+//                }
+//            });
         }
+    }
+    public TinDaXem getDstindaxem(){
+        return this.dstindaxem;
     }
 }

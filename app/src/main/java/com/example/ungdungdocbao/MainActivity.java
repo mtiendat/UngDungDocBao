@@ -33,9 +33,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
     private ViewPager viewPager;
@@ -120,18 +123,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    public void nextTrangChiTiet(View view) {
-        txt_tile=findViewById(R.id.txt_title);
-        txt_tile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,TrangChiTiet.class);
-                startActivity(intent);
-
-            }
-        });
-
-    }
-
 }

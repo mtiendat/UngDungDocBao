@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import com.example.ungdungdocbao.ui.setting.SaveState;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +28,7 @@ import java.util.List;
 public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<List<Newspaper>>{
     private RecyclerView recyclerView;
     private NewspaperAdapter mAdapter;
-    private LinkedList<Newspaper> listNews = new LinkedList<>();
+    private List<Newspaper> listNews = new ArrayList<>();
     LoaderManager loaderManager;
     SaveState saveState;
 
@@ -87,8 +88,10 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     @Override
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
-        listNews.addAll(data);
-        mAdapter.notifyDataSetChanged();
+        if(data!=null) {
+            listNews.addAll(data);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

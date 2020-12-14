@@ -16,3 +16,4 @@ thấy chữ compare pull request k? bấm zô
 đặt tên xong tạo pull request là xong
 đợi Đạt merge code nữa là xong
 rồi lại pull về r tạo branch mới làm r push lên xong pull request ok
+
