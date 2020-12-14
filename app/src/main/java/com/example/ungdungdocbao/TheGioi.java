@@ -99,8 +99,10 @@ public class TheGioi extends Fragment implements LoaderManager.LoaderCallbacks<L
     @Override
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
-        listNews.addAll(data);
-        mAdapter.notifyDataSetChanged();
+        if(data!=null) {
+            listNews.addAll(data);
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
