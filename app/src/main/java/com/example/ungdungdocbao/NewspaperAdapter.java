@@ -68,8 +68,6 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
-                    intent.putExtra("Title",mTieuDe.getText());
-                    intent.putExtra("Mota",mMoTa.getText());
                     intent.putExtra("ID",mID.getText());
                     dstindaxem.addTinDaXem(mID.getText().toString());
                     v.getContext().startActivity(intent);
