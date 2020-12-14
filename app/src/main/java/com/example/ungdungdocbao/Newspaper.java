@@ -9,9 +9,9 @@ public class Newspaper {
     private String NgayDang;
     private String HinhAnh;
     private String TieuDeHinhAnh;
-
-    public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh){
     private String TacGia;
+
+    public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh, String TacGia){
         this.TieuDe=TieuDe;
         this.ID = Id;
         this.DanhMuc=DanhMuc;
