@@ -84,7 +84,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/txt_tieudeHA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Hình ảnh mang tính chất minh họa"
@@ -101,7 +101,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/txt_motangan"
                 app:layout_constraintStart_toStartOf="@+id/txt_motangan"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_tieudeHA" />
 
             <TextView
                 android:id="@+id/textView19"
@@ -145,5 +145,22 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Tác Giả:"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
+        app:layout_constraintStart_toEndOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/txt_tacgia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
