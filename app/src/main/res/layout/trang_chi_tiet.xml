@@ -33,14 +33,13 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
             app:layout_constraintStart_toEndOf="@+id/textView13" />
 
-        <TextView
-            android:id="@+id/textView15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Nổi loạn học đường"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
-            app:layout_constraintStart_toEndOf="@+id/textView10" />
+    <TextView
+        android:id="@+id/txt_title_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -51,7 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title_detail"
         app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,24 +62,23 @@
             tools:layout_editor_absoluteX="1dp">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/imgDetail"
                 android:layout_width="295dp"
                 android:layout_height="221dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="TODO"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
-                app:layout_constraintTop_toBottomOf="@+id/textView16"
+                app:layout_constraintEnd_toEndOf="@+id/txt_motangan"
+                app:layout_constraintStart_toStartOf="@+id/txt_motangan"
+                app:layout_constraintTop_toBottomOf="@+id/txt_motangan"
                 app:srcCompat="@android:drawable/ic_menu_gallery" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/txt_motangan"
                 android:layout_width="356dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/noi_dung1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -91,19 +89,18 @@
                 android:layout_height="wrap_content"
                 android:text="Hình ảnh mang tính chất minh họa"
                 android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintStart_toStartOf="@+id/imageView2"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintEnd_toEndOf="@+id/imgDetail"
+                app:layout_constraintStart_toStartOf="@+id/imgDetail"
+                app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/txt_noidung"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="@string/noi_dung"
-                app:layout_constraintEnd_toEndOf="@+id/textView16"
-                app:layout_constraintStart_toStartOf="@+id/textView16"
+                app:layout_constraintEnd_toEndOf="@+id/txt_motangan"
+                app:layout_constraintStart_toStartOf="@+id/txt_motangan"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
             <TextView
@@ -112,8 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Bình luận"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintStart_toStartOf="@+id/txt_noidung"
+                app:layout_constraintTop_toBottomOf="@+id/txt_noidung" />
 
             <EditText
                 android:id="@+id/editTextTextPersonName2"
@@ -131,7 +128,7 @@
                 android:layout_height="39dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName2"
-                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/txt_noidung"
                 app:srcCompat="@android:drawable/ic_menu_send" />
 
             <androidx.recyclerview.widget.RecyclerView

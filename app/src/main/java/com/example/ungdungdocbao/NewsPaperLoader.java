@@ -33,6 +33,7 @@ public class NewsPaperLoader extends AsyncTaskLoader<List<Newspaper>> {
             JSONArray newspaper = jsonObject.getJSONArray("data");
             for (int i=0;i<newspaper.length();i++){
                 JSONObject item = newspaper.getJSONObject(i);
+                Integer id= item.getInt("id");
                 String tieuDe = item.getString("TieuDe");
                 String danhMuc= item.getString("DanhMuc");
                 String noiDung = item.getString("NoiDung");
@@ -40,8 +41,9 @@ public class NewsPaperLoader extends AsyncTaskLoader<List<Newspaper>> {
                 String ngayDang =item.getString("NgayDang");
                 String hinhAnh = item.getString("HinhAnh");
                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
+
+                Newspaper aNewspaper = new Newspaper(id,tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh);
                 String tacGia = item.getString("TacGia");
-                Newspaper aNewspaper = new Newspaper(tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh, tacGia);
                 listNewspaper.add(aNewspaper);
             }
             return listNewspaper;

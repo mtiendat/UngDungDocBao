@@ -120,18 +120,4 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-    public void nextTrangChiTiet(View view) {
-        txt_tile=findViewById(R.id.txt_title);
-        txt_tile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,TrangChiTiet.class);
-                startActivity(intent);
-
-            }
-        });
-
-    }
-
 }
