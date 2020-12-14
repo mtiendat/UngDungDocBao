@@ -20,7 +20,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
     private final List<Newspaper> listNews;
     private LayoutInflater mInflater;
     private Context context;
-
+    TinDaXem dstindaxem;
     public NewspaperAdapter(Context context, List<Newspaper> newsList) {
         mInflater=LayoutInflater.from(context);
         this.listNews = newsList;
@@ -71,6 +71,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
                     intent.putExtra("Title",mTieuDe.getText());
                     intent.putExtra("Mota",mMoTa.getText());
                     intent.putExtra("ID",mID.getText());
+                    dstindaxem.addTinDaXem(mID.getText().toString());
                     v.getContext().startActivity(intent);
 
                 }
@@ -94,5 +95,8 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 //                }
 //            });
         }
+    }
+    public TinDaXem getDstindaxem(){
+        return this.dstindaxem;
     }
 }

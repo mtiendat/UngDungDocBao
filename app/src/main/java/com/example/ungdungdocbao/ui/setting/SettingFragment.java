@@ -20,12 +20,14 @@ import com.example.ungdungdocbao.DangKy;
 import com.example.ungdungdocbao.DangNhap;
 import com.example.ungdungdocbao.MainActivity;
 import com.example.ungdungdocbao.R;
+import com.example.ungdungdocbao.TrangTinDaXem;
 
 public class SettingFragment extends AppCompatActivity {
 
     private ImageButton imgBtnDangNhap;
     private ImageButton imgBtnDangKy;
     private Switch switch_btn;
+    private ImageButton imgBtnTinDaXem;
     SaveState saveState ;
     Switch aSwitch;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -38,6 +40,13 @@ public class SettingFragment extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_setting);
+        imgBtnTinDaXem = findViewById(R.id.img_button_tindaxem);
+        imgBtnTinDaXem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SettingFragment.this, TrangTinDaXem.class));
+            }
+        });
         Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

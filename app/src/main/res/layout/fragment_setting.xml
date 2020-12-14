@@ -160,7 +160,7 @@
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/img_button_tindaxem"
             android:layout_width="0dp"
             android:layout_height="31dp"
             android:layout_marginStart="216dp"
@@ -187,7 +187,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/imageButton5" />
+            app:layout_constraintTop_toBottomOf="@+id/img_button_tindaxem" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
