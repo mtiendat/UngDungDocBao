@@ -1,0 +1,18 @@
+đây là thư mục đã clone về của đồ án nè
+chuột phải chọn git bash here
+Mới vô sẽ ở branch master
+Làm gì cũng phải git pull về trước để k bị conflict nhiều
+sau đó tạo branch mới
+chuyển qua branch đó
+bắt đầu làm việc trên branch mới tạo
+ví dụ tui tạo 1 file nha
+git status để biết mình mới làm gì
+sau đó git add .
+rồi git commit
+rồi git push
+oke v là xong thao tác trên máy local
+sau đó lên github
+thấy chữ compare pull request k? bấm zô
+đặt tên xong tạo pull request là xong
+đợi Đạt merge code nữa là xong
+rồi lại pull về r tạo branch mới làm r push lên xong pull request ok
