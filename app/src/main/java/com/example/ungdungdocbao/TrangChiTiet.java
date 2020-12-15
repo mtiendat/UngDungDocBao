@@ -2,6 +2,7 @@ package com.example.ungdungdocbao;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,7 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
     String id;
     ImageView img;
     LoaderManager loaderManager;
+    EditText txtBinhLuan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
         txt_noidung = findViewById(R.id.txt_noidung);
         txt_tieudeHA = findViewById(R.id.txt_tieudeHA);
         txt_tacgia=findViewById(R.id.txt_tacgia);
+        txtBinhLuan = findViewById(R.id.edittext_binh_luan);
+        txt_tieude.setFocusable(true);
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
         saveState=new SaveState(this);
