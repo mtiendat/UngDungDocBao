@@ -77,7 +77,6 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
         } else {
             loaderManager.restartLoader(1000, null,this);
         }
-
     }
     @NonNull
     @Override

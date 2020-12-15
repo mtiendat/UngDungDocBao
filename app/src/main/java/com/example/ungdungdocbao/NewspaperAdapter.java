@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.NewspaperViewHolder> {
@@ -20,7 +21,8 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
     private final List<Newspaper> listNews;
     private LayoutInflater mInflater;
     private Context context;
-    TinDaXem dstindaxem;
+
+
     public NewspaperAdapter(Context context, List<Newspaper> newsList) {
         mInflater=LayoutInflater.from(context);
         this.listNews = newsList;
@@ -47,7 +49,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
                 Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
                 String id = String.valueOf(newspaper.getID());
                 intent.putExtra("ID",id);
-                //dstindaxem.addTinDaXem(mID.getText().toString());
+                MainActivity.dstindaxem.add(String.valueOf(newspaper.getID()));
                 v.getContext().startActivity(intent);
 
             }
@@ -96,7 +98,5 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 //            });
         }
     }
-    public TinDaXem getDstindaxem(){
-        return this.dstindaxem;
-    }
+
 }

@@ -25,8 +25,9 @@ public class NetWorkUltis {
         }
 
     }
+
     public static String getDetailNewspaper(int id) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/bai-viet").buildUpon()
+        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/chitiet").buildUpon()
                 .appendQueryParameter("id",String.valueOf(id)).build();
         try {
             URL requestURL = new URL(builtURI.toString());

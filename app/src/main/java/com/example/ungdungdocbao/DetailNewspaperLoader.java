@@ -24,23 +24,27 @@ public class DetailNewspaperLoader extends AsyncTaskLoader<Newspaper> {
     public Newspaper loadInBackground() {
         Newspaper newspaper;
         try {
-            String results= NetWorkUltis.getDetailNewspaper(id);
+            String results = NetWorkUltis.getDetailNewspaper(id);
             JSONObject jsonObject = new JSONObject(results);
-            JSONObject item = jsonObject.getJSONObject(String.valueOf(0));
-            Integer id= item.getInt("id");
-            String tieuDe = item.getString("TieuDe");
-            String danhMuc= item.getString("DanhMuc");
-            String noiDung = item.getString("NoiDung");
-            String moTa =item.getString("MoTa");
-            String ngayDang =item.getString("NgayDang");
-            String hinhAnh = item.getString("HinhAnh");
-            String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
-            String tacGia = item.getString("TacGia");
-            newspaper = new Newspaper(id,tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh,tacGia);
-            return newspaper;
-            } catch (JSONException jsonException) {
+            JSONArray detail = jsonObject.getJSONArray("data");
+            for (int i = 0; i < detail.length(); i++) {
+                JSONObject item = detail.getJSONObject(i);
+                Integer id = item.getInt("id");
+                String tieuDe = item.getString("TieuDe");
+                String danhMuc = item.getString("DanhMuc");
+                String noiDung = item.getString("NoiDung");
+                String moTa = item.getString("MoTa");
+                String ngayDang = item.getString("NgayDang");
+                String hinhAnh = item.getString("HinhAnh");
+                String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
+                String tacGia = item.getString("TacGia");
+                Newspaper aNewspaper = new Newspaper(id, tieuDe, danhMuc, moTa, noiDung, ngayDang, hinhAnh, tieuDeHinhAnh, tacGia);
+                return aNewspaper;
+            }
+
+        } catch (JSONException jsonException) {
             jsonException.printStackTrace();
         }
         return null;
     }
-}
+    }

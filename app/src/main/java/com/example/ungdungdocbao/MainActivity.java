@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton imgBtnSetting;
     private ImageButton imgBtnSearch;
     SaveState saveState;
-
+    public static List<String> dstindaxem = new ArrayList<>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
