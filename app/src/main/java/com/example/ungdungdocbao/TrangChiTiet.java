@@ -57,11 +57,11 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1000);
+        Loader loader = loaderManager.getLoader(1111);
         if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
+            loaderManager.initLoader(1111, null, this);
         } else {
-            loaderManager.restartLoader(1000, null,this);
+            loaderManager.restartLoader(1111, null,this);
         }
 
     }

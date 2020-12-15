@@ -47,4 +47,9 @@ public class DetailNewspaperLoader extends AsyncTaskLoader<Newspaper> {
         }
         return null;
     }
+    @Override
+    protected void onStartLoading() {
+        super.onStartLoading();
+        forceLoad();
+    }
     }
