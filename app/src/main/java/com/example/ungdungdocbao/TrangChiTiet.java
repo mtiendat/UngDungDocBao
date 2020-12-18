@@ -52,10 +52,7 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-//        for(int i =0;i<10;i++){
-//            BinhLuan binhLuan = new BinhLuan("Tên "+i,"Nội dung "+i);
-//            listBinhLuan.add(binhLuan);
-//        }
+
         recyclerView = findViewById(R.id.recyclerview_list_cmt);
         mAdapter = new ListCommentAdapter(this,listBinhLuan);
         recyclerView.setAdapter(mAdapter);

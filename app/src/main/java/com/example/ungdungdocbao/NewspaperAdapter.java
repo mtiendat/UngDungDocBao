@@ -49,7 +49,11 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
                 Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
                 String id = String.valueOf(newspaper.getID());
                 intent.putExtra("ID",id);
-                MainActivity.dstindaxem.add(String.valueOf(newspaper.getID()));
+                if(MainActivity.tindaxem==null) {
+                    MainActivity.tindaxem = newspaper.getID();
+                }else if(MainActivity.tindaxem!=newspaper.getID()){
+                    MainActivity.tindaxem = newspaper.getID();
+                }
                 v.getContext().startActivity(intent);
 
             }

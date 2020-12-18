@@ -58,7 +58,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".ui.setting.SettingFragment"/>
         </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />

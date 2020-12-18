@@ -10,10 +10,12 @@
         android:id="@+id/txt_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/img_main"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/img_main" />
 
     <ImageView
         android:id="@+id/img_main"
@@ -30,13 +32,19 @@
         android:id="@+id/txt_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="nextTrangChiTiet"
         android:text="Tiêu đề"
+        android:textAlignment="textStart"
+        android:textAllCaps="true"
+        android:textColor="#000000"
+        android:textDirection="firstStrongRtl"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:onClick="nextTrangChiTiet"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_main" />
 
@@ -45,9 +53,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="Mô tả ngắn"
+        android:textAlignment="textStart"
+        android:textAllCaps="false"
+        android:textColor="#453D3D"
+        android:textDirection="firstStrongRtl"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txt_title"
-        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_title"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
