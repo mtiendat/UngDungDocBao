@@ -25,6 +25,20 @@ public class NetWorkUltis {
         }
 
     }
+
+    public static String getLogin(String Login) throws MalformedURLException{
+        Uri builtlURILogin = Uri.parse("http://10.0.2.2:8000/api/login").buildUpon()
+                .appendQueryParameter("login",Login).build();
+        try {
+            URL requestURL = new URL(builtlURILogin.toString());
+
+            return callAPI(requestURL,"GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getDetailNewspaper(int id) {
         Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/bai-viet").buildUpon()
                 .appendQueryParameter("id",String.valueOf(id)).build();
