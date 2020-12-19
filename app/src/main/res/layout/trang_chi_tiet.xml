@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TrangChiTiet">
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/ng_y_xu_t_b_n"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/ng_y_xu_t_b_n"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView10"
@@ -67,6 +68,7 @@
                 android:layout_height="221dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="TODO"
+                android:focusableInTouchMode="true"
                 app:layout_constraintEnd_toEndOf="@+id/txt_motangan"
                 app:layout_constraintStart_toStartOf="@+id/txt_motangan"
                 app:layout_constraintTop_toBottomOf="@+id/txt_motangan"
@@ -118,8 +120,6 @@
                 android:layout_height="33dp"
                 android:layout_marginStart="16dp"
                 android:ems="10"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView19"
                 app:layout_constraintStart_toEndOf="@+id/textView19" />
 
