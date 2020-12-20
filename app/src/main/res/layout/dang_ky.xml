@@ -55,7 +55,7 @@
                     android:drawableStart="@drawable/baseline_account_circle_24"
                     android:drawablePadding="12dp"
                     android:ems="10"
-                    android:hint="Họ và Tên"
+                    android:hint="User Name"
                     android:inputType="textEmailAddress"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -105,51 +105,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtEmailDK" />
 
-                <RelativeLayout
-                    android:id="@+id/reLayoutDK"
-                    android:layout_width="0dp"
-                    android:layout_height="46dp"
-                    android:layout_marginStart="16dp"
-
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtSDTDangKy">
-
-
-                    <EditText
-                        android:id="@+id/txtNgaySinhDK"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-
-                        android:background="@drawable/custom_input"
-                        android:drawableStart="@drawable/ic_baseline_date_range_24"
-                        android:ems="10"
-                        android:hint="Ngày sinh"
-                        android:paddingStart="12dp"
-                        android:textSize="18sp" />
-
-                    <ImageButton
-                        android:id="@+id/imgLichNgaySinhDK"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/txtNgaySinhDK"
-                        android:layout_alignRight="@+id/txtNgaySinhDK"
-                        android:layout_alignBottom="@+id/txtNgaySinhDK"
-                        android:padding="5dp"
-                        android:src="@drawable/ic_baseline_calendar_today_24" />
-
-                </RelativeLayout>
-
                 <EditText
                     android:id="@+id/txtDiaChiDK"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="62dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/custom_input"
                     android:drawableStart="@drawable/baseline_home_24"
@@ -161,7 +122,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reLayoutDK" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtSDTDangKy" />
 
                 <EditText
                     android:id="@+id/txtMatKhauDK"
@@ -190,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="98dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/custom_button"
                     android:text="Đăng ký"
@@ -198,26 +159,6 @@
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtNhapLaiMatKhauDK" />
-
-                <EditText
-                    android:id="@+id/txtNhapLaiMatKhauDK"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/custom_input"
-                    android:drawableStart="@drawable/custom_lock_icon"
-                    android:ems="10"
-                    android:hint="Nhập lại mật khẩu"
-                    android:inputType="textPassword"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="12dp"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.562"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtMatKhauDK" />
 
