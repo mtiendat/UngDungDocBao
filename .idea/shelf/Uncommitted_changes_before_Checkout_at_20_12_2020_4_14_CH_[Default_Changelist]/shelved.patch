@@ -1,0 +1,123 @@
+Index: app/src/main/java/com/example/ungdungdocbao/DangNhap.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ungdungdocbao;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\nimport android.widget.Toast;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.app.AppCompatDelegate;\r\nimport androidx.appcompat.widget.Toolbar;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\n\r\nimport com.android.volley.AuthFailureError;\r\nimport com.android.volley.RequestQueue;\r\nimport com.android.volley.Response;\r\nimport com.android.volley.VolleyError;\r\nimport com.android.volley.toolbox.StringRequest;\r\nimport com.android.volley.toolbox.Volley;\r\nimport com.example.ungdungdocbao.ui.setting.SaveState;\r\nimport com.example.ungdungdocbao.ui.setting.SettingFragment;\r\nimport com.android.volley.Request;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.HashMap;\r\nimport java.util.Map;\r\n\r\npublic class DangNhap extends AppCompatActivity {\r\n    //TextView txtEmail, txtPass;\r\n    private EditText txtEmail, txtPass;\r\n    private Button btnDangNhap;\r\n    private static String URL_DANGNHAP = \"http://192.168.97.2/AdminAndroid/login.php\";\r\n    SaveState saveState;\r\n\r\n    public View onCreateView(@NonNull LayoutInflater inflater,\r\n                             ViewGroup container, Bundle savedInstanceState) {\r\n        View root = inflater.inflate(R.layout.dang_nhap, container, false);\r\n        return root;\r\n    }\r\n\r\n    @Override\r\n    protected void onCreate(@Nullable Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.dang_nhap);\r\n        txtEmail = findViewById(R.id.editTextTextPersonName);\r\n        txtPass = findViewById(R.id.editTextTextPassword);\r\n        btnDangNhap = findViewById(R.id.btn_dangnhap2);\r\n\r\n        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dangnhap);\r\n        setSupportActionBar(toolbar);\r\n        ; //sudung toolbar nhu actionbar\r\n        getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nut back cho toolbar\r\n        getSupportActionBar().setDisplayShowHomeEnabled(true);\r\n        toolbar.setNavigationOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                startActivity(new Intent(getApplicationContext(), SettingFragment.class));\r\n            }\r\n        });\r\n\r\n        btnDangNhap.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                String Email = txtEmail.getText().toString().trim();\r\n                String Password = txtPass.getText().toString().trim();\r\n                if (!Email.isEmpty() || !Password.isEmpty()) {\r\n                    Login(Email,Password);\r\n                } else {\r\n                    txtEmail.setError(\"Please inser Email\");\r\n                    txtPass.setError(\"Please insert Pass\");\r\n                }\r\n            }\r\n        });\r\n\r\n        saveState = new SaveState(this);\r\n        if (saveState.getState() == true)\r\n            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);\r\n        else\r\n            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);\r\n    }\r\n\r\n    public void Login(final String Email, final String Password) {\r\n        btnDangNhap.setVisibility(View.GONE);\r\n        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP, new Response.Listener<String>() {\r\n            @Override\r\n            public void onResponse(String response) {\r\n                try {\r\n                    JSONObject jsonObject = new JSONObject(response);\r\n                    String success = jsonObject.getString(\"success\");\r\n                    JSONArray jsonArray = jsonObject.getJSONArray(\"login\");\r\n                    if (success.equals(\"1\")) {\r\n                        for (int i = 0; i < jsonArray.length(); i++) {\r\n                            JSONObject object = jsonArray.getJSONObject(i);\r\n                            String email = object.getString(\"email\").trim();\r\n                            String passwrord = object.getString(\"password\").trim();\r\n                            Toast.makeText(DangNhap.this, \"Success Login.\\nYour Name: \"  + \"\\n Your Email: \" + email, Toast.LENGTH_SHORT).show();\r\n                        }\r\n                    }\r\n                }catch (JSONException e) {\r\n                    e.printStackTrace();\r\n                    btnDangNhap.setVisibility(View.VISIBLE);\r\n                    Toast.makeText(DangNhap.this, \"Login Error\" + e.toString(), Toast.LENGTH_SHORT).show();\r\n                }\r\n            }\r\n        },\r\n                new Response.ErrorListener() {\r\n                    @Override\r\n                    public void onErrorResponse(VolleyError error) {\r\n                        btnDangNhap.setVisibility(View.VISIBLE);\r\n                        Toast.makeText(DangNhap.this, \"Login Error\" + error.toString(), Toast.LENGTH_SHORT).show();\r\n                    }\r\n                })\r\n        {\r\n            @Override\r\n            protected Map<String, String> getParams() throws AuthFailureError {\r\n                Map<String, String> parms = new HashMap<>();\r\n                parms.put(\"email\",Email);\r\n                parms.put(\"password\", Password);\r\n                return parms;\r\n            }\r\n        };\r\n        RequestQueue requestQueue = Volley.newRequestQueue(this);\r\n        requestQueue.add(stringRequest);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ungdungdocbao/DangNhap.java	(revision 6df2f0750978fe7a38327ebb62ed0b52c0ac1081)
++++ app/src/main/java/com/example/ungdungdocbao/DangNhap.java	(date 1608454150603)
+@@ -2,6 +2,7 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+@@ -37,7 +38,7 @@
+     //TextView txtEmail, txtPass;
+     private EditText txtEmail, txtPass;
+     private Button btnDangNhap;
+-    private static String URL_DANGNHAP = "http://192.168.97.2/AdminAndroid/login.php";
++    private static String URL_DANGNHAP = "http://192.168.1.6/AdminAndroid/login.php";
+     SaveState saveState;
+ 
+     public View onCreateView(@NonNull LayoutInflater inflater,
+@@ -87,12 +88,13 @@
+             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+     }
+ 
+-    public void Login(final String Email, final String Password) {
++    public void Login(final String email, final String password) {
+         btnDangNhap.setVisibility(View.GONE);
+         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP, new Response.Listener<String>() {
+             @Override
+             public void onResponse(String response) {
+                 try {
++                    Log.i("tagconvertstr", "["+response+"]");
+                     JSONObject jsonObject = new JSONObject(response);
+                     String success = jsonObject.getString("success");
+                     JSONArray jsonArray = jsonObject.getJSONArray("login");
+@@ -100,13 +102,13 @@
+                         for (int i = 0; i < jsonArray.length(); i++) {
+                             JSONObject object = jsonArray.getJSONObject(i);
+                             String email = object.getString("email").trim();
+-                            String passwrord = object.getString("password").trim();
+                             Toast.makeText(DangNhap.this, "Success Login.\nYour Name: "  + "\n Your Email: " + email, Toast.LENGTH_SHORT).show();
+                         }
+                     }
+                 }catch (JSONException e) {
+                     e.printStackTrace();
+                     btnDangNhap.setVisibility(View.VISIBLE);
++                    Log.d("ERROR LOGIN",e.toString());
+                     Toast.makeText(DangNhap.this, "Login Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                 }
+             }
+@@ -115,6 +117,7 @@
+                     @Override
+                     public void onErrorResponse(VolleyError error) {
+                         btnDangNhap.setVisibility(View.VISIBLE);
++
+                         Toast.makeText(DangNhap.this, "Login Error" + error.toString(), Toast.LENGTH_SHORT).show();
+                     }
+                 })
+@@ -122,8 +125,8 @@
+             @Override
+             protected Map<String, String> getParams() throws AuthFailureError {
+                 Map<String, String> parms = new HashMap<>();
+-                parms.put("email",Email);
+-                parms.put("password", Password);
++                parms.put("email",email);
++                parms.put("password", password);
+                 return parms;
+             }
+         };
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.ungdungdocbao\"\r\n        minSdkVersion 24\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\nrepositories {\r\n    mavenCentral()\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'com.google.android.material:material:1.2.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'androidx.navigation:navigation-fragment:2.3.1'\r\n    implementation 'androidx.navigation:navigation-ui:2.3.1'\r\n    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    implementation 'com.google.firebase:firebase-auth:19.3.1'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n\r\n    implementation 'com.android.volley:volley:1.1.1'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 6df2f0750978fe7a38327ebb62ed0b52c0ac1081)
++++ app/build.gradle	(date 1608455616867)
+@@ -18,6 +18,7 @@
+         release {
+             minifyEnabled false
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
++           
+         }
+     }
+ }
+Index: app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ungdungdocbao;\r\n\r\nimport android.net.Uri;\r\nimport android.util.Log;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.InputStreamReader;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\n\r\npublic class NetWorkUltis {\r\n    public static String getNewspaper(String danhMuc) throws MalformedURLException {\r\n        Uri builtlURI = Uri.parse(\"http://10.0.2.2:8000/api/bai-viet\").buildUpon()\r\n                .appendQueryParameter(\"danhmuc\",danhMuc).build();\r\n        try {\r\n            URL requestURL = new URL(builtlURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n\r\n    }\r\n\r\n    public static String getLogin(String Login) throws MalformedURLException{\r\n        Uri builtlURILogin = Uri.parse(\"http://10.0.2.2:8000/api/login\").buildUpon()\r\n                .appendQueryParameter(\"login\",Login).build();\r\n        try {\r\n            URL requestURL = new URL(builtlURILogin.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n\r\n    public static String getDetailNewspaper(int id) {\r\n        Uri builtURI = Uri.parse(\"http://10.0.2.2:8000/api/bai-viet\").buildUpon()\r\n                .appendQueryParameter(\"id\",String.valueOf(id)).build();\r\n        try {\r\n            URL requestURL = new URL(builtURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n    public static String callAPI(URL requestURL,String method) throws IOException {\r\n        HttpURLConnection urlConnection =null;\r\n        String results=\"\";\r\n\r\n        try {\r\n            urlConnection = (HttpURLConnection) requestURL.openConnection();\r\n            urlConnection.setRequestMethod(method);\r\n            urlConnection.connect();\r\n            InputStream inputStream=urlConnection.getInputStream();\r\n            results=convertISToString(inputStream);\r\n        }catch (Exception e){\r\n            e.printStackTrace();\r\n        }finally {\r\n            if(urlConnection!=null){\r\n                urlConnection.disconnect();\r\n            }\r\n        }\r\n\r\n        return results;\r\n    }\r\n    public static String convertISToString(InputStream inputStream){\r\n        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));\r\n        StringBuilder builder = new StringBuilder();\r\n        String line;\r\n        try{\r\n            while ((line=reader.readLine())!=null){\r\n                builder.append(line+\"\\n\");\r\n                if (builder.length()==0){\r\n                    return null;\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return builder.toString();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(revision 6df2f0750978fe7a38327ebb62ed0b52c0ac1081)
++++ app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(date 1608440560730)
+@@ -17,13 +17,11 @@
+                 .appendQueryParameter("danhmuc",danhMuc).build();
+         try {
+             URL requestURL = new URL(builtlURI.toString());
+-
+             return callAPI(requestURL,"GET");
+         } catch (IOException e) {
+             e.printStackTrace();
+             return null;
+         }
+-
+     }
+ 
+     public static String getLogin(String Login) throws MalformedURLException{
+@@ -38,7 +36,6 @@
+             return null;
+         }
+     }
+-
+     public static String getDetailNewspaper(int id) {
+         Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/bai-viet").buildUpon()
+                 .appendQueryParameter("id",String.valueOf(id)).build();

@@ -2,6 +2,7 @@ package com.example.ungdungdocbao;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,7 +38,7 @@ public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
     private EditText txtEmail, txtPass;
     private Button btnDangNhap;
-    private static String URL_DANGNHAP = "http://192.168.97.2/AdminAndroid/login.php";
+    private static String URL_DANGNHAP = "http://192.168.43.176/AdminAndroid/login.php";
     SaveState saveState;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -87,12 +88,13 @@ public class DangNhap extends AppCompatActivity {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
-    public void Login(final String Email, final String Password) {
+    public void Login(final String email, final String password) {
         btnDangNhap.setVisibility(View.GONE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
+                    Log.i("tagconvertstr", "["+response+"]");
                     JSONObject jsonObject = new JSONObject(response);
                     String success = jsonObject.getString("success");
                     JSONArray jsonArray = jsonObject.getJSONArray("login");
@@ -100,8 +102,8 @@ public class DangNhap extends AppCompatActivity {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
                             String email = object.getString("email").trim();
-                            String passwrord = object.getString("password").trim();
-                            Toast.makeText(DangNhap.this, "Success Login.\nYour Name: "  + "\n Your Email: " + email, Toast.LENGTH_SHORT).show();
+                            String name = object.getString("name").trim();
+                            Toast.makeText(DangNhap.this, "Success Login! \nYour Name: "+name  + "\nYour Email: " + email, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }catch (JSONException e) {
@@ -122,8 +124,8 @@ public class DangNhap extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parms = new HashMap<>();
-                parms.put("email",Email);
-                parms.put("password", Password);
+                parms.put("email",email);
+                parms.put("password", password);
                 return parms;
             }
         };
