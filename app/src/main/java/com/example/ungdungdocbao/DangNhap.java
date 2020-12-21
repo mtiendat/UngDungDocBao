@@ -40,7 +40,7 @@ public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
     private EditText txtEmail, txtPass;
     private Button btnDangNhap;
-    private static String URL_DANGNHAP = "http://192.168.97.2/AdminAndroid/login.php";
+    private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
     private TextView user_name;
     private TextView user_email;
     SaveState saveState;
@@ -97,49 +97,44 @@ public class DangNhap extends AppCompatActivity {
     }
 
     public void Login(final String email, final String password) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    Log.i("tagconvertstr", "["+response+"]");
-                    JSONObject jsonObject = new JSONObject(response);
-                    String success = jsonObject.getString("success");
-                    JSONArray jsonArray = jsonObject.getJSONArray("login");
-                    if (success.equals("1")) {
-                        for (int i = 0; i < jsonArray.length(); i++) {
-                            JSONObject object = jsonArray.getJSONObject(i);
-                            String email = object.getString("email");
-                            String name = object.getString("name");
-                            //user_name.setText(name);
-                            //user_email.setText(email);
-                            Toast.makeText(DangNhap.this, "Success Login! \nYour Name: "+name  + "\nYour Email: " + email, Toast.LENGTH_LONG).show();
-                            Thread thread = new Thread(){
-                                @Override
-                                public void run() {
-                                    try {
-                                        Thread.sleep(3500); // Set time LENGTH_LONG Toast
-                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        try {
+                            Log.i("tagconvertstr", "["+response+"]");
+                            JSONObject jsonObject=new JSONObject(response);
+                            String status=jsonObject.getString("status");
+                            String message=jsonObject.getString("message");
+                            if(status.equals("success")){
+                                String hoten = jsonObject.getString("hoten");
+                                Toast.makeText(DangNhap.this,message+"\nChào "+hoten+"<3",Toast.LENGTH_LONG).show();
+                                Thread thread = new Thread(){
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            Thread.sleep(3500); // Set time LENGTH_LONG Toast
+                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
                                     }
-                                }
-                            };
-                            thread.start();
-                        }
-                    }else Toast.makeText(DangNhap.this,"Tên đăng nhập hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
+                                };
+                                thread.start();
+                            }else Toast.makeText(DangNhap.this,message+"",Toast.LENGTH_SHORT).show();
 
-                }catch (JSONException e) {
-                    e.printStackTrace();
-                    btnDangNhap.setVisibility(View.VISIBLE);
-                    Toast.makeText(DangNhap.this, "Login Error" + e.toString(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        },
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            Toast.makeText(DangNhap.this,"app error"+e.toString(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        btnDangNhap.setVisibility(View.VISIBLE);
-                        Toast.makeText(DangNhap.this, "Login Error" + error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DangNhap.this,error.toString(),Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -150,8 +145,8 @@ public class DangNhap extends AppCompatActivity {
                 parms.put("password", password);
                 return parms;
             }
+
         };
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+        queue.add(stringRequest);
     }
 }

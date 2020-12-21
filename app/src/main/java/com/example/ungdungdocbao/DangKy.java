@@ -40,7 +40,8 @@ public class DangKy extends AppCompatActivity {
     private TextView txtUsername,txtEmail,txtSdt,txtHoTen,txtDiaChi,txtMatKhau;
     private Button btnDangKy;
     private ProgressBar Loadding;
-    private  static  String URL_DangKy="http://10.0.2.2:8000/api/test";
+    String boundary = "apiclient-" + System.currentTimeMillis();
+    private  static  String URL_DangKy="http://10.0.2.2:8000/api/dang-ky";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.dang_ky, container, false);
@@ -89,74 +90,65 @@ public class DangKy extends AppCompatActivity {
     }
 
       private void Register(){
-//        btnDangKy.setVisibility(View.GONE);
-//        final String UserName = this.txtUsername.getText().toString().trim();
-//        final String Name = this.txtHoTen.getText().toString().trim();
-//        final String Email = this.txtEmail.getText().toString().trim();
-//        final String Sdt=this.txtSdt.getText().toString().trim();
-//        final String Dchi=this.txtDiaChi.getText().toString().trim();
-//        final String Password = this.txtMatKhau.getText().toString().trim();
-//          StringRequest stringRequest=new StringRequest(Request.Method.GET, URL_DangKy, new Response.Listener<String>() {
-//              @Override
-//              public void onResponse(String response) {
-//                  try {
-//                      Log.i("tagconvertstr", "["+response+"]");
-//                      JSONObject jsonObject=new JSONObject(response);
-//                      String success=jsonObject.getString("success");
-//                      if(success.equals("1")){
-//                          Toast.makeText(DangKy.this,"Register Success",Toast.LENGTH_SHORT).show();
-//                      }
-//                  } catch (JSONException e) {
-//                      e.printStackTrace();
-//                      btnDangKy.setVisibility(View.VISIBLE);
-//                      Toast.makeText(DangKy.this,"Register Error"+e.toString(),Toast.LENGTH_SHORT).show();
-//                  }
-//              }
-//          },
-//                  new Response.ErrorListener() {
-//                      @Override
-//                      public void onErrorResponse(VolleyError error) {
-//                          btnDangKy.setVisibility(View.VISIBLE);
-//                          Toast.makeText(DangKy.this,"Register Error"+error.toString(),Toast.LENGTH_SHORT).show();
-//                      }
-//                  })
-//          {
-//              @Override
-//              protected Map<String, String> getParams() throws AuthFailureError {
-//                  Map<String,String>parms=new HashMap<>();
-//                  parms.put("username",UserName);
-//                  parms.put("hoten",Name);
-//                  parms.put("password",Password);
-//                  parms.put("diachi",Dchi);
-//                  parms.put("sdt",Sdt);
-//                  parms.put("email",Email);
-//                  return parms;
-//              }
-//
-////              @Override
-////              public Map<String, String> getHeaders() throws AuthFailureError {
-////                  Map<String,String> parms =new HashMap<>();
-////                  parms.put("accept", "application/json");
-////                  parms.put("content-type", "multipart/form-data;");
-////
-////                  return parms;
-////              }
-//          };
+       final String username = this.txtUsername.getText().toString().trim();
+       final String hoten = this.txtHoTen.getText().toString().trim();
+       final String email = this.txtEmail.getText().toString().trim();
+       final String sdt=this.txtSdt.getText().toString().trim();
+       final String diachi=this.txtDiaChi.getText().toString().trim();
+       final String password = this.txtMatKhau.getText().toString().trim();
           RequestQueue queue = Volley.newRequestQueue(this);
-
-          StringRequest stringRequest = new StringRequest(Request.Method.GET, URL_DangKy,
+          StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DangKy,
                   new Response.Listener<String>() {
                       @Override
                       public void onResponse(String response) {
                           // Display the first 500 characters of the response string.
-                          Log.d("TEST_LOG", response);
+                          try {
+                              Log.i("tagconvertstr", "["+response+"]");
+                              JSONObject jsonObject=new JSONObject(response);
+                              String status=jsonObject.getString("status");
+                              String message=jsonObject.getString("message");
+                              if(status.equals("success")){
+                                   Toast.makeText(DangKy.this,message+" Vui lòng đăng nhập!",Toast.LENGTH_LONG).show();
+                                  Thread thread = new Thread(){
+                                      @Override
+                                      public void run() {
+                                          try {
+                                              Thread.sleep(3500); // Set time LENGTH_LONG Toast
+                                              startActivity(new Intent(getApplicationContext(),DangNhap.class));
+                                          } catch (Exception e) {
+                                              e.printStackTrace();
+                                          }
+                                      }
+                                  };
+                                  thread.start();
+                              }else Toast.makeText(DangKy.this,message+"",Toast.LENGTH_SHORT).show();
+
+                             } catch (JSONException e) {
+                             e.printStackTrace();
+                            Toast.makeText(DangKy.this,"Register Error"+e.toString(),Toast.LENGTH_SHORT).show();
+                             }
                       }
-                  }, new Response.ErrorListener() {
+                  },
+                  new Response.ErrorListener() {
+                    @Override
+                   public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(DangKy.this,"Email hoặc password đã tồn tại",Toast.LENGTH_SHORT).show();
+                }
+             })
+          {
               @Override
-              public void onErrorResponse(VolleyError error) {
-                  Log.d("TEST_LOG", "Loi roi");
+              protected Map<String, String> getParams() throws AuthFailureError {
+                  Map<String, String> parms = new HashMap<>();
+                  parms.put("username",username);
+                  parms.put("hoten", hoten);
+                  parms.put("email",email);
+                  parms.put("sdt",sdt);
+                  parms.put("password", password);
+                  parms.put("diachi",diachi);
+                  return parms;
               }
-          });
+
+          };
           queue.add(stringRequest);
       }
 }
