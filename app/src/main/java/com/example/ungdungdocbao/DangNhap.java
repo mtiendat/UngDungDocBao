@@ -40,7 +40,7 @@ public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
     private EditText txtEmail, txtPass;
     private Button btnDangNhap;
-    private static String URL_DANGNHAP = "http://192.168.137.145/AdminAndroid/login.php";
+    private static String URL_DANGNHAP = "http://192.168.97.2/AdminAndroid/login.php";
     private TextView user_name;
     private TextView user_email;
     SaveState saveState;
