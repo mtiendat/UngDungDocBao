@@ -21,14 +21,15 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrangChiTiet extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Newspaper>{
+public class TrangChiTiet extends AppCompatActivity{
+
     RecyclerView recyclerView;
     ListCommentAdapter mAdapter;
     List<BinhLuan> listBinhLuan= new ArrayList<>();
     SaveState saveState;
     TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA;
     DetailNewspaperLoader dt;
-    String id;
+    static String id;
     ImageView img;
     LoaderManager loaderManager;
     EditText txtBinhLuan;
@@ -37,6 +38,8 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trang_chi_tiet);
+
+
         img = findViewById(R.id.imgDetail);
         txt_motangan = findViewById(R.id.txt_motangan);
         txt_tieude = findViewById(R.id.txt_title_detail);
@@ -60,33 +63,69 @@ public class TrangChiTiet extends AppCompatActivity implements LoaderManager.Loa
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1111);
         if (loader == null) {
-            loaderManager.initLoader(1111, null, this);
+            loaderManager.initLoader(1111, null, new CallBack1());
         } else {
-            loaderManager.restartLoader(1111, null,this);
+            loaderManager.restartLoader(1111, null, new CallBack1());
         }
 
+        Loader loader2 = loaderManager.getLoader(2222);
+        if (loader2 == null) {
+            loaderManager.initLoader(2222, null, new CallBack2());
+        } else {
+            loaderManager.restartLoader(2222, null, new CallBack2());
+        }
+        recyclerView = findViewById(R.id.recyclerview_list_cmt);
+        mAdapter = new ListCommentAdapter(getApplicationContext(),listBinhLuan);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        recyclerView.setAdapter(mAdapter);
+
     }
 
-    @NonNull
-    @Override
-    public Loader<Newspaper> onCreateLoader(int id, @Nullable Bundle args) {
-        return new DetailNewspaperLoader(this,Integer.valueOf(this.id));
+    private class CallBack1 implements LoaderManager.LoaderCallbacks<Newspaper>{
+
+        @NonNull
+        @Override
+        public Loader<Newspaper> onCreateLoader(int idd, @Nullable Bundle args) {
+            return new DetailNewspaperLoader(getApplicationContext(),Integer.valueOf(id));
+        }
+
+        @Override
+        public void onLoadFinished(@NonNull Loader<Newspaper> loader, Newspaper data) {
+            txt_noidung.setText(data.getNoiDung());
+            txt_motangan.setText(data.getMoTa());
+            txt_tieude.setText(data.getTieuDe());
+            txt_tacgia.setText(data.getTacGia());
+            txt_tieudeHA.setText(data.getTieuDeHinhAnh());
+            Picasso.get()
+                    .load(data.getHinhAnh())
+                    .into(img);
+        }
+
+        @Override
+        public void onLoaderReset(@NonNull Loader<Newspaper> loader) {
+
+        }
     }
+    private class CallBack2 implements LoaderManager.LoaderCallbacks<List<BinhLuan>>{
 
-    @Override
-    public void onLoadFinished(@NonNull Loader<Newspaper> loader, Newspaper data) {
-        this.txt_noidung.setText(data.getNoiDung());
-        this.txt_motangan.setText(data.getMoTa());
-        this.txt_tieude.setText(data.getTieuDe());
-        this.txt_tacgia.setText(data.getTacGia());
-        this.txt_tieudeHA.setText(data.getTieuDeHinhAnh());
-        Picasso.get()
-                .load(data.getHinhAnh())
-                .into(img);
-    }
+        @NonNull
+        @Override
+        public Loader<List<BinhLuan>> onCreateLoader(int idd, @Nullable Bundle args) {
+            return new CommentLoader(getApplicationContext(),Integer.valueOf(id));
+        }
 
-    @Override
-    public void onLoaderReset(@NonNull Loader<Newspaper> loader) {
+        @Override
+        public void onLoadFinished(@NonNull Loader<List<BinhLuan>> loader, List<BinhLuan> data) {
+            listBinhLuan.clear();
+            if(data!=null) {
+                listBinhLuan.addAll(data);
+                mAdapter.notifyDataSetChanged();
+            }
+        }
 
+        @Override
+        public void onLoaderReset(@NonNull Loader<List<BinhLuan>> loader) {
+
+        }
     }
 }
