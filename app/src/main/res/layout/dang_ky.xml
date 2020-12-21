@@ -45,7 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText
-                    android:id="@+id/txtHoTenDK"
+                    android:id="@+id/txtUsername"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -55,7 +55,7 @@
                     android:drawableStart="@drawable/baseline_account_circle_24"
                     android:drawablePadding="12dp"
                     android:ems="10"
-                    android:hint="User Name"
+                    android:hint="Username"
                     android:inputType="textEmailAddress"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
@@ -84,7 +84,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtHoTenDK" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtUsername" />
 
                 <EditText
                     android:id="@+id/txtSDTDangKy"
@@ -106,21 +106,40 @@
                     app:layout_constraintTop_toBottomOf="@+id/txtEmailDK" />
 
                 <EditText
-                    android:id="@+id/txtDiaChiDK"
+                    android:id="@+id/txtDiaChi"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="62dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/custom_input"
-                    android:drawableStart="@drawable/baseline_home_24"
+                    android:drawableStart="@drawable/ic_address"
                     android:ems="10"
-                    android:hint="Địa Chỉ"
+                    android:hint="Địa chỉ"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtHoTen" />
+
+                <EditText
+                    android:id="@+id/txtHoTen"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/custom_input"
+                    android:drawableStart="@drawable/baseline_home_24"
+                    android:ems="10"
+                    android:hint="Họ Tên"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txtSDTDangKy" />
 
@@ -143,7 +162,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.562"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDiaChiDK" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtDiaChi" />
 
 
                 <Button
@@ -151,7 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="98dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="30dp"
                     android:background="@drawable/custom_button"
                     android:text="Đăng ký"

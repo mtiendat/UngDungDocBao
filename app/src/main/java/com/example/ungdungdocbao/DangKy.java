@@ -1,13 +1,11 @@
 package com.example.ungdungdocbao;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,8 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
@@ -35,14 +31,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import okhttp3.OkHttpClient;
 public class DangKy extends AppCompatActivity {
     SaveState saveState;
 
-    private TextView txtTen,txtEmail,txtSdt,txtNgaySinh,txtDiaChi,txtMatK,txtNhapLai;
+    private TextView txtUsername,txtEmail,txtSdt,txtHoTen,txtDiaChi,txtMatKhau;
     private Button btnDangKy;
     private ProgressBar Loadding;
-    private  static  String URL_DangKy="http://192.168.97.2/AdminAndroid/register.php";
+    private  static  String URL_DangKy="http://192.168.43.176/AdminAndroid/register.php";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.dang_ky, container, false);
@@ -55,11 +50,12 @@ public class DangKy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dang_ky);
         Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar_dangky);
-        txtTen = findViewById(R.id.txtHoTenDK);
+        txtUsername = findViewById(R.id.txtUsername);
         txtEmail=findViewById(R.id.txtEmailDK);
         txtSdt=findViewById(R.id.txtSDTDangKy);
-        txtDiaChi=findViewById(R.id.txtDiaChiDK);
-        txtMatK=findViewById(R.id.txtMatKhauDK);
+        txtDiaChi=findViewById(R.id.txtDiaChi);
+        txtMatKhau=findViewById(R.id.txtMatKhauDK);
+        txtHoTen=findViewById(R.id.txtHoTen);
 
         setSupportActionBar(toolbar);; //sudung toolbar nhu actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nut back cho toolbar
@@ -91,12 +87,12 @@ public class DangKy extends AppCompatActivity {
 
       private void Register(){
         btnDangKy.setVisibility(View.GONE);
-        final String Name = this.txtTen.getText().toString().trim();
+        final String UserName = this.txtUsername.getText().toString().trim();
+        final String Name = this.txtHoTen.getText().toString().trim();
         final String Email = this.txtEmail.getText().toString().trim();
         final String Sdt=this.txtSdt.getText().toString().trim();
         final String Dchi=this.txtDiaChi.getText().toString().trim();
-        final String Password = this.txtMatK.getText().toString().trim();
-
+        final String Password = this.txtMatKhau.getText().toString().trim();
           StringRequest stringRequest=new StringRequest(Request.Method.POST, URL_DangKy, new Response.Listener<String>() {
               @Override
               public void onResponse(String response) {
@@ -124,7 +120,8 @@ public class DangKy extends AppCompatActivity {
               @Override
               protected Map<String, String> getParams() throws AuthFailureError {
                   Map<String,String>parms=new HashMap<>();
-                  parms.put("username",Name);
+                  parms.put("username",UserName);
+                  parms.put("hoten",Name);
                   parms.put("password",Password);
                   parms.put("diachi",Dchi);
                   parms.put("sdt",Sdt);
