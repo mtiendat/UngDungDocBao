@@ -6,7 +6,9 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/img_cmt"
+
+        android:id="@+id/img_avatar"
+
         android:layout_width="82dp"
         android:layout_height="73dp"
         android:layout_marginStart="16dp"
@@ -24,8 +26,10 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
-        app:layout_constraintStart_toEndOf="@+id/img_cmt"
-        app:layout_constraintTop_toTopOf="@+id/img_cmt" />
+
+        app:layout_constraintStart_toEndOf="@+id/img_avatar"
+        app:layout_constraintTop_toTopOf="@+id/img_avatar" />
+
 
     <TextView
         android:id="@+id/txt_comment_content"

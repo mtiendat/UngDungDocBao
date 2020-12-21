@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.ungdungdocbao.ui.setting.SaveState;
 import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.android.volley.Request;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,7 +40,9 @@ public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
     private EditText txtEmail, txtPass;
     private Button btnDangNhap;
-    private static String URL_DANGNHAP = "http://192.168.43.176/AdminAndroid/login.php";
+    private static String URL_DANGNHAP = "http://192.168.97.2/AdminAndroid/login.php";
+    private TextView user_name;
+    private TextView user_email;
     SaveState saveState;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -54,7 +58,11 @@ public class DangNhap extends AppCompatActivity {
         txtEmail = findViewById(R.id.editTextTextPersonName);
         txtPass = findViewById(R.id.editTextTextPassword);
         btnDangNhap = findViewById(R.id.btn_dangnhap2);
-
+        //NavigationView navigationView;
+        //navigationView = (NavigationView) findViewById(R.id.nav_view);
+        //View hView = navigationView.getHeaderView(0);
+        //user_name=(TextView)hView.findViewById(R.id.user_name);
+        //user_email=(TextView)hView.findViewById(R.id.user_email);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dangnhap);
         setSupportActionBar(toolbar);
         ; //sudung toolbar nhu actionbar
@@ -89,7 +97,6 @@ public class DangNhap extends AppCompatActivity {
     }
 
     public void Login(final String email, final String password) {
-        btnDangNhap.setVisibility(View.GONE);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DANGNHAP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -101,11 +108,26 @@ public class DangNhap extends AppCompatActivity {
                     if (success.equals("1")) {
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject object = jsonArray.getJSONObject(i);
-                            String email = object.getString("email").trim();
-                            String name = object.getString("name").trim();
-                            Toast.makeText(DangNhap.this, "Success Login! \nYour Name: "+name  + "\nYour Email: " + email, Toast.LENGTH_SHORT).show();
+                            String email = object.getString("email");
+                            String name = object.getString("name");
+                            //user_name.setText(name);
+                            //user_email.setText(email);
+                            Toast.makeText(DangNhap.this, "Success Login! \nYour Name: "+name  + "\nYour Email: " + email, Toast.LENGTH_LONG).show();
+                            Thread thread = new Thread(){
+                                @Override
+                                public void run() {
+                                    try {
+                                        Thread.sleep(3500); // Set time LENGTH_LONG Toast
+                                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            };
+                            thread.start();
                         }
-                    }
+                    }else Toast.makeText(DangNhap.this,"Tên đăng nhập hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
+
                 }catch (JSONException e) {
                     e.printStackTrace();
                     btnDangNhap.setVisibility(View.VISIBLE);
