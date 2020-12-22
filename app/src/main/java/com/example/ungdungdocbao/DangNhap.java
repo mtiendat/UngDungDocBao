@@ -83,8 +83,8 @@ public class DangNhap extends AppCompatActivity {
                 if (!Email.isEmpty() || !Password.isEmpty()) {
                     Login(Email,Password);
                 } else {
-                    txtEmail.setError("Please inser Email");
-                    txtPass.setError("Please insert Pass");
+                    txtEmail.setError("Vui lòng nhập email");
+                    txtPass.setError("Vui lòng nhập password");
                 }
             }
         });
@@ -115,7 +115,7 @@ public class DangNhap extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         try {
-                                            Thread.sleep(3500); // Set time LENGTH_LONG Toast
+                                            Thread.sleep(3000); // Set time LENGTH_LONG Toast
                                             startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                         } catch (Exception e) {
                                             e.printStackTrace();
