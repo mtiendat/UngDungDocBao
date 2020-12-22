@@ -90,7 +90,10 @@ public class DangNhap extends AppCompatActivity {
         });
 
         saveState = new SaveState(this);
-
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
     public void Login(final String email, final String password) {

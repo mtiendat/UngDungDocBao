@@ -39,6 +39,11 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        saveState = new SaveState(getContext());
+        if(saveState.getState()==true)
+            ((AppCompatActivity)(getActivity())).getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            ((AppCompatActivity)(getActivity())).getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
 
     }

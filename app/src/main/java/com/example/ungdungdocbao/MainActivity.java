@@ -67,9 +67,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         saveState =new SaveState(this);
-
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
@@ -79,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -109,13 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void DarkMode(){
-        saveState=new SaveState(this);
-        if(saveState.getState()==true)
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-    }
+
     public void nextActivitySetting() {
         imgBtnSetting=findViewById(R.id.imgBtn_setting);
         imgBtnSetting.setOnClickListener(new View.OnClickListener() {

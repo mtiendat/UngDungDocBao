@@ -81,6 +81,10 @@ public class DangKy extends AppCompatActivity {
         });
 
         saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
 
       private void Register(){
