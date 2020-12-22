@@ -39,6 +39,8 @@ public class FirstFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     public void someMethodThatUsesActivity(Activity myActivityReference){
@@ -48,10 +50,10 @@ public class FirstFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         // Inflate the layout for this fragment
         someMethodThatUsesActivity(getActivity());//ẨN THANH STATUS TRẠNG THÁI
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
+
 
         mFirstViewPager = (ViewPager) rootView.findViewById(R.id.viewpage_content);
         mTabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);

@@ -59,7 +59,6 @@ public class SettingFragment extends AppCompatActivity {
         });
 
         DarkMode();
-
         switch_btn= findViewById(R.id.switch_nen_toi);
         if(saveState.getState()==true)
             switch_btn.setChecked(true);

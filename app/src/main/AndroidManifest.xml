@@ -16,16 +16,15 @@
             android:theme="@style/SplashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
+            android:theme="@style/AppTheme"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,12 +41,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.setting.SettingFragment"/>
         </activity>
+
         <activity android:name=".DangKy" android:parentActivityName=".ui.setting.SettingFragment"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.setting.SettingFragment"/>
         </activity>
+
         <activity android:name=".TrangChiTiet" android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">
             <meta-data

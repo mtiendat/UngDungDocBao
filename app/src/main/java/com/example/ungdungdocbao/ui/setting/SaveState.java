@@ -11,7 +11,6 @@ public class SaveState {
     public SaveState(Context context) {
         this.context = context;
         sharedPreferences=context.getSharedPreferences("preferences",Context.MODE_PRIVATE);
-
     }
     public void setState(boolean bvalue){
         SharedPreferences.Editor editor=sharedPreferences.edit();
