@@ -56,10 +56,7 @@ public class TrangChiTiet extends AppCompatActivity{
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
-        recyclerView = findViewById(R.id.recyclerview_list_cmt);
-        mAdapter = new ListCommentAdapter(this,listBinhLuan);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1111);
         if (loader == null) {
@@ -75,7 +72,7 @@ public class TrangChiTiet extends AppCompatActivity{
             loaderManager.restartLoader(2222, null, new CallBack2());
         }
         recyclerView = findViewById(R.id.recyclerview_list_cmt);
-        mAdapter = new ListCommentAdapter(getApplicationContext(),listBinhLuan);
+        mAdapter = new ListCommentAdapter(this,listBinhLuan);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(mAdapter);
 

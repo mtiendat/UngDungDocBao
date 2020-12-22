@@ -33,8 +33,8 @@ public class CommentLoader extends AsyncTaskLoader<List<BinhLuan>> {
             for (int i = 0; i < binhluan.length(); i++) {
                 JSONObject item = binhluan.getJSONObject(i);
                 Integer id = item.getInt("id");
-                String nameUser = item.getString("nameUser");
-                String content = item.getString("content");
+                String nameUser = item.getString("username");
+                String content = item.getString("noidung");
                 BinhLuan binhLuan = new BinhLuan(nameUser,content);
                 listbinhLuan.add(binhLuan);
             }
