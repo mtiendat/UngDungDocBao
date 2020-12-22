@@ -34,8 +34,8 @@ public class ListCommentAdapter extends RecyclerView.Adapter<ListCommentAdapter.
     @Override
     public void onBindViewHolder(@NonNull cmtViewHolder holder, int position) {
         final BinhLuan binhLuan = listBinhLuan.get(position);
-        holder.mName.setText(binhLuan.getNameUser().toString());
-        holder.mContent.setText(binhLuan.getContent().toString());
+        holder.mName.setText(binhLuan.getNameUser());
+        holder.mContent.setText(binhLuan.getContent());
     }
 
     @Override

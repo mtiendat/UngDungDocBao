@@ -107,7 +107,7 @@ public class DangKy extends AppCompatActivity {
                                       @Override
                                       public void run() {
                                           try {
-                                              Thread.sleep(3500); // Set time LENGTH_LONG Toast
+                                              Thread.sleep(3000); // Set time LENGTH_LONG Toast
                                               startActivity(new Intent(getApplicationContext(),DangNhap.class));
                                           } catch (Exception e) {
                                               e.printStackTrace();
