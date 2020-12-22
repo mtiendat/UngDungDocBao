@@ -1,13 +1,18 @@
 package com.example.ungdungdocbao;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -31,6 +36,11 @@ public class FirstFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private Toolbar mToolbar;
+    private TextView user_name;
+    private TextView user_email;
+    private TextView dangXuat;
+    public static String USER_NAME="";
+    public static String USER_EMAIL="";
     SaveState saveState;
     public FirstFragment() {
 
@@ -58,7 +68,6 @@ public class FirstFragment extends Fragment {
         // Inflate the layout for this fragment
         someMethodThatUsesActivity(getActivity());//ẨN THANH STATUS TRẠNG THÁI
         View rootView = inflater.inflate(R.layout.fragment_first, container, false);
-
 
         mFirstViewPager = (ViewPager) rootView.findViewById(R.id.viewpage_content);
         mTabLayout = (TabLayout) rootView.findViewById(R.id.tab_layout);
@@ -100,6 +109,38 @@ public class FirstFragment extends Fragment {
                 //Nếu Item được chạm , đoạn code này sẽ thiết lập lựa chon item và Drawer cũng được đóng bởi hàm closeDrawers().
             }
         });
+        View hview = mNavigationView.getHeaderView(0);
+        user_name=hview.findViewById(R.id.user_name);
+        user_email=hview.findViewById(R.id.user_email);
+        dangXuat=hview.findViewById(R.id.dangxuat);
+        dangXuat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                USER_NAME="";
+                USER_EMAIL="";
+                dangXuat.setVisibility(View.INVISIBLE);
+                Toast.makeText(getContext(),"Đăng xuất thành công",Toast.LENGTH_LONG).show();
+                Thread thread = new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000); // Set time LENGTH_LONG Toast
+                            startActivity(new Intent(getContext(),DangNhap.class));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                thread.start();
+            }
+        });
+        if(!USER_NAME.equals("")) {
+            Log.d("USERNAME",USER_NAME);
+            user_name.setText(USER_NAME);
+            user_email.setText(USER_EMAIL);
+            dangXuat.setVisibility(View.VISIBLE);
+
+        }
         mToolbar = rootView.findViewById(R.id.toolbar_drawer);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);//set toolbar như là 1 actionbar
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);

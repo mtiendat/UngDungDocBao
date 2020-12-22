@@ -17,6 +17,7 @@ import com.example.ungdungdocbao.ui.home.HomeFragment;
 import com.example.ungdungdocbao.ui.setting.SaveState;
 import com.example.ungdungdocbao.ui.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
@@ -67,11 +68,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         saveState =new SaveState(this);
         if(saveState.getState()==true)
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);

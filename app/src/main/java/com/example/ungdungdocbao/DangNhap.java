@@ -41,8 +41,6 @@ public class DangNhap extends AppCompatActivity {
     private EditText txtEmail, txtPass;
     private Button btnDangNhap;
     private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
-    private TextView user_name;
-    private TextView user_email;
     SaveState saveState;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -58,11 +56,7 @@ public class DangNhap extends AppCompatActivity {
         txtEmail = findViewById(R.id.editTextTextPersonName);
         txtPass = findViewById(R.id.editTextTextPassword);
         btnDangNhap = findViewById(R.id.btn_dangnhap2);
-        //NavigationView navigationView;
-        //navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //View hView = navigationView.getHeaderView(0);
-        //user_name=(TextView)hView.findViewById(R.id.user_name);
-        //user_email=(TextView)hView.findViewById(R.id.user_email);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dangnhap);
         setSupportActionBar(toolbar);
         ; //sudung toolbar nhu actionbar
@@ -109,14 +103,18 @@ public class DangNhap extends AppCompatActivity {
                             String status=jsonObject.getString("status");
                             String message=jsonObject.getString("message");
                             if(status.equals("success")){
-                                String hoten = jsonObject.getString("hoten");
-                                Toast.makeText(DangNhap.this,message+"\nChào "+hoten+"<3",Toast.LENGTH_LONG).show();
+                                final String hoTen = jsonObject.getString("hoten");
+                                final String userEmail = jsonObject.getString("email");
+                                Toast.makeText(DangNhap.this,message+"\nChào "+hoTen+"<3",Toast.LENGTH_LONG).show();
                                 Thread thread = new Thread(){
                                     @Override
                                     public void run() {
                                         try {
                                             Thread.sleep(3000); // Set time LENGTH_LONG Toast
-                                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                            FirstFragment.USER_NAME=hoTen;
+                                            FirstFragment.USER_EMAIL=userEmail;
+                                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                            startActivity(intent);
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }
