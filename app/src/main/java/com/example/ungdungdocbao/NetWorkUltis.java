@@ -40,7 +40,7 @@ public class NetWorkUltis {
     }
     public static String getBinhLuan(int id) {
         Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/binhluan").buildUpon()
-                .appendQueryParameter("id",String.valueOf(id)).build();
+                .appendQueryParameter("id_baiviet",String.valueOf(id)).build();
         try {
             URL requestURL = new URL(builtURI.toString());
 
