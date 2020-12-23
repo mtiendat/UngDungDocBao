@@ -112,7 +112,16 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
     }
-
+    public void TimKiem(View view) {
+        imgBtnSearch = findViewById(R.id.imgBtn_search);
+        imgBtnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,TimKiem.class);
+                startActivity(intent);
+            }
+        });
+    }
 
     public void nextActivitySetting() {
         imgBtnSetting=findViewById(R.id.imgBtn_setting);

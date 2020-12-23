@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="txtTim" type="id" />
+    <item name="btnTim" type="id" />
+    <item name="recylerview" type="id" />
+</resources>

@@ -50,6 +50,18 @@ public class NetWorkUltis {
             return null;
         }
     }
+    public static String getTieuDe(String tukhoa) {
+        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/tieude").buildUpon()
+                .appendQueryParameter("tukhoa",tukhoa).build();
+        try {
+            URL requestURL = new URL(builtURI.toString());
+
+            return callAPI(requestURL,"GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static String callAPI(URL requestURL,String method) throws IOException {
         HttpURLConnection urlConnection =null;
         String results="";
