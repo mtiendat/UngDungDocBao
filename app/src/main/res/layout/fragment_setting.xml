@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Tài Khoản"
+        android:text="@string/taikhoan"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
-            android:text="Đăng Nhập"
+            android:text="@string/dangnhap"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Tạo Tài Khoản"
+            android:text="@string/tao_tai_khoan"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,7 +82,8 @@
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
         <ImageButton
             android:id="@+id/imgBtn_dangky"
@@ -99,7 +100,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView6"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            android:contentDescription="@string/todo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -109,7 +111,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Hoạt Động"
+        android:text="@string/hoat_dong"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -129,13 +131,13 @@
 
 
         <TextView
-            android:id="@+id/user_email"
+            android:id="@+id/tindaxem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="8dp"
-            android:text="Tin Đã Xem"
+            android:text="@string/tin_da_xem"
             android:textSize="16sp"
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintStart_toStartOf="parent"
@@ -143,12 +145,13 @@
 
         <View
             android:id="@+id/view2"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@+id/user_email"
-            tools:layout_editor_absoluteX="0dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tindaxem" />
 
         <TextView
             android:id="@+id/textView8"
@@ -157,7 +160,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Bình Luận Gần Đây"
+            android:text="@string/b_nh_lu_n_g_n_y"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -175,8 +178,9 @@
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/user_email"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/tindaxem"
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/todo" />
 
         <ImageButton
             android:id="@+id/imageButton6"
@@ -191,7 +195,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/img_button_tindaxem" />
+            app:layout_constraintTop_toBottomOf="@+id/img_button_tindaxem"
+            android:contentDescription="@string/todo" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -203,7 +208,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="8dp"
-        android:text="Tùy Chỉnh"
+        android:text="@string/t_y_ch_nh"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
@@ -229,7 +234,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Nền Tối"
+            android:text="@string/n_n_t_i"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -256,7 +261,7 @@
         android:layout_marginStart="25dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:text="Liên Hệ"
+        android:text="@string/li_n_h"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
@@ -275,13 +280,14 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        android:importantForAutofill="no" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/screen_background_light_transparent"
+        android:background="@android:color/transparent"
         android:minHeight="?attr/actionBarSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -292,9 +298,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="?android:attr/actionBarSize"
             android:gravity="center"
-            android:text="Thiết lập"
-            android:textStyle="bold"
-            android:textColor="@color/cardview_dark_background"
+            android:text="@string/thi_t_l_p"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="14dp" />

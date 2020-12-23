@@ -129,7 +129,6 @@
             android:layout_marginRight="?android:attr/actionBarSize"
             android:gravity="center"
             android:text="@string/dang_nhap"
-            android:textColor="@color/cardview_dark_background"
             android:textSize="20dp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="14dp" />

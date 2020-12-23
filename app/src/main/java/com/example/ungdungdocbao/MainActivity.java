@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -64,22 +65,25 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         saveState =new SaveState(this);
-        if(saveState.getState()==true)
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        else
-            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         nextActivitySetting();//An Button Setting
         viewPager = findViewById(R.id.view_pager);
         setupViewPager(viewPager);
         final BottomNavigationView navigation = findViewById(R.id.bot_nav_view);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        if(saveState.getState()==true) {
+            navigation.setBackgroundColor(AppCompatDelegate.MODE_NIGHT_YES);
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener(){
 
             @Override

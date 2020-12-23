@@ -24,4 +24,14 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="ng_xu_t">Đăng xuất</string>
+    <string name="taikhoan">Tài Khoản</string>
+    <string name="dangnhap">Đăng Nhập</string>
+    <string name="hoat_dong">Hoạt Động</string>
+    <string name="b_nh_lu_n_g_n_y">Bình Luận Gần Đây</string>
+    <string name="t_y_ch_nh">Tùy Chỉnh</string>
+    <string name="n_n_t_i">Nền Tối</string>
+    <string name="li_n_h">Liên Hệ</string>
+    <string name="todo">TODO</string>
+    <string name="thi_t_l_p">Thiết lập</string>
+
 </resources>

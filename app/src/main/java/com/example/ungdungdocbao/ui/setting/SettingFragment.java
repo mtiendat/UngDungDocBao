@@ -47,22 +47,10 @@ public class SettingFragment extends AppCompatActivity {
                 startActivity(new Intent(SettingFragment.this, TrangTinDaXem.class));
             }
         });
-        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            }
-        });
-
         DarkMode();
         switch_btn= findViewById(R.id.switch_nen_toi);
         if(saveState.getState()==true)
             switch_btn.setChecked(true);
-
         switch_btn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -76,7 +64,16 @@ public class SettingFragment extends AppCompatActivity {
                 }
             }
         });
-
+        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
 
 
     }

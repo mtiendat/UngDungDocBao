@@ -2,7 +2,6 @@ package com.example.ungdungdocbao;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.ungdungdocbao.ui.setting.SaveState;
@@ -111,7 +108,7 @@ public class FirstFragment extends Fragment {
         });
         View hview = mNavigationView.getHeaderView(0);
         user_name=hview.findViewById(R.id.user_name);
-        user_email=hview.findViewById(R.id.user_email);
+        user_email=hview.findViewById(R.id.tindaxem);
         dangXuat=hview.findViewById(R.id.dangxuat);
         dangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,7 +149,8 @@ public class FirstFragment extends Fragment {
             }
         });
 
-        mTabLayout.setupWithViewPager(mFirstViewPager);//set viewpage
+        mTabLayout.setupWithViewPager(mFirstViewPager);//set viewpager
+
         setupViewPager(mFirstViewPager);
 
         return rootView;
