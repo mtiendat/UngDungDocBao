@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/vien"
-    tools:context=".ui.home.HomeFragment">
+    tools:context=".Bottom_Nav.home.HomeFragment">
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

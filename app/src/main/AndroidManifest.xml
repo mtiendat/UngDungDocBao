@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:theme="@style/AppTheme"
             >
             <intent-filter>
@@ -29,37 +29,37 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.setting.SettingFragment" android:parentActivityName=".MainActivity"
+        <activity android:name=".Bottom_Nav.setting.SettingFragment" android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".Activity.MainActivity"/>
         </activity>
-        <activity android:name=".DangNhap" android:parentActivityName=".ui.setting.SettingFragment"
+        <activity android:name=".Activity.DangNhap" android:parentActivityName=".Bottom_Nav.setting.SettingFragment"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.setting.SettingFragment"/>
-        </activity>
-
-        <activity android:name=".DangKy" android:parentActivityName=".ui.setting.SettingFragment"
-            android:theme="@style/AppTheme">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.setting.SettingFragment"/>
+                android:value=".Bottom_Nav.setting.SettingFragment"/>
         </activity>
 
-        <activity android:name=".TrangChiTiet" android:parentActivityName=".MainActivity"
+        <activity android:name=".Activity.DangKy" android:parentActivityName=".Bottom_Nav.setting.SettingFragment"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".Bottom_Nav.setting.SettingFragment"/>
         </activity>
-        <activity android:name=".TrangTinDaXem" android:parentActivityName=".MainActivity"
+
+        <activity android:name=".Activity.TrangChiTiet" android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.setting.SettingFragment"/>
+                android:value=".Activity.MainActivity"/>
+        </activity>
+        <activity android:name=".Activity.TrangTinDaXem" android:parentActivityName=".Activity.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Bottom_Nav.setting.SettingFragment"/>
         </activity>
 
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
