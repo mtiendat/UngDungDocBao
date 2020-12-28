@@ -23,7 +23,7 @@ import com.example.ungdungdocbao.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrangTinDaXem  extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Newspaper>> {
+public class TrangTinDaXem  extends AppCompatActivity {
     Toolbar toolbar;
     private RecyclerView recyclerView;
     private NewspaperAdapter mAdapter;
@@ -47,35 +47,7 @@ public class TrangTinDaXem  extends AppCompatActivity implements LoaderManager.L
          mAdapter=new NewspaperAdapter(this,dsTinDaXem);
          recyclerView.setLayoutManager(new LinearLayoutManager(this));
          recyclerView.setAdapter(mAdapter);
-        loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(10);
-             if (loader == null) {
-                 loaderManager.initLoader(10, null, this);
-             } else {
-                 loaderManager.restartLoader(10, null, this);
-             }
 
-    }
-
-    @NonNull
-    @Override
-    public Loader<List<Newspaper>> onCreateLoader(int id, @Nullable Bundle args) {
-
-         return new DanhSachTinDaXemLoader(this,MainActivity.dsTinDaXem);
-
-    }
-
-    @Override
-    public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
-        dsTinDaXem.clear();
-        if(data!=null) {
-            dsTinDaXem.addAll(data);
-            mAdapter.notifyDataSetChanged();
-        }
-    }
-
-    @Override
-    public void onLoaderReset(@NonNull Loader<List<Newspaper>> loader) {
 
     }
 }

@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ungdungdocbao.Bottom_Nav.favorite.FavoriteFragment;
 import com.example.ungdungdocbao.Models.Newspaper;
 
 import org.json.JSONArray;
@@ -25,20 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DanhSachTinDaXemLoader extends AsyncTaskLoader<List<Newspaper>> {
-    public final String URL_DSTINDAXEM ="http://10.0.2.2:8000/api/tin-da-xem";
-    public List<Integer>dsID = new ArrayList<>();
-    public DanhSachTinDaXemLoader(@NonNull Context context,List<Integer>dsID) {
-        super(context);
-        this.dsID=dsID;
-    }
-
-    @Nullable
-    @Override
-    public List<Newspaper> loadInBackground() {
-        final List<Newspaper> listNewspaper= new ArrayList<>();
-        RequestQueue queue = Volley.newRequestQueue(getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DSTINDAXEM,
+public class DanhSachTinDaXemLoader {
+    public static List<Newspaper> listResult = new ArrayList<>();
+    public DanhSachTinDaXemLoader(Context context, final List<Integer>dsID){
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://10.0.2.2:8000/api/tin-da-xem",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -59,13 +51,11 @@ public class DanhSachTinDaXemLoader extends AsyncTaskLoader<List<Newspaper>> {
                                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
                                 String tacGia = item.getString("TacGia");
                                 Newspaper aNewspaper = new Newspaper(id,tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh,tacGia);
-                                listNewspaper.add(aNewspaper);
+                                listResult.add(aNewspaper);
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                 },
@@ -87,12 +77,10 @@ public class DanhSachTinDaXemLoader extends AsyncTaskLoader<List<Newspaper>> {
                     }
 
                 };
-            queue.add(stringRequest);
-            return listNewspaper;
+
+                queue.add(stringRequest);
+
+
     }
-    @Override
-    protected void onStartLoading() {
-        super.onStartLoading();
-        forceLoad();
-    }
+
 }
