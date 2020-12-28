@@ -1,0 +1,105 @@
+Index: app/src/main/java/com/example/ungdungdocbao/TimKiem.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ungdungdocbao;\r\n\r\nimport android.os.Bundle;\r\nimport android.util.Log;\r\nimport android.view.Menu;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\nimport android.widget.EditText;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.loader.app.LoaderManager;\r\nimport androidx.loader.content.Loader;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport org.json.JSONArray;\r\nimport org.json.JSONException;\r\nimport org.json.JSONObject;\r\n\r\nimport java.util.LinkedList;\r\npublic class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {\r\n    static final int WEATHER_LOADER_ID = 1000;\r\n    LoaderManager loaderManager;\r\n\r\n    EditText editTextTuKhoa;\r\n\r\n    LinkedList<BaiViet> baivietlist;\r\n    RecyclerView recyclerViewBaiVietList;\r\n    BaiVietAdapter baivietAdapter;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.fragment_tim_kiem);\r\n        loaderManager = LoaderManager.getInstance(this);\r\n\r\n\r\n\r\n    }\r\n    public void timKiem(View view) {\r\n        this.editTextTuKhoa = findViewById(R.id.txtTim);\r\n        Bundle info = new Bundle();\r\n        info.putString(\"tukhoa\", this.editTextTuKhoa.getText().toString());\r\n        if (loaderManager.getLoader(WEATHER_LOADER_ID) == null) {\r\n\r\n            loaderManager.initLoader(WEATHER_LOADER_ID,info,this);\r\n        } else {\r\n            loaderManager.restartLoader(WEATHER_LOADER_ID, info, this);\r\n        }\r\n\r\n\r\n\r\n    }\r\n    @NonNull\r\n    @Override\r\n    public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {\r\n        return new BaiVietLoader(this, args.getString(\"tukhoa\"));\r\n    }\r\n\r\n    @Override\r\n    public void onLoadFinished(@NonNull Loader<String> loader, String data) {\r\n\r\n        Log.d(\"Test_data\",data.toString());\r\n        try {\r\n            JSONObject jsonObject = new JSONObject(data);\r\n            JSONArray itemsArray = jsonObject.getJSONArray(\"items\");\r\n            Log.d(\"TEST_LG\", itemsArray.toString());\r\n\r\n            // Tạo nguồn dữ liệu\r\n            this.baivietlist = new LinkedList<BaiViet>();\r\n            String tieude = null;\r\n\r\n            for(int i = 0 ; i < itemsArray.length() ; i++){\r\n                JSONObject jsonObject1 = itemsArray.getJSONObject(i);\r\n                JSONObject volumebaiviet = jsonObject1.getJSONObject(\"volumebaiviet\");\r\n                try{\r\n                    tieude = volumebaiviet.getString(\"tieude\");\r\n\r\n                    BaiViet temp = new BaiViet(tieude);\r\n                    this.baivietlist.add(temp);\r\n                }\r\n                catch (Exception e){\r\n                    e.printStackTrace();\r\n                }\r\n            }\r\n\r\n            //Thiết lập Adapter và LayoutManager cho RecyclerView\r\n            recyclerViewBaiVietList= findViewById(R.id.recy_timkiem);\r\n            Log.d(\"Test_array\",this.baivietlist.get(0).getTieude());\r\n            baivietAdapter = new BaiVietAdapter(this, this.baivietlist);\r\n            recyclerViewBaiVietList.setAdapter(baivietAdapter);\r\n\r\n            recyclerViewBaiVietList.setLayoutManager(new LinearLayoutManager(this));\r\n\r\n        } catch (JSONException e) {\r\n            e.printStackTrace();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public void onLoaderReset(@NonNull Loader<String> loader) {\r\n\r\n    }\r\n\r\n    @Override\r\n    public boolean onOptionsItemSelected(@NonNull MenuItem item) {\r\n\r\n        int id = item.getItemId();\r\n        return super.onOptionsItemSelected(item);\r\n    }\r\n\r\n    @Override\r\n    public boolean onCreateOptionsMenu(Menu menu) {\r\n        return super.onCreateOptionsMenu(menu);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ungdungdocbao/TimKiem.java	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
++++ app/src/main/java/com/example/ungdungdocbao/TimKiem.java	(date 1609053650761)
+@@ -65,7 +65,7 @@
+         Log.d("Test_data",data.toString());
+         try {
+             JSONObject jsonObject = new JSONObject(data);
+-            JSONArray itemsArray = jsonObject.getJSONArray("items");
++            JSONArray itemsArray = jsonObject.getJSONArray("data");
+             Log.d("TEST_LG", itemsArray.toString());
+ 
+             // Tạo nguồn dữ liệu
+@@ -74,10 +74,8 @@
+ 
+             for(int i = 0 ; i < itemsArray.length() ; i++){
+                 JSONObject jsonObject1 = itemsArray.getJSONObject(i);
+-                JSONObject volumebaiviet = jsonObject1.getJSONObject("volumebaiviet");
+                 try{
+                     tieude = volumebaiviet.getString("tieude");
+-
+                     BaiViet temp = new BaiViet(tieude);
+                     this.baivietlist.add(temp);
+                 }
+Index: app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.ungdungdocbao;\r\n\r\nimport android.net.Uri;\r\nimport android.util.Log;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.InputStreamReader;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\n\r\npublic class NetWorkUltis {\r\n    public static String getNewspaper(String danhMuc) throws MalformedURLException {\r\n        Uri builtlURI = Uri.parse(\"http://10.0.2.2:8000/api/bai-viet\").buildUpon()\r\n                .appendQueryParameter(\"danhmuc\",danhMuc).build();\r\n        try {\r\n            URL requestURL = new URL(builtlURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n\r\n    }\r\n\r\n    public static String getDetailNewspaper(int id) {\r\n        Uri builtURI = Uri.parse(\"http://10.0.2.2:8000/api/chitiet\").buildUpon()\r\n                .appendQueryParameter(\"id\",String.valueOf(id)).build();\r\n        try {\r\n            URL requestURL = new URL(builtURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n    public static String getBinhLuan(int id) {\r\n        Uri builtURI = Uri.parse(\"http://10.0.2.2:8000/api/binhluan\").buildUpon()\r\n                .appendQueryParameter(\"id_baiviet\",String.valueOf(id)).build();\r\n        try {\r\n            URL requestURL = new URL(builtURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n    public static String getTieuDe(String tukhoa) {\r\n        Uri builtURI = Uri.parse(\"http://10.0.2.2:8000/api/tieude\").buildUpon()\r\n                .appendQueryParameter(\"tukhoa\",tukhoa).build();\r\n        try {\r\n            URL requestURL = new URL(builtURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n    public static String callAPI(URL requestURL,String method) throws IOException {\r\n        HttpURLConnection urlConnection =null;\r\n        String results=\"\";\r\n\r\n        try {\r\n            urlConnection = (HttpURLConnection) requestURL.openConnection();\r\n            urlConnection.setRequestMethod(method);\r\n            urlConnection.connect();\r\n            InputStream inputStream=urlConnection.getInputStream();\r\n            results=convertISToString(inputStream);\r\n        }catch (Exception e){\r\n            e.printStackTrace();\r\n        }finally {\r\n            if(urlConnection!=null){\r\n                urlConnection.disconnect();\r\n            }\r\n        }\r\n\r\n        return results;\r\n    }\r\n    public static String convertISToString(InputStream inputStream){\r\n        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));\r\n        StringBuilder builder = new StringBuilder();\r\n        String line;\r\n        try{\r\n            while ((line=reader.readLine())!=null){\r\n                builder.append(line+\"\\n\");\r\n                if (builder.length()==0){\r\n                    return null;\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return builder.toString();\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
++++ app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(date 1609053386067)
+@@ -51,7 +51,7 @@
+         }
+     }
+     public static String getTieuDe(String tukhoa) {
+-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/tieude").buildUpon()
++        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/timkiem").buildUpon()
+                 .appendQueryParameter("tukhoa",tukhoa).build();
+         try {
+             URL requestURL = new URL(builtURI.toString());
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH_[Default_Changelist]/shelved.patch
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH_[Default_Changelist]/shelved.patch	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
++++ .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH_[Default_Changelist]/shelved.patch	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
+@@ -1,25 +0,0 @@
+-Index: app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>package com.example.ungdungdocbao;\r\n\r\nimport android.net.Uri;\r\nimport android.util.Log;\r\n\r\nimport java.io.BufferedReader;\r\nimport java.io.IOException;\r\nimport java.io.InputStream;\r\nimport java.io.InputStreamReader;\r\nimport java.net.HttpURLConnection;\r\nimport java.net.MalformedURLException;\r\nimport java.net.URL;\r\n\r\npublic class NetWorkUltis {\r\n    public static String getNewspaper(String danhMuc) throws MalformedURLException {\r\n        Uri builtlURI = Uri.parse(\"http://10.0.2.2:8000/api/bai-viet\").buildUpon()\r\n                .appendQueryParameter(\"danhmuc\",danhMuc).build();\r\n        try {\r\n            URL requestURL = new URL(builtlURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n\r\n    }\r\n\r\n    public static String getDetailNewspaper(int id) {\r\n        Uri builtURI = Uri.parse(\"http://10.0.2.2:8000/api/chitiet\").buildUpon()\r\n                .appendQueryParameter(\"id\",String.valueOf(id)).build();\r\n        try {\r\n            URL requestURL = new URL(builtURI.toString());\r\n\r\n            return callAPI(requestURL,\"GET\");\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n            return null;\r\n        }\r\n    }\r\n    public static String callAPI(URL requestURL,String method) throws IOException {\r\n        HttpURLConnection urlConnection =null;\r\n        String results=\"\";\r\n\r\n        try {\r\n            urlConnection = (HttpURLConnection) requestURL.openConnection();\r\n            urlConnection.setRequestMethod(method);\r\n            urlConnection.connect();\r\n            InputStream inputStream=urlConnection.getInputStream();\r\n            results=convertISToString(inputStream);\r\n        }catch (Exception e){\r\n            e.printStackTrace();\r\n        }finally {\r\n            if(urlConnection!=null){\r\n                urlConnection.disconnect();\r\n            }\r\n        }\r\n\r\n        return results;\r\n    }\r\n    public static String convertISToString(InputStream inputStream){\r\n        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));\r\n        StringBuilder builder = new StringBuilder();\r\n        String line;\r\n        try{\r\n            while ((line=reader.readLine())!=null){\r\n                builder.append(line+\"\\n\");\r\n                if (builder.length()==0){\r\n                    return null;\r\n                }\r\n            }\r\n        } catch (IOException e) {\r\n            e.printStackTrace();\r\n        }\r\n        return builder.toString();\r\n    }\r\n}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+---- app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(revision d70b392bd8fcf343d0b6f0d984c736336646cfe2)
+-+++ app/src/main/java/com/example/ungdungdocbao/NetWorkUltis.java	(date 1608368848202)
+-@@ -17,15 +17,12 @@
+-                 .appendQueryParameter("danhmuc",danhMuc).build();
+-         try {
+-             URL requestURL = new URL(builtlURI.toString());
+--
+-             return callAPI(requestURL,"GET");
+-         } catch (IOException e) {
+-             e.printStackTrace();
+-             return null;
+-         }
+--
+-     }
+--
+-     public static String getDetailNewspaper(int id) {
+-         Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/chitiet").buildUpon()
+-                 .appendQueryParameter("id",String.valueOf(id)).build();
+Index: .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH__Default_Changelist_.xml
+===================================================================
+--- .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH__Default_Changelist_.xml	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
++++ .idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH__Default_Changelist_.xml	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH_[Default_Changelist]" date="1608440560744" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_12_2020_12_02_CH_[Default_Changelist]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 20/12/2020 12:02 CH [Default Changelist]" />
+-</changelist>
+\ No newline at end of file
+Index: app/src/main/res/layout/fragment_tim_kiem.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:backgroundTint=\"#D1C1C1\"\r\n    tools:context=\".TimKiem\">\r\n\r\n\r\n    <!-- TODO: Update blank fragment layout -->\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\">\r\n\r\n        <Button\r\n            android:id=\"@+id/btnTim\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"48dp\"\r\n            android:layout_marginStart=\"16dp\"\r\n\r\n            android:text=\"Tìm\"\r\n            app:layout_constraintStart_toEndOf=\"@+id/txtTim\"\r\n            app:layout_constraintTop_toTopOf=\"@+id/txtTim\" />\r\n\r\n        <EditText\r\n            android:id=\"@+id/txtTim\"\r\n            android:layout_width=\"271dp\"\r\n            android:layout_height=\"51dp\"\r\n            android:layout_marginStart=\"16dp\"\r\n            android:layout_marginTop=\"16dp\"\r\n\r\n            android:background=\"#FFFFFF\"\r\n            android:ems=\"10\"\r\n            android:hint=\"Nhập Tiêu Đề\"\r\n            android:inputType=\"textPersonName\"\r\n            android:textColor=\"#9C27B0\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n        <androidx.recyclerview.widget.RecyclerView\r\n            android:id=\"@+id/recylerview\"\r\n            android:layout_width=\"0dp\"\r\n            android:layout_height=\"0dp\"\r\n            android:layout_marginTop=\"16dp\"\r\n            app:layout_constraintBottom_toBottomOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@+id/txtTim\" />\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n</LinearLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_tim_kiem.xml	(revision e9c30506c8e928018c1dbdba007d721cb5fd4055)
++++ app/src/main/res/layout/fragment_tim_kiem.xml	(date 1609052656482)
+@@ -18,7 +18,7 @@
+             android:layout_width="wrap_content"
+             android:layout_height="48dp"
+             android:layout_marginStart="16dp"
+-
++            android:onClick="timKiem"
+             android:text="Tìm"
+             app:layout_constraintStart_toEndOf="@+id/txtTim"
+             app:layout_constraintTop_toTopOf="@+id/txtTim" />

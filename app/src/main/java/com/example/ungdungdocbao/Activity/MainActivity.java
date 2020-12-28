@@ -118,4 +118,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void nextTimKiem(View view) {
+        imgBtnSearch=findViewById(R.id.imgBtn_search);
+        startActivity(new Intent(MainActivity.this,TimKiem.class));
+
+
+
+    }
 }

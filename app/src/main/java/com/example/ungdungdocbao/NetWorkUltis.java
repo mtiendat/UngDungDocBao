@@ -3,9 +3,6 @@ package com.example.ungdungdocbao;
 import android.net.Uri;
 import android.util.Log;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 public class NetWorkUltis {
     public static String getNewspaper(String danhMuc) throws MalformedURLException {
@@ -54,7 +50,18 @@ public class NetWorkUltis {
             return null;
         }
     }
+    public static String getTieuDe(String tukhoa) {
+        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/timkiem").buildUpon()
+                .appendQueryParameter("tukhoa",tukhoa).build();
+        try {
+            URL requestURL = new URL(builtURI.toString());
 
+            return callAPI(requestURL,"GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static String callAPI(URL requestURL,String method) throws IOException {
         HttpURLConnection urlConnection =null;
         String results="";
