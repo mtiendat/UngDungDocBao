@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ungdungdocbao.Activity.MainActivity;
+import com.example.ungdungdocbao.Fragment.FirstFragment;
 import com.example.ungdungdocbao.Models.Newspaper;
 import com.example.ungdungdocbao.R;
 import com.example.ungdungdocbao.Activity.TrangChiTiet;
@@ -52,7 +53,12 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), TrangChiTiet.class);
                 String id = String.valueOf(newspaper.getID());
+                String name = String.valueOf(FirstFragment.USER_NAME);
+                String id_user = String.valueOf(FirstFragment.ID_USER);
+
                 intent.putExtra("ID",id);
+                intent.putExtra("id_user",id_user);
+                intent.putExtra("user_name",name);
                 MainActivity.dsTinDaXem.add(newspaper.getID());
                 v.getContext().startActivity(intent);
 

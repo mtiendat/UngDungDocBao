@@ -102,6 +102,7 @@ public class DangNhap extends AppCompatActivity {
                             if(status.equals("success")){
                                 final String hoTen = jsonObject.getString("hoten");
                                 final String userEmail = jsonObject.getString("email");
+                                final String id_user = jsonObject.getString("user_name");
                                 Toast.makeText(DangNhap.this,message+"\nChào "+hoTen+"<3",Toast.LENGTH_LONG).show();
                                 Thread thread = new Thread(){
                                     @Override
@@ -110,6 +111,8 @@ public class DangNhap extends AppCompatActivity {
                                             Thread.sleep(3000); // Set time LENGTH_LONG Toast
                                             FirstFragment.USER_NAME=hoTen;
                                             FirstFragment.USER_EMAIL=userEmail;
+                                            FirstFragment.ID_USER=id_user;
+
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             startActivity(intent);
                                         } catch (Exception e) {
