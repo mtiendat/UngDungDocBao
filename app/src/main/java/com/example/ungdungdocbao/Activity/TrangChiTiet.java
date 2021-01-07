@@ -28,6 +28,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdocbao.Adapter.ListCommentAdapter;
+import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.example.ungdungdocbao.Fragment.FirstFragment;
 import com.example.ungdungdocbao.Loader.CommentLoader;
 import com.example.ungdungdocbao.Loader.DetailNewspaperLoader;
@@ -55,7 +56,7 @@ public class TrangChiTiet extends AppCompatActivity{
     TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA;
     DetailNewspaperLoader dt;
     private  static  String URL_DangBL="http://10.0.2.2:8000/api/dang-binhluan";
-    static String id, id_user,name;
+    private String id, id_user,name;
     ImageView img,btn_dangbl;
     LoaderManager loaderManager;
     EditText txtBinhLuan;
@@ -103,12 +104,6 @@ public class TrangChiTiet extends AppCompatActivity{
         mAdapter = new ListCommentAdapter(this,listBinhLuan);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(mAdapter);
-        btn_dangbl.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                postBinhLuan();
-            }
-        });
 
     }
 
@@ -155,6 +150,16 @@ public class TrangChiTiet extends AppCompatActivity{
         };
         queue.add(stringRequest);
         }
+
+    public void dangBL(View view) {
+        if(id_user.equals("")) {
+            Intent intent = new Intent(getApplicationContext(), DangNhap.class);
+            startActivity(intent);
+        } else {
+            postBinhLuan();
+        }
+
+    }
 
     private class CallBack1 implements LoaderManager.LoaderCallbacks<Newspaper>{
 

@@ -63,6 +63,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Bottom_Nav.setting.SettingFragment"/>
         </activity>
+        <activity android:name=".Activity.BinhLuanGanDay" android:parentActivityName=".Activity.MainActivity"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Bottom_Nav.setting.SettingFragment"/>
+        </activity>
         <activity android:name=".Activity.TimKiem" android:parentActivityName=".Activity.MainActivity"
             android:theme="@style/AppTheme">
             <meta-data

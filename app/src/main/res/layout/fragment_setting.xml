@@ -183,7 +183,7 @@
             android:contentDescription="@string/todo" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/img_bl_near"
             android:layout_width="0dp"
             android:layout_height="32dp"
             android:layout_marginStart="164dp"
