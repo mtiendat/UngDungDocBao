@@ -38,8 +38,10 @@ public class FirstFragment extends Fragment {
     private Toolbar mToolbar;
     private TextView user_name;
     private TextView user_email;
+    private TextView id_user;
     private TextView dangXuat;
     public static String USER_NAME="";
+    public static String ID_USER="";
     public static String USER_EMAIL="";
     SaveState saveState;
     public FirstFragment() {
@@ -112,12 +114,14 @@ public class FirstFragment extends Fragment {
         View hview = mNavigationView.getHeaderView(0);
         user_name=hview.findViewById(R.id.user_name);
         user_email=hview.findViewById(R.id.tindaxem);
+        id_user=hview.findViewById(R.id.id_user);
         dangXuat=hview.findViewById(R.id.dangxuat);
         dangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 USER_NAME="";
                 USER_EMAIL="";
+                ID_USER="";
                 dangXuat.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(),"Đăng xuất thành công",Toast.LENGTH_LONG).show();
                 Thread thread = new Thread(){
@@ -138,6 +142,7 @@ public class FirstFragment extends Fragment {
             Log.d("USERNAME",USER_NAME);
             user_name.setText(USER_NAME);
             user_email.setText(USER_EMAIL);
+            id_user.setText(ID_USER);
             dangXuat.setVisibility(View.VISIBLE);
 
         }

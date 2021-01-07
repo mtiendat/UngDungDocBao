@@ -115,7 +115,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_noidung" />
 
             <EditText
-                android:id="@+id/edittext_binh_luan"
+                android:id="@+id/edit_binhluan"
                 android:layout_width="210dp"
                 android:layout_height="33dp"
                 android:layout_marginStart="16dp"
@@ -124,11 +124,12 @@
                 app:layout_constraintStart_toEndOf="@+id/textView19" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/img_dangBL"
                 android:layout_width="46dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintStart_toEndOf="@+id/edittext_binh_luan"
+                android:onClick="dangBL"
+                app:layout_constraintStart_toEndOf="@+id/edit_binhluan"
                 app:layout_constraintTop_toBottomOf="@+id/txt_noidung"
                 app:srcCompat="@android:drawable/ic_menu_send" />
 
@@ -142,7 +143,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edittext_binh_luan" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_binhluan" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

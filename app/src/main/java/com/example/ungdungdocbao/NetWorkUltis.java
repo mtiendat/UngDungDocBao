@@ -38,6 +38,18 @@ public class NetWorkUltis {
             return null;
         }
     }
+    public static String getBinhLuanByID(String id) {
+        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/binhluanbyid").buildUpon()
+                .appendQueryParameter("id_user",id).build();
+        try {
+            URL requestURL = new URL(builtURI.toString());
+
+            return callAPI(requestURL,"GET");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     public static String getBinhLuan(int id) {
         Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/binhluan").buildUpon()
                 .appendQueryParameter("id_baiviet",String.valueOf(id)).build();

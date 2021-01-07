@@ -16,9 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.ungdungdocbao.Activity.BinhLuanGanDay;
 import com.example.ungdungdocbao.Activity.DangKy;
 import com.example.ungdungdocbao.Activity.DangNhap;
 import com.example.ungdungdocbao.Activity.MainActivity;
+import com.example.ungdungdocbao.Fragment.FirstFragment;
 import com.example.ungdungdocbao.R;
 import com.example.ungdungdocbao.Activity.TrangTinDaXem;
 
@@ -27,7 +29,7 @@ public class SettingFragment extends AppCompatActivity {
     private ImageButton imgBtnDangNhap;
     private ImageButton imgBtnDangKy;
     private Switch switch_btn;
-    private ImageButton imgBtnTinDaXem;
+    private ImageButton imgBtnTinDaXem,imgBtnBinhLuanGanDay;
     SaveState saveState ;
     Switch aSwitch;
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -41,6 +43,15 @@ public class SettingFragment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_setting);
         imgBtnTinDaXem = findViewById(R.id.img_button_tindaxem);
+        imgBtnBinhLuanGanDay = findViewById(R.id.img_bl_near);
+        imgBtnBinhLuanGanDay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingFragment.this, BinhLuanGanDay.class);
+                intent.putExtra("ID", FirstFragment.ID_USER);
+                startActivity(intent);
+            }
+        });
         imgBtnTinDaXem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
