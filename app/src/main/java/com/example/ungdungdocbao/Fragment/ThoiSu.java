@@ -10,6 +10,7 @@ import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,18 +70,9 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.recyclerview_thoisu);
-        mAdapter=new NewspaperAdapter(getContext(),listNews);
-        recyclerView.setAdapter(mAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1000);
-        if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
-        } else {
-            loaderManager.restartLoader(1000, null,this);
-        }
+
     }
+
     @NonNull
     @Override
     public Loader<List<Newspaper>> onCreateLoader(int id, @Nullable Bundle args) {
@@ -90,10 +82,7 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     @Override
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
-        if(data!=null) {
-            listNews.addAll(data);
-            mAdapter.notifyDataSetChanged();
-        }
+        mAdapter.updateDataSet(data);
     }
 
     @Override
@@ -114,6 +103,18 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_thoi_su, container, false);
+        View view =  inflater.inflate(R.layout.fragment_thoi_su, container, false);
+        recyclerView=view.findViewById(R.id.recyclerview_thoisu);
+        mAdapter=new NewspaperAdapter(getContext(),listNews);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        loaderManager = LoaderManager.getInstance(this);
+        Loader loader = loaderManager.getLoader(1000);
+        if (loader == null) {
+            loaderManager.initLoader(1000, null, this);
+        } else {
+            loaderManager.restartLoader(1000, null,this);
+        }
+        return view;
     }
 }

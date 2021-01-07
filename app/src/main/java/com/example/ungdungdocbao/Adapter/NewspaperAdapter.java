@@ -22,7 +22,7 @@ import java.util.List;
 
 public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.NewspaperViewHolder> {
 
-    private final List<Newspaper> listNews;
+    private List<Newspaper> listNews;
     private LayoutInflater mInflater;
     private Context context;
 
@@ -32,7 +32,12 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
         this.listNews = newsList;
         this.context=context;
     }
-
+    public void updateDataSet(List<Newspaper> newResult){
+        if(newResult!=null){
+            listNews = newResult;
+        }
+        notifyDataSetChanged();
+    }
     @NonNull
     @Override
     public NewspaperViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,11 +55,23 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
         holder.mTieuDe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Trang Chi Tiết
                 Intent intent = new Intent(v.getContext(), TrangChiTiet.class);
                 String id = String.valueOf(newspaper.getID());
                 intent.putExtra("ID",id);
-                MainActivity.dsTinDaXem.add(newspaper.getID());
                 v.getContext().startActivity(intent);
+
+                //Tin Đã Xem
+                int dem=0;
+                //Kiểm Tra Xem ID có trùng không?
+                for (int item:MainActivity.dsTinDaXem) {
+                    if(newspaper.getID()!=item){
+                        dem++;
+                    }
+                }
+                if(dem==MainActivity.dsTinDaXem.size()) {
+                    MainActivity.dsTinDaXem.add(newspaper.getID()); //add id vào danh sách
+                }
 
             }
         });
@@ -63,7 +80,7 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
             @Override
             public void onClick(View v) {
                 holder.mFlag.setBackgroundResource(R.drawable.ic_flag_active_foreground);
-                MainActivity.tinYeuThich.add(newspaper.getID());
+                MainActivity.dsTinYeuThich.add(newspaper.getID());
             }
         });
 

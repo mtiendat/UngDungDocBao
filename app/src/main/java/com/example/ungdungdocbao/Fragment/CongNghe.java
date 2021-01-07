@@ -64,19 +64,10 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
     }
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.recyclerview_congnghe);
-        mAdapter=new NewspaperAdapter(getContext(),listNews);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(mAdapter);
-        loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1000);
-        if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
-        } else {
-            loaderManager.restartLoader(1000, null,this);
-        }
+
 
     }
+
     @NonNull
     @Override
     public Loader<List<Newspaper>> onCreateLoader(int id, @Nullable Bundle args) {
@@ -86,16 +77,15 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
     @Override
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
-        if(data!=null) {
-            listNews.addAll(data);
-            mAdapter.notifyDataSetChanged();
-        }
+        mAdapter.updateDataSet(data);
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<List<Newspaper>> loader) {
 
     }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +102,18 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_cong_nghe, container, false);
+        View view =  inflater.inflate(R.layout.fragment_cong_nghe, container, false);
+        recyclerView=view.findViewById(R.id.recyclerview_congnghe);
+        mAdapter=new NewspaperAdapter(getContext(),listNews);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        loaderManager = LoaderManager.getInstance(this);
+        Loader loader = loaderManager.getLoader(1000);
+        if (loader == null) {
+            loaderManager.initLoader(1000, null, this);
+        } else {
+            loaderManager.restartLoader(1000, null,this);
+        }
+        return  view;
     }
 }

@@ -66,17 +66,6 @@ public class TheThao extends Fragment implements LoaderManager.LoaderCallbacks<L
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView=view.findViewById(R.id.recyclerview_thethao);
-        mAdapter=new NewspaperAdapter(getContext(),listNews);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(mAdapter);
-        loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1000);
-        if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
-        } else {
-            loaderManager.restartLoader(1000, null,this);
-        }
 
     }
     @NonNull
@@ -88,10 +77,7 @@ public class TheThao extends Fragment implements LoaderManager.LoaderCallbacks<L
     @Override
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
-        if(data!=null) {
-            listNews.addAll(data);
-            mAdapter.notifyDataSetChanged();
-        }
+        mAdapter.updateDataSet(data);
     }
 
     @Override
@@ -112,6 +98,18 @@ public class TheThao extends Fragment implements LoaderManager.LoaderCallbacks<L
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_the_thao, container, false);
+        View view =  inflater.inflate(R.layout.fragment_the_thao, container, false);
+        recyclerView=view.findViewById(R.id.recyclerview_thethao);
+        mAdapter=new NewspaperAdapter(getContext(),listNews);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        loaderManager = LoaderManager.getInstance(this);
+        Loader loader = loaderManager.getLoader(1000);
+        if (loader == null) {
+            loaderManager.initLoader(1000, null, this);
+        } else {
+            loaderManager.restartLoader(1000, null,this);
+        }
+        return  view;
     }
 }

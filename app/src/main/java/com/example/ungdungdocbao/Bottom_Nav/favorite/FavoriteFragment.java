@@ -46,9 +46,8 @@ import java.util.Map;
  */
 public class FavoriteFragment extends Fragment {
     private RecyclerView recyclerView;
-    private TinYeuThichAdapter mAdapter;
-    public List<Newspaper> dsTinDaXem = new ArrayList<>();
-
+    private NewspaperAdapter mAdapter;
+    private List<Newspaper> dsTinYeuThich = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -87,24 +86,37 @@ public class FavoriteFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        Log.d("TAG_ONVIEW","oncrea");
 
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recyclerView = view.findViewById(R.id.recyclerview_tinyeuthich);
-        DanhSachTinDaXemLoader(MainActivity.tinYeuThich);
-
+        Log.d("TAG_ONVIEW","onviewcrea");
+        recyclerView =view.findViewById(R.id.recyclerview_tinyeuthich);
+        mAdapter = new NewspaperAdapter(getContext(),dsTinYeuThich);
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        getList();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favorite, container, false);
+        View view = inflater.inflate(R.layout.fragment_favorite, container, false);
+        Log.d("TAG_ONVIEW","oncreateview");
+        return view;
     }
-    public void DanhSachTinDaXemLoader(final List<Integer>dsID){
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    public void getList(){
         RequestQueue queue = Volley.newRequestQueue(getActivity());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://10.0.2.2:8000/api/tin-da-xem",
                 new Response.Listener<String>() {
@@ -127,16 +139,15 @@ public class FavoriteFragment extends Fragment {
                                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
                                 String tacGia = item.getString("TacGia");
                                 Newspaper aNewspaper = new Newspaper(id,tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh,tacGia);
-                                dsTinDaXem.add(aNewspaper);
+                                dsTinYeuThich.add(aNewspaper);
 
                             }
-
+                            mAdapter.updateDataSet(dsTinYeuThich);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        mAdapter = new TinYeuThichAdapter(getContext(),dsTinDaXem);
-                        recyclerView.setAdapter(mAdapter);
-                        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
                     }
 
                 },
@@ -150,10 +161,10 @@ public class FavoriteFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parms = new HashMap<>();
-                for(int i=0;i<dsID.size();i++) {
-                    parms.put("id"+i, dsID.get(i).toString());
+                for(int i=0;i<MainActivity.dsTinYeuThich.size();i++) {
+                    parms.put("id"+i, MainActivity.dsTinYeuThich.get(i).toString());
                 }
-                parms.put("size", String.valueOf(dsID.size()));
+                parms.put("size", String.valueOf(MainActivity.dsTinYeuThich.size()));
                 return parms;
             }
 
@@ -161,7 +172,7 @@ public class FavoriteFragment extends Fragment {
 
         queue.add(stringRequest);
 
-
     }
+
 
 }

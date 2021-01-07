@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     SaveState saveState;
     public static Integer tindaxem;
     public static List<Integer> dsTinDaXem = new ArrayList<>();
-    public static List<Integer> tinYeuThich = new ArrayList<>();
+    public static List<Integer> dsTinYeuThich = new ArrayList<>();
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
