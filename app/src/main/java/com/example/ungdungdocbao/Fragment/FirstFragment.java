@@ -3,12 +3,12 @@ package com.example.ungdungdocbao.Fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +29,7 @@ import com.example.ungdungdocbao.Adapter.TabViewPagerAdapter;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
+import com.squareup.picasso.Picasso;
 
 public class FirstFragment extends Fragment {
     private TabLayout mTabLayout;
@@ -38,11 +39,13 @@ public class FirstFragment extends Fragment {
     private Toolbar mToolbar;
     private TextView user_name;
     private TextView user_email;
-    private TextView id_user;
+    private TextView user_id;
     private TextView dangXuat;
+    private ImageView user_avatar;
     public static String USER_NAME="";
-    public static String ID_USER="";
+    public static String USER_ID="";
     public static String USER_EMAIL="";
+    public static String USER_AVATAR="";
     SaveState saveState;
     public FirstFragment() {
 
@@ -111,17 +114,19 @@ public class FirstFragment extends Fragment {
                 //Nếu Item được chạm , đoạn code này sẽ thiết lập lựa chon item và Drawer cũng được đóng bởi hàm closeDrawers().
             }
         });
-        View hview = mNavigationView.getHeaderView(0);
+        View hview = mNavigationView.getHeaderView(0); //lấy view header của drawer
         user_name=hview.findViewById(R.id.user_name);
-        user_email=hview.findViewById(R.id.tindaxem);
-        id_user=hview.findViewById(R.id.id_user);
+        user_email=hview.findViewById(R.id.email);
+        user_id=hview.findViewById(R.id.user_id);
+        user_avatar=hview.findViewById(R.id.img_avatar);
         dangXuat=hview.findViewById(R.id.dangxuat);
         dangXuat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 USER_NAME="";
                 USER_EMAIL="";
-                ID_USER="";
+                USER_ID="";
+                USER_AVATAR="";
                 dangXuat.setVisibility(View.INVISIBLE);
                 Toast.makeText(getContext(),"Đăng xuất thành công",Toast.LENGTH_LONG).show();
                 Thread thread = new Thread(){
@@ -138,13 +143,14 @@ public class FirstFragment extends Fragment {
                 thread.start();
             }
         });
+        //hiển thị tên,email,.. lên header drawer
         if(!USER_NAME.equals("")) {
-            Log.d("USERNAME",USER_NAME);
             user_name.setText(USER_NAME);
             user_email.setText(USER_EMAIL);
-            id_user.setText(ID_USER);
-            dangXuat.setVisibility(View.VISIBLE);
-
+            user_id.setText(USER_ID);
+            dangXuat.setText("Đăng xuất");
+            dangXuat.setVisibility(View.VISIBLE); //(mặc định ẩn nút)
+            Picasso.get().load(USER_AVATAR).into(user_avatar);
         }
         mToolbar = rootView.findViewById(R.id.toolbar_drawer);
         ((AppCompatActivity)getActivity()).setSupportActionBar(mToolbar);//set toolbar như là 1 actionbar

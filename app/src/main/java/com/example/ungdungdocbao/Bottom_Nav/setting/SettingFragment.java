@@ -48,7 +48,7 @@ public class SettingFragment extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SettingFragment.this, BinhLuanGanDay.class);
-                intent.putExtra("ID", FirstFragment.ID_USER);
+                intent.putExtra("ID", FirstFragment.USER_ID);
                 startActivity(intent);
             }
         });

@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,10 +57,11 @@ public class TrangChiTiet extends AppCompatActivity{
     TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA;
     DetailNewspaperLoader dt;
     private  static  String URL_DangBL="http://10.0.2.2:8000/api/dang-binhluan";
-    private String id, id_user,name;
+    private String id, id_user,name, user_avatar;
     ImageView img,btn_dangbl;
     LoaderManager loaderManager;
     EditText txtBinhLuan;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,17 +81,21 @@ public class TrangChiTiet extends AppCompatActivity{
         id = intent.getStringExtra("ID");
         id_user = intent.getStringExtra("id_user");
         name = intent.getStringExtra("user_name");
+        user_avatar = intent.getStringExtra("user_avatar");
         saveState=new SaveState(this);
         if(saveState.getState()==true)
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Đang tải...");
+        progressDialog.show();
 
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1111);
         if (loader == null) {
             loaderManager.initLoader(1111, null, new CallBack1());
+
         } else {
             loaderManager.restartLoader(1111, null, new CallBack1());
         }
@@ -108,15 +114,13 @@ public class TrangChiTiet extends AppCompatActivity{
     }
 
     private void postBinhLuan() {
-        final String idUser = id_user;
-        final String mname = name;
-        final String id_baiviet = id.toString();
         final String noidung = txtBinhLuan.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_DangBL,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         try {
                             JSONObject jsonObject=new JSONObject(response);
                             String status=jsonObject.getString("status");
@@ -140,10 +144,11 @@ public class TrangChiTiet extends AppCompatActivity{
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parms = new HashMap<>();
-                parms.put("id_user",idUser);
-                parms.put("name", mname);
-                parms.put("id_baiviet", id_baiviet);
+                parms.put("id_user",id_user);
+                parms.put("name", name);
+                parms.put("id_baiviet", id.toString());
                 parms.put("noidung", noidung);
+                parms.put("anhdaidien",user_avatar);
                 return parms;
             }
 
@@ -179,6 +184,7 @@ public class TrangChiTiet extends AppCompatActivity{
             Picasso.get()
                     .load(data.getHinhAnh())
                     .into(img);
+            progressDialog.dismiss();
         }
 
         @Override

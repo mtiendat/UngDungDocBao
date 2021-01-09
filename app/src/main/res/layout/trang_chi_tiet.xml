@@ -16,31 +16,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/ti_u"
-            app:layout_constraintStart_toStartOf="@+id/textView13"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
-
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="24/12/2000"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
-            app:layout_constraintStart_toEndOf="@+id/textView13" />
-
     <TextView
-        android:id="@+id/txt_title_detail"
+        android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView10"
-        app:layout_constraintStart_toEndOf="@+id/textView10" />
+        android:text="24/12/2000"
+        android:textStyle="italic"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
+        app:layout_constraintStart_toEndOf="@+id/textView13" />
+
+    <TextView
+        android:id="@+id/txt_title_detail"
+        android:layout_width="370dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -64,8 +58,8 @@
 
             <ImageView
                 android:id="@+id/imgDetail"
-                android:layout_width="295dp"
-                android:layout_height="221dp"
+                android:layout_width="360dp"
+                android:layout_height="301dp"
                 android:layout_marginTop="8dp"
                 android:contentDescription="TODO"
                 android:focusableInTouchMode="true"
@@ -76,20 +70,23 @@
 
             <TextView
                 android:id="@+id/txt_motangan"
-                android:layout_width="356dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txt_tieudeHA"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:text="Hình ảnh mang tính chất minh họa"
+                android:textAlignment="center"
                 android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="@+id/imgDetail"
                 app:layout_constraintStart_toStartOf="@+id/imgDetail"
@@ -99,8 +96,9 @@
                 android:id="@+id/txt_noidung"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="@+id/txt_motangan"
                 app:layout_constraintStart_toStartOf="@+id/txt_motangan"
                 app:layout_constraintTop_toBottomOf="@+id/txt_tieudeHA" />
@@ -116,7 +114,7 @@
 
             <EditText
                 android:id="@+id/edit_binhluan"
-                android:layout_width="210dp"
+                android:layout_width="255dp"
                 android:layout_height="33dp"
                 android:layout_marginStart="16dp"
                 android:ems="10"
@@ -128,7 +126,9 @@
                 android:layout_width="46dp"
                 android:layout_height="39dp"
                 android:layout_marginStart="16dp"
+                android:backgroundTint="@color/design_default_color_secondary_variant"
                 android:onClick="dangBL"
+                app:layout_constraintEnd_toEndOf="@+id/txt_noidung"
                 app:layout_constraintStart_toEndOf="@+id/edit_binhluan"
                 app:layout_constraintTop_toBottomOf="@+id/txt_noidung"
                 app:srcCompat="@android:drawable/ic_menu_send" />
@@ -161,7 +161,9 @@
         android:id="@+id/txt_tacgia"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
+        android:textAllCaps="false"
+        android:textStyle="italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
         app:layout_constraintStart_toEndOf="@+id/textView2" />
 

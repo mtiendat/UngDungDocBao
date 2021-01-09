@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class KhoaHoc extends Fragment implements LoaderManager.LoaderCallbacks<L
     private NewspaperAdapter mAdapter;
     LoaderManager loaderManager;
     public List<Newspaper> listNews = new ArrayList<>();
+    private ProgressDialog progressDialog;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -78,6 +80,7 @@ public class KhoaHoc extends Fragment implements LoaderManager.LoaderCallbacks<L
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
         mAdapter.updateDataSet(data);
+        progressDialog.dismiss();
     }
 
     @Override
@@ -104,6 +107,10 @@ public class KhoaHoc extends Fragment implements LoaderManager.LoaderCallbacks<L
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1000);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Đang tải chờ tí nhé...");
+        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+        progressDialog.show();
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
         } else {

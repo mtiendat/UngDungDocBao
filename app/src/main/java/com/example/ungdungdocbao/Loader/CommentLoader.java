@@ -37,7 +37,8 @@ public class CommentLoader extends AsyncTaskLoader<List<BinhLuan>> {
                 Integer id = item.getInt("id");
                 String nameUser = item.getString("name");
                 String content = item.getString("noidung");
-                BinhLuan binhLuan = new BinhLuan(nameUser,content);
+                String avatar = item.getString("anhdaidien");
+                BinhLuan binhLuan = new BinhLuan(nameUser,content,avatar);
                 listbinhLuan.add(binhLuan);
             }
             return listbinhLuan;

@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(saveState.getState()==true) {
-            navigation.setBackgroundColor(AppCompatDelegate.MODE_NIGHT_YES);
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            navigation.setBackgroundColor(AppCompatDelegate.MODE_NIGHT_YES);
         }
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);

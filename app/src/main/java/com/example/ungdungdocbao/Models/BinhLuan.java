@@ -3,9 +3,11 @@ package com.example.ungdungdocbao.Models;
 public class BinhLuan {
     private String nameUser;
     private String content;
-    public BinhLuan(String nameUser, String content){
+    private String avatar;
+    public BinhLuan(String nameUser, String content, String avatar){
         this.nameUser = nameUser;
         this.content = content;
+        this.avatar=avatar;
     }
     public String getNameUser() {
         return nameUser;
@@ -24,4 +26,11 @@ public class BinhLuan {
     }
 
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 }

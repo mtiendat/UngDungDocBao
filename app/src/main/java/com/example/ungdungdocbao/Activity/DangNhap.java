@@ -100,18 +100,20 @@ public class DangNhap extends AppCompatActivity {
                             String status=jsonObject.getString("status");
                             String message=jsonObject.getString("message");
                             if(status.equals("success")){
-                                final String hoTen = jsonObject.getString("hoten");
-                                final String userEmail = jsonObject.getString("email");
-                                final String id_user = jsonObject.getString("user_name");
-                                Toast.makeText(DangNhap.this,message+"\nChào "+hoTen+"<3",Toast.LENGTH_LONG).show();
+                                final String user_name = jsonObject.getString("hoten");
+                                final String user_email = jsonObject.getString("email");
+                                final String user_id = jsonObject.getString("user_name");
+                                final String user_avatar = jsonObject.getString("anhdaidien");
+                                Toast.makeText(DangNhap.this,message+"\nXin chào "+user_name,Toast.LENGTH_LONG).show();
                                 Thread thread = new Thread(){
                                     @Override
                                     public void run() {
                                         try {
                                             Thread.sleep(3000); // Set time LENGTH_LONG Toast
-                                            FirstFragment.USER_NAME=hoTen;
-                                            FirstFragment.USER_EMAIL=userEmail;
-                                            FirstFragment.ID_USER=id_user;
+                                            FirstFragment.USER_NAME=user_name;
+                                            FirstFragment.USER_EMAIL=user_email;
+                                            FirstFragment.USER_ID=user_id;
+                                            FirstFragment.USER_AVATAR=user_avatar;
 
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             startActivity(intent);

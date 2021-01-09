@@ -48,7 +48,12 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
 
     @Override
     public void onBindViewHolder(@NonNull final NewspaperViewHolder holder, int position) {
+
         final Newspaper newspaper = listNews.get(position);
+        final String id = String.valueOf(newspaper.getID());
+        final String name = String.valueOf(FirstFragment.USER_NAME);
+        final String id_user = String.valueOf(FirstFragment.USER_ID);
+        final String avatar = String.valueOf(FirstFragment.USER_AVATAR);
         Picasso.get()
                 .load(newspaper.getHinhAnh())
                 .into(holder.mHinhAnh);
@@ -58,16 +63,12 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
             public void onClick(View v) {
                 //Trang Chi Tiết
                 Intent intent = new Intent(v.getContext(), TrangChiTiet.class);
-                String id = String.valueOf(newspaper.getID());
-                String name = String.valueOf(FirstFragment.USER_NAME);
-                String id_user = String.valueOf(FirstFragment.ID_USER);
-
                 intent.putExtra("ID",id);
                 intent.putExtra("id_user",id_user);
                 intent.putExtra("user_name",name);
+                intent.putExtra("user_avatar",avatar);
                 MainActivity.dsTinDaXem.add(newspaper.getID());
                 v.getContext().startActivity(intent);
-
                 //Tin Đã Xem
                 int dem=0;
                 //Kiểm Tra Xem ID có trùng không?
@@ -80,6 +81,29 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
                     MainActivity.dsTinDaXem.add(newspaper.getID()); //add id vào danh sách
                 }
 
+            }
+        });
+        holder.mHinhAnh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), TrangChiTiet.class);
+                intent.putExtra("ID",id);
+                intent.putExtra("id_user",id_user);
+                intent.putExtra("user_name",name);
+                intent.putExtra("user_avatar",avatar);
+                MainActivity.dsTinDaXem.add(newspaper.getID());
+                v.getContext().startActivity(intent);
+                //Tin Đã Xem
+                int dem=0;
+                //Kiểm Tra Xem ID có trùng không?
+                for (int item:MainActivity.dsTinDaXem) {
+                    if(newspaper.getID()!=item){
+                        dem++;
+                    }
+                }
+                if(dem==MainActivity.dsTinDaXem.size()) {
+                    MainActivity.dsTinDaXem.add(newspaper.getID()); //add id vào danh sách
+                }
             }
         });
         holder.mMoTa.setText(newspaper.getMoTa().toString());
@@ -114,26 +138,8 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
             mID=itemView.findViewById(R.id.txt_ID);
             mFlag = itemView.findViewById(R.id.img_flag);
             this.mAdapter = mAdapter;
-
-//            this.mMoTa.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
-//                    intent.putExtra("Title",mTieuDe.getText());
-//                    intent.putExtra("Mota",mMoTa.getText());
-//
-//                }
-//            });
-//            this.mHinhAnh.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(v.getContext(),TrangChiTiet.class);
-//                    intent.putExtra("Title",mTieuDe.getText());
-//                    intent.putExtra("Mota",mMoTa.getText());
-//
-//                }
-//            });
         }
     }
+
 
 }

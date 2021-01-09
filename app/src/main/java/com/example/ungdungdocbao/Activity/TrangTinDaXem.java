@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
@@ -24,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdocbao.Adapter.NewspaperAdapter;
+import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Loader.DanhSachTinDaXemLoader;
 import com.example.ungdungdocbao.Models.Newspaper;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
@@ -44,10 +47,13 @@ public class TrangTinDaXem  extends AppCompatActivity {
     private NewspaperAdapter mAdapter;
     LoaderManager loaderManager;
     private List<Newspaper> dsTinDaXem = new ArrayList<>();
+    SaveState saveState;
+    private ProgressDialog progressDialog;
      @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tindaxem);
+
         toolbar=(Toolbar) findViewById(R.id.toolbar_tindaxem);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -58,11 +64,22 @@ public class TrangTinDaXem  extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
+         progressDialog = new ProgressDialog(this);
+         progressDialog.setMessage("Đang tải...");
+         progressDialog.show();
+
          recyclerView =findViewById(R.id.recyclerView_tindaxem);
          mAdapter=new NewspaperAdapter(this,dsTinDaXem);
          recyclerView.setLayoutManager(new LinearLayoutManager(this));
          recyclerView.setAdapter(mAdapter);
          getList();
+
+         saveState = new SaveState(this);
+         if(saveState.getState()==true) {
+             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+         }
+         else
+             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
     public void getList(){
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -72,6 +89,7 @@ public class TrangTinDaXem  extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         Log.i("reponsestringrequest",response);
+                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray newspaper = jsonObject.getJSONArray("data");
@@ -91,6 +109,7 @@ public class TrangTinDaXem  extends AppCompatActivity {
 
                             }
                             mAdapter.updateDataSet(dsTinDaXem); //notifychangedata adapter
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

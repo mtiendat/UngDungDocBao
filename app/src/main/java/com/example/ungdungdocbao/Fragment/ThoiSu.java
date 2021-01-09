@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ungdungdocbao.Activity.DangKy;
 import com.example.ungdungdocbao.Models.Newspaper;
 import com.example.ungdungdocbao.Loader.NewsPaperLoader;
 import com.example.ungdungdocbao.Adapter.NewspaperAdapter;
@@ -35,6 +37,7 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     private List<Newspaper> listNews = new ArrayList<>();
     LoaderManager loaderManager;
     SaveState saveState;
+    private ProgressDialog progressDialog;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,6 +86,7 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
         mAdapter.updateDataSet(data);
+        progressDialog.dismiss();
     }
 
     @Override
@@ -112,6 +116,10 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
         Loader loader = loaderManager.getLoader(1000);
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Đang tải chờ tí nhé...");
+            progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+            progressDialog.show();
         } else {
             loaderManager.restartLoader(1000, null,this);
         }

@@ -1,5 +1,6 @@
 package com.example.ungdungdocbao.Fragment;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
     private RecyclerView recyclerView;
     private NewspaperAdapter mAdapter;
     LoaderManager loaderManager;
+    private ProgressDialog progressDialog;
     public List<Newspaper> listNews = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,6 +80,7 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         listNews.clear();
         mAdapter.updateDataSet(data);
+        progressDialog.dismiss();
     }
 
     @Override
@@ -109,6 +112,10 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1000);
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Đang tải chờ tí nhé...");
+        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+        progressDialog.show();
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
         } else {

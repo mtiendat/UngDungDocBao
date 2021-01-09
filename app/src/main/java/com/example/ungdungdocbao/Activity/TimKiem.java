@@ -7,12 +7,14 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ungdungdocbao.Adapter.NewspaperAdapter;
+import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Loader.TimKiemLoader;
 import com.example.ungdungdocbao.Models.Newspaper;
 import com.example.ungdungdocbao.R;
@@ -26,11 +28,18 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     RecyclerView recyclerView;
     NewspaperAdapter mAdapter;
     private List<Newspaper> dsTimKiem = new ArrayList<>();
+    SaveState saveState;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timkiem);
         mTieuDe=findViewById(R.id.edit_nhaptimkiem);
+        saveState = new SaveState(this);
+        if(saveState.getState()==true) {
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
     }
 
