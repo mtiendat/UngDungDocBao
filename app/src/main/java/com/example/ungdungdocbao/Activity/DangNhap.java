@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,6 +38,7 @@ import java.util.Map;
 public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
     private EditText txtEmail, txtPass;
+    private TextView txtQuenPass;
     private Button btnDangNhap;
     private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
     SaveState saveState;
@@ -64,6 +66,16 @@ public class DangNhap extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
+            }
+        });
+
+
+        txtQuenPass=findViewById(R.id.txt_quenmk);
+        txtQuenPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DangNhap.this, QuenMatKhau.class);
+                startActivity(intent);
             }
         });
 

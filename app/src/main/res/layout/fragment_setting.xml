@@ -33,7 +33,7 @@
 
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txt_quenmk"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -52,7 +52,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/black"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/txt_quenmk"
             tools:layout_editor_absoluteX="103dp" />
 
         <TextView
@@ -81,7 +81,7 @@
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
             app:layout_constraintBottom_toTopOf="@+id/view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
+            app:layout_constraintStart_toEndOf="@+id/txt_quenmk"
             app:layout_constraintTop_toTopOf="parent"
             android:contentDescription="@string/todo" />
 

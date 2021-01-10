@@ -44,6 +44,13 @@
                 android:value=".Bottom_Nav.setting.SettingFragment"/>
         </activity>
 
+        <activity android:name=".Activity.QuenMatKhau" android:parentActivityName=".Bottom_Nav.setting.SettingFragment"
+            android:theme="@style/AppTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Bottom_Nav.setting.SettingFragment"/>
+        </activity>
+
         <activity android:name=".Activity.DangKy" android:parentActivityName=".Bottom_Nav.setting.SettingFragment"
             android:theme="@style/AppTheme">
             <meta-data
