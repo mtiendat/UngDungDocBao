@@ -25,6 +25,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.example.ungdungdocbao.Fragment.FirstFragment;
@@ -58,7 +59,7 @@ public class QuenMatKhau extends AppCompatActivity {
         setContentView(R.layout.quen_mat_khau);
 
         editTextEmail = findViewById(R.id.editText_email);
-        editTextPass=findViewById(R.id.editTextTextPassword);
+        editTextPass=findViewById(R.id.editText_password);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolba_quenpass);
         setSupportActionBar(toolbar);
         ; //sudung toolbar nhu actionbar
@@ -90,17 +91,16 @@ public class QuenMatKhau extends AppCompatActivity {
         final String email = this.editTextEmail.getText().toString().trim();
         final String password = this.editTextPass.getText().toString().trim();
         RequestQueue queue = Volley.newRequestQueue(this);
-        VolleyMultipartRequest stringRequest = new VolleyMultipartRequest(Request.Method.POST, URL_QuenPass,
-                new Response.Listener<NetworkResponse>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_QuenPass,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(NetworkResponse response) {
+                    public void onResponse(String response) {
                         progressDialog.dismiss();
                         try {
-                            Log.i("tagconvertstr", "[" + new String(response.data) + "]");
-                            String test = new String(response.data);
-                            JSONObject jsonObject = new JSONObject(new String(response.data));
-                            String status = jsonObject.getString("status");
-                            String message = jsonObject.getString("message");
+                            Log.i("tagconvertstr", response);
+                            JSONObject jsonObject=new JSONObject(response);
+                            String status=jsonObject.getString("status");
+                            String message=jsonObject.getString("message");
                             if (status.equals("success")) {
                                 Toast.makeText(QuenMatKhau.this, message + " Vui lòng đăng nhập!", Toast.LENGTH_LONG).show();
                                 Thread thread = new Thread() {
@@ -128,6 +128,7 @@ public class QuenMatKhau extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(QuenMatKhau.this, "Email không đúng", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
                     }
                 }) {
             @Override
