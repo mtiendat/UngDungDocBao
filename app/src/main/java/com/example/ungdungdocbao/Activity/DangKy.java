@@ -60,6 +60,7 @@ public class DangKy extends AppCompatActivity {
     private Bitmap bitmap;
     private ProgressDialog progressDialog;
     public String imageString, filePath;
+    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     private static final int  REQUEST_PERMISSIONS = 10;
     private static final int PICK_IMAGE_REQUEST=1;
     String boundary = "apiclient-" + System.currentTimeMillis();
@@ -129,9 +130,7 @@ public class DangKy extends AppCompatActivity {
         btnDangKy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(DangKy.this);
-                progressDialog.setMessage("Uploading, please wait...");
-                progressDialog.show();
+
                 Register();
             }
         });
@@ -150,72 +149,101 @@ public class DangKy extends AppCompatActivity {
        final String sdt=this.txtSdt.getText().toString().trim();
        final String diachi=this.txtDiaChi.getText().toString().trim();
        final String password = this.txtMatKhau.getText().toString().trim();
-          RequestQueue queue = Volley.newRequestQueue(this);
-          VolleyMultipartRequest stringRequest = new VolleyMultipartRequest(Request.Method.POST, URL_DangKy,
-                  new Response.Listener<NetworkResponse>() {
-                      @Override
-                      public void onResponse(NetworkResponse response) {
-                          progressDialog.dismiss();
-                          try {
-                              Log.i("tagconvertstr", "["+new String(response.data)+"]");
-                              String test = new String(response.data);
-                              JSONObject jsonObject=new JSONObject(new String(response.data));
-                              String status=jsonObject.getString("status");
-                              String message=jsonObject.getString("message");
-                              if(status.equals("success")){
-                                   Toast.makeText(DangKy.this,message+" Vui lòng đăng nhập!",Toast.LENGTH_LONG).show();
-                                  Thread thread = new Thread(){
-                                      @Override
-                                      public void run() {
-                                          try {
-                                              Thread.sleep(3000); // Set time LENGTH_LONG Toast
-                                              startActivity(new Intent(getApplicationContext(),DangNhap.class));
-                                          } catch (Exception e) {
-                                              e.printStackTrace();
+          if(username.length()==0){
+              txtUsername.setError("Chưa nhập user name");
+          }else if(hoten.length()==0){
+              txtHoTen.setError("Bạn chưa nhập họ tên");
+          }else if(email.length()==0){
+              txtEmail.setError("Bạn chưa nhập email");
+          }else if(sdt.length()==0){
+              txtSdt.setError("Bạn chưa nhập sdt");
+          }else if(diachi.length()==0){
+              txtDiaChi.setError("Bạn chưa nhập địa chỉ");
+          }else if(password.length()==0){
+              txtMatKhau.setError("Bạn chưa nhập password");
+          }else if(isValidEmail(email)) {
+              txtEmail.setError("Email phải có @");
+          }else if(sdt.length()<10||sdt.length()>10) {
+              txtSdt.setError("SDT phải có 10 kí tự");
+          }else {
+              progressDialog = new ProgressDialog(DangKy.this);
+              progressDialog.setMessage("Uploading, please wait...");
+              progressDialog.show();
+              RequestQueue queue = Volley.newRequestQueue(this);
+              VolleyMultipartRequest stringRequest = new VolleyMultipartRequest(Request.Method.POST, URL_DangKy,
+                      new Response.Listener<NetworkResponse>() {
+                          @Override
+                          public void onResponse(NetworkResponse response) {
+                              progressDialog.dismiss();
+                              try {
+                                  Log.i("tagconvertstr", "[" + new String(response.data) + "]");
+                                  String test = new String(response.data);
+                                  JSONObject jsonObject = new JSONObject(new String(response.data));
+                                  String status = jsonObject.getString("status");
+                                  String message = jsonObject.getString("message");
+                                  if (status.equals("success")) {
+                                      Toast.makeText(DangKy.this, message + " Vui lòng đăng nhập!", Toast.LENGTH_LONG).show();
+                                      Thread thread = new Thread() {
+                                          @Override
+                                          public void run() {
+                                              try {
+                                                  Thread.sleep(3000); // Set time LENGTH_LONG Toast
+                                                  startActivity(new Intent(getApplicationContext(), DangNhap.class));
+                                              } catch (Exception e) {
+                                                  e.printStackTrace();
+                                              }
                                           }
-                                      }
-                                  };
-                                  thread.start();
-                              }else Toast.makeText(DangKy.this,message+"",Toast.LENGTH_SHORT).show();
+                                      };
+                                      thread.start();
+                                  } else
+                                      Toast.makeText(DangKy.this, message + "", Toast.LENGTH_SHORT).show();
 
-                             } catch (JSONException e) {
-                             e.printStackTrace();
-                            Toast.makeText(DangKy.this,"Register Error"+e.toString(),Toast.LENGTH_SHORT).show();
-                             }
-                      }
-                  },
-                  new Response.ErrorListener() {
-                    @Override
-                   public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(DangKy.this,"Email hoặc password đã tồn tại",Toast.LENGTH_SHORT).show();
-                }
-             })
-          {
-              @Override
-              protected Map<String, String> getParams() throws AuthFailureError {
-                  Map<String, String> parms = new HashMap<>();
-                  parms.put("username",username);
-                  parms.put("hoten", hoten);
-                  parms.put("email",email);
-                  parms.put("sdt",sdt);
-                  parms.put("password", password);
-                  parms.put("diachi",diachi);
-                  return parms;
-              }
-              @Override
-              protected Map<String, DataPart> getByteData() {
-                  Map<String, DataPart> params = new HashMap<>();
-                  long imagename = System.currentTimeMillis();
-                  params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
-                  return params;
-              }
+                              } catch (JSONException e) {
+                                  e.printStackTrace();
+                                  Toast.makeText(DangKy.this, "Register Error" + e.toString(), Toast.LENGTH_SHORT).show();
+                              }
+                          }
+                      },
+                      new Response.ErrorListener() {
+                          @Override
+                          public void onErrorResponse(VolleyError error) {
+                              Toast.makeText(DangKy.this, "Email hoặc Username đã tồn tại", Toast.LENGTH_SHORT).show();
+                              progressDialog.dismiss();
+                          }
+                      }) {
+                  @Override
+                  protected Map<String, String> getParams() throws AuthFailureError {
+                      Map<String, String> parms = new HashMap<>();
+                      parms.put("username", username);
+                      parms.put("hoten", hoten);
+                      parms.put("email", email);
+                      parms.put("sdt", sdt);
+                      parms.put("password", password);
+                      parms.put("diachi", diachi);
+                      return parms;
+                  }
 
-          };
-          queue.add(stringRequest);
+                  @Override
+                  protected Map<String, DataPart> getByteData() {
+                      Map<String, DataPart> params = new HashMap<>();
+                      long imagename = System.currentTimeMillis();
+                      params.put("image", new DataPart(imagename + ".png", getFileDataFromDrawable(bitmap)));
+                      return params;
+                  }
+
+              };
+              queue.add(stringRequest);
+          }
       }
 
 
-
+    public final static boolean isValidEmail(CharSequence target) {
+        if (target == null) {
+            return false;
+        } else {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
+        }
+    }
     public void selectImageFromGallery(){
         Intent intent = new Intent();
         intent.setType("image/*");
