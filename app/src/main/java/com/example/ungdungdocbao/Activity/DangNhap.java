@@ -97,15 +97,16 @@ public class DangNhap extends AppCompatActivity {
                             id = object.getString("id");
 
                         try {
-                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
-                            Log.i("profile_pic", profile_pic + "");
-                            email = response.getJSONObject().getString("email");
+
+                            //URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                            //Log.i("profile_pic", profile_pic + "");
+                            //email = response.getJSONObject().getString("email");
                             String first_name = object.getString("first_name");
                             String last_name = object.getString("last_name");
-                            name= first_name + " " + last_name;
-                            image= profile_pic.toString();
+                            name= last_name+" "+first_name;
+                            image= object.getJSONObject("picture").getJSONObject("data").getString("url");
 
-                        } catch (JSONException | MalformedURLException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         } catch (JSONException e) {
@@ -113,6 +114,10 @@ public class DangNhap extends AppCompatActivity {
                         }
                     }
                 });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id, first_name, last_name, email,gender,picture.type(large)");
+                request.setParameters(parameters);
+                request.executeAsync();
                 Toast.makeText(DangNhap.this,"Đăng nhập facebook thành công", Toast.LENGTH_LONG).show();
                 Thread thread = new Thread(){
                     @Override
@@ -120,7 +125,7 @@ public class DangNhap extends AppCompatActivity {
                         try {
                             Thread.sleep(3000); // Set time LENGTH_LONG Toast
                             FirstFragment.USER_NAME=name;
-                            FirstFragment.USER_EMAIL=email;
+                            FirstFragment.USER_EMAIL="";
                             FirstFragment.USER_AVATAR=image;
                             FirstFragment.USER_ID=id;
                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
