@@ -161,7 +161,7 @@ public class DangKy extends AppCompatActivity {
               txtDiaChi.setError("Bạn chưa nhập địa chỉ");
           }else if(password.length()==0){
               txtMatKhau.setError("Bạn chưa nhập password");
-          }else if(isValidEmail(email)) {
+          }else if(!isValidEmail(email)) {
               txtEmail.setError("Email phải có @");
           }else if(sdt.length()<10||sdt.length()>10) {
               txtSdt.setError("SDT phải có 10 kí tự");
