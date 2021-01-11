@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.example.ungdungdocbao.ui.home.HomeFragment;
 //import com.example.ungdungdocbao.ui.setting.SettingFragment;
@@ -22,10 +23,18 @@ import com.example.ungdungdocbao.Bottom_Nav.home.HomeFragment;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.example.ungdungdocbao.R;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -40,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
+
     private ViewPager viewPager;
     private TextView txt_tile;
     private ImageButton imgBtnSetting;
@@ -63,10 +73,13 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     };
+
+
     @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         saveState =new SaveState(this);
 
@@ -97,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
         if(saveState.getState()==true) {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             navigation.setBackgroundColor(AppCompatDelegate.MODE_NIGHT_YES);
@@ -114,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
     public void nextActivitySetting() {
         imgBtnSetting=findViewById(R.id.imgBtn_setting);
         imgBtnSetting.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
     public void nextTimKiem(View view) {
         imgBtnSearch=findViewById(R.id.imgBtn_search);
         startActivity(new Intent(MainActivity.this,TimKiem.class));
-
-
 
     }
 }
