@@ -84,7 +84,7 @@ public class DangKy extends AppCompatActivity {
         txtMatKhau=findViewById(R.id.txtMatKhauDK);
         txtHoTen=findViewById(R.id.txtHoTen);
         imageUpload = findViewById(R.id.uploadImage);
-        uploadButton = findViewById(R.id.uploadButton);
+        //uploadButton = findViewById(R.id.uploadButton);
         selectImageButton = findViewById(R.id.selectImageButton);
         selectImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,13 +108,7 @@ public class DangKy extends AppCompatActivity {
 
             }
         });
-        uploadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-            }
-        });
+       
         setSupportActionBar(toolbar);; //sudung toolbar nhu actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nut back cho toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
