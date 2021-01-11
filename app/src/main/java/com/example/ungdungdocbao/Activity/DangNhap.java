@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.CallbackManager;
@@ -30,6 +31,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.facebook.login.LoginResult;
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -85,6 +88,7 @@ public class DangNhap extends AppCompatActivity {
         setContentView(R.layout.dang_nhap);
         loginButton=findViewById(R.id.login_button);
         loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.setBackgroundResource(R.drawable.custom_button);
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
