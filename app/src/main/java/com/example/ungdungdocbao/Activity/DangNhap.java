@@ -19,6 +19,8 @@ import com.facebook.CallbackManager;
 
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -44,6 +46,8 @@ import com.facebook.FacebookCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -56,7 +60,7 @@ public class DangNhap extends AppCompatActivity {
     private EditText txtEmail, txtPass;
     private TextView txtQuenPass;
     private Button btnDangNhap;
-
+    String name,image,email,id;
     private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
     SaveState saveState;
 
@@ -84,7 +88,49 @@ public class DangNhap extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(DangNhap.this,"Successful", Toast.LENGTH_LONG).show();
+
+                GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                    @Override
+                    public void onCompleted(JSONObject object, GraphResponse response) {
+                       id = null;
+                        try {
+                            id = object.getString("id");
+
+                        try {
+                            URL profile_pic = new URL("https://graph.facebook.com/" + id + "/picture?width=200&height=150");
+                            Log.i("profile_pic", profile_pic + "");
+                            email = response.getJSONObject().getString("email");
+                            String first_name = object.getString("first_name");
+                            String last_name = object.getString("last_name");
+                            name= first_name + " " + last_name;
+                            image= profile_pic.toString();
+
+                        } catch (JSONException | MalformedURLException e) {
+                            e.printStackTrace();
+                        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+                Toast.makeText(DangNhap.this,"Đăng nhập facebook thành công", Toast.LENGTH_LONG).show();
+                Thread thread = new Thread(){
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(3000); // Set time LENGTH_LONG Toast
+                            FirstFragment.USER_NAME=name;
+                            FirstFragment.USER_EMAIL=email;
+                            FirstFragment.USER_AVATAR=image;
+                            FirstFragment.USER_ID=id;
+                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            startActivity(intent);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                thread.start();
             }
             @Override
             public void onCancel() {
