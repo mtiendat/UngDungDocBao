@@ -1,7 +1,13 @@
 package com.example.ungdungdocbao.Activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.telecom.Call;
+import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,14 +15,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.facebook.CallbackManager;
 
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
+import com.facebook.login.LoginResult;
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,20 +40,27 @@ import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.android.volley.Request;
 import com.example.ungdungdocbao.R;
-
+import com.facebook.FacebookCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DangNhap extends AppCompatActivity {
     //TextView txtEmail, txtPass;
+    private LoginButton loginButton;
+    private CallbackManager callbackManager;
     private EditText txtEmail, txtPass;
     private TextView txtQuenPass;
     private Button btnDangNhap;
+
     private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
     SaveState saveState;
+
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -49,14 +68,41 @@ public class DangNhap extends AppCompatActivity {
         return root;
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.dang_nhap);
+        loginButton=findViewById(R.id.login_button);
+        loginButton = (LoginButton)findViewById(R.id.login_button);
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(DangNhap.this,"Successful", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onCancel() {
+                Toast.makeText(DangNhap.this,"Login attempt canceled.", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onError(FacebookException e) {
+                Toast.makeText(DangNhap.this,"Login attempt failed.", Toast.LENGTH_LONG).show();
+            }
+        });
+        super.onCreate(savedInstanceState);
+
+
+
+
         txtEmail = findViewById(R.id.editTextTextPersonName);
         txtPass = findViewById(R.id.editTextTextPassword);
         btnDangNhap = findViewById(R.id.btn_dangnhap2);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dangnhap);
         setSupportActionBar(toolbar);
         ; //sudung toolbar nhu actionbar
@@ -92,6 +138,8 @@ public class DangNhap extends AppCompatActivity {
                 }
             }
         });
+
+
 
         saveState = new SaveState(this);
         if(saveState.getState()==true)

@@ -1,8 +1,12 @@
 package com.example.ungdungdocbao.Activity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +30,7 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     EditText mTieuDe;
     LoaderManager loaderManager;
     RecyclerView recyclerView;
+    private ImageButton imgBack;
     NewspaperAdapter mAdapter;
     private List<Newspaper> dsTimKiem = new ArrayList<>();
     SaveState saveState;
@@ -76,5 +81,10 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(@NonNull Loader<List<Newspaper>> loader) {
 
+    }
+
+    public void nextActivity(View view) {
+        imgBack=findViewById(R.id.imgBack);
+        startActivity(new Intent(TimKiem.this,MainActivity.class));
     }
 }

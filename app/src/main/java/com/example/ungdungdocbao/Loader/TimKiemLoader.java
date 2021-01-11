@@ -49,6 +49,7 @@ public class TimKiemLoader  extends AsyncTaskLoader<List<Newspaper>> {
             return listNewspaper;
 
         } catch (JSONException e) {
+
             e.printStackTrace();
         }
         return null;
