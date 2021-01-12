@@ -71,8 +71,8 @@ public class QuenMatKhau extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), DangNhap.class));
             }
         });
-
-
+        Intent intent = getIntent();
+        editTextEmail.setText(intent.getStringExtra("EMAIL"));
         btnSubmit=findViewById(R.id.btn_quempass);
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -144,7 +144,7 @@ public class DangNhap extends AppCompatActivity {
         txtQuenPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DangNhap.this, QuenMatKhau.class);
+                Intent intent = new Intent(DangNhap.this, TimKiemUser.class);
                 startActivity(intent);
             }
         });
