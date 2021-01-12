@@ -10,6 +10,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -113,6 +114,18 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         loaderManager = LoaderManager.getInstance(this);
+        StartLoader();
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.refreshThoiSu);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                StartLoader(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+        return view;
+    }
+    public void StartLoader(){
         Loader loader = loaderManager.getLoader(1000);
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
@@ -123,6 +136,5 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
         } else {
             loaderManager.restartLoader(1000, null,this);
         }
-        return view;
     }
 }

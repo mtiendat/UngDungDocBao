@@ -10,6 +10,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,15 +113,27 @@ public class CongNghe extends Fragment implements LoaderManager.LoaderCallbacks<
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1000);
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Đang tải chờ tí nhé...");
-        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
-        progressDialog.show();
+        StartLoader();
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.refreshCongNghe);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                StartLoader(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+        return view;
+    }
+    public void StartLoader(){
+        Loader loader = loaderManager.getLoader(1000);
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Đang tải chờ tí nhé...");
+            progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+            progressDialog.show();
         } else {
             loaderManager.restartLoader(1000, null,this);
         }
-        return  view;
     }
 }

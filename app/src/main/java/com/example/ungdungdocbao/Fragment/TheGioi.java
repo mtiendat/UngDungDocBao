@@ -10,6 +10,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -84,15 +85,15 @@ public class TheGioi extends Fragment implements LoaderManager.LoaderCallbacks<L
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         loaderManager = LoaderManager.getInstance(this);
         Loader loader = loaderManager.getLoader(1000);
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage("Đang tải chờ tí nhé...");
-        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
-        progressDialog.show();
-        if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
-        } else {
-            loaderManager.restartLoader(1000, null,this);
-        }
+        StartLoader();
+        final SwipeRefreshLayout pullToRefresh = view.findViewById(R.id.refreshTheGioi);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                StartLoader(); // your code
+                pullToRefresh.setRefreshing(false);
+            }
+        });
         return  view;
     }
 
@@ -119,5 +120,17 @@ public class TheGioi extends Fragment implements LoaderManager.LoaderCallbacks<L
     @Override
     public void onLoaderReset(@NonNull Loader<List<Newspaper>> loader) {
 
+    }
+    public void StartLoader(){
+        Loader loader = loaderManager.getLoader(1000);
+        if (loader == null) {
+            loaderManager.initLoader(1000, null, this);
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage("Đang tải chờ tí nhé...");
+            progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+            progressDialog.show();
+        } else {
+            loaderManager.restartLoader(1000, null,this);
+        }
     }
 }

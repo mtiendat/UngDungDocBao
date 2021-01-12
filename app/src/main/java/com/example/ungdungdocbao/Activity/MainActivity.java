@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
 
     public  static Boolean mInNightMode=false;
     private TabLayout mTabLayout;
-
     private ViewPager viewPager;
     private TextView txt_tile;
     private ImageButton imgBtnSetting;
