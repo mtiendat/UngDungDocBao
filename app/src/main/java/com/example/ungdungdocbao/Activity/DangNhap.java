@@ -289,9 +289,11 @@ public class DangNhap extends AppCompatActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             // Signed in successfully, show authenticated UI.
+            if(account.getPhotoUrl()!=null) {
+                URL pic = new URL(account.getPhotoUrl().toString());
+                updateUI("google",account.getId(),account.getDisplayName(),pic.toString(),account.getEmail());
+            }else updateUI("google",account.getId(),account.getDisplayName(),null,account.getEmail());
 
-            URL pic = new URL(account.getPhotoUrl().toString());
-            updateUI("google",account.getId(),account.getDisplayName(),pic.toString(),account.getEmail());
 
 
         } catch (ApiException | MalformedURLException e) {
