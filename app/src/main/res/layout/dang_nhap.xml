@@ -74,6 +74,16 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_quenmk"
         tools:ignore="MissingConstraints" />
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/login_button"
+        app:layout_constraintStart_toStartOf="@+id/btn_dangnhap2"
+        app:layout_constraintTop_toBottomOf="@+id/login_button"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/btn_dangnhap2"
         android:layout_width="0dp"
@@ -102,15 +112,14 @@
         android:id="@+id/textView6"
         android:layout_width="90dp"
         android:layout_height="25dp"
-        android:layout_marginTop="24dp"
         android:text="@string/tao_tai_khoan"
         android:textColor="#050505"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.003" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_button"
+        app:layout_constraintVertical_bias="0.136" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_dangnhap"
