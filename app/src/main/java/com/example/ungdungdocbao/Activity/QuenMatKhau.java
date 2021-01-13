@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
@@ -27,6 +28,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.example.ungdungdocbao.Fragment.FirstFragment;
 import com.example.ungdungdocbao.R;
@@ -42,7 +44,7 @@ public class QuenMatKhau extends AppCompatActivity {
 
     private TextView txtQuenPass;
     private Button btnSubmit;
-
+    SaveState saveState;
     private ProgressDialog progressDialog;
     private EditText editTextEmail, editTextPass;
     private  static  String URL_QuenPass="http://10.0.2.2:8000/api/quenmatkhau";
@@ -68,9 +70,16 @@ public class QuenMatKhau extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), DangNhap.class));
+                startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
+
+        saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         Intent intent = getIntent();
         editTextEmail.setText(intent.getStringExtra("EMAIL"));
         btnSubmit=findViewById(R.id.btn_quempass);

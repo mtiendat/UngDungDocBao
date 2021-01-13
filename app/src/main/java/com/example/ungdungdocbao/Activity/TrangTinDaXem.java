@@ -64,6 +64,8 @@ public class TrangTinDaXem  extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
+
+
          progressDialog = new ProgressDialog(this);
          progressDialog.setMessage("Đang tải...");
          progressDialog.show();
@@ -74,12 +76,6 @@ public class TrangTinDaXem  extends AppCompatActivity {
          recyclerView.setAdapter(mAdapter);
          getList();
 
-         saveState = new SaveState(this);
-         if(saveState.getState()==true) {
-             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-         }
-         else
-             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
     public void getList(){
         RequestQueue queue = Volley.newRequestQueue(this);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -25,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ungdungdocbao.Bottom_Nav.setting.SaveState;
 import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.example.ungdungdocbao.Fragment.FirstFragment;
 import com.example.ungdungdocbao.Loader.TimKiemUserLoader;
@@ -45,6 +47,7 @@ public class TimKiemUser  extends AppCompatActivity implements LoaderManager.Loa
     EditText mTuKhoa;
     ImageView mAvatar;
     LoaderManager loaderManager;
+    SaveState saveState;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,11 @@ public class TimKiemUser  extends AppCompatActivity implements LoaderManager.Loa
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
+        saveState=new SaveState(this);
+        if(saveState.getState()==true)
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        else
+            getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         mAvatar = findViewById(R.id.img_tk_user);
         mEmail = findViewById(R.id.txt_email);
