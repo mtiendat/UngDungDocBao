@@ -50,7 +50,8 @@ public class DanhSachTinDaXemLoader {
                                 String hinhAnh = item.getString("HinhAnh");
                                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
                                 String tacGia = item.getString("TacGia");
-                                Newspaper aNewspaper = new Newspaper(id,tieuDe,danhMuc,moTa,noiDung,ngayDang,hinhAnh,tieuDeHinhAnh,tacGia);
+                                int luotXem = item.getInt("LuotXem");
+                                Newspaper aNewspaper = new Newspaper(id, tieuDe, danhMuc, moTa, noiDung, ngayDang, hinhAnh, tieuDeHinhAnh, tacGia,luotXem);
                                 listResult.add(aNewspaper);
                             }
                         } catch (JSONException e) {

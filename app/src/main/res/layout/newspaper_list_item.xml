@@ -71,6 +71,6 @@
         app:layout_constraintStart_toEndOf="@+id/txt_ID"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.028"
-        app:srcCompat="@drawable/ic_baseline_outlined_flag_24" />
+        app:srcCompat="@drawable/ic_love_notfull" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

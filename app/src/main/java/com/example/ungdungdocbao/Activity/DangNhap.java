@@ -132,12 +132,11 @@ public class DangNhap extends AppCompatActivity {
             public void onClick(View v) {
                 String Email = txtEmail.getText().toString().trim();
                 String Password = txtPass.getText().toString().trim();
-                if (!Email.isEmpty() || !Password.isEmpty()) {
-                    Login(Email,Password);
-                } else {
+                if (Email.equals("")){
                     txtEmail.setError("Vui lòng nhập email");
+                } else if(Password.equals("")) {
                     txtPass.setError("Vui lòng nhập password");
-                }
+                }else  Login(Email,Password);
             }
         });
         txtQuenPass=findViewById(R.id.txt_quenmk);
@@ -228,6 +227,7 @@ public class DangNhap extends AppCompatActivity {
                 .build();
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
         SignInButton signInButton = findViewById (R.id.sign_in_button );
+
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -252,8 +252,6 @@ public class DangNhap extends AppCompatActivity {
                             id = object.getString("id");
 
                             try {
-
-
                                 String first_name = object.getString("first_name");
                                 String last_name = object.getString("last_name");
                                 name= last_name+" "+first_name;
@@ -320,5 +318,9 @@ public class DangNhap extends AppCompatActivity {
             }
         };
         thread.start();
+    }
+
+    public void nextActivityDangKyFromDangNhap(View view) {
+        startActivity(new Intent(this,DangKy.class));
     }
 }

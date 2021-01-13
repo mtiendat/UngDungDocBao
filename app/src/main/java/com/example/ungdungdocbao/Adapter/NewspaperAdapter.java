@@ -110,8 +110,9 @@ public class NewspaperAdapter extends RecyclerView.Adapter<NewspaperAdapter.News
         holder.mFlag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.mFlag.setBackgroundResource(R.drawable.ic_flag_active_foreground);
-                MainActivity.dsTinYeuThich.add(newspaper.getID());
+                    holder.mFlag.setBackgroundResource(R.drawable.ic_love);
+                    MainActivity.dsTinYeuThich.add(newspaper.getID());
+
             }
         });
 

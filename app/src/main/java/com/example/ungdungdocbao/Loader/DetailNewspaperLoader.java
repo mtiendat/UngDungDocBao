@@ -26,9 +26,7 @@ public class DetailNewspaperLoader extends AsyncTaskLoader<Newspaper> {
         try {
             String results = NetWorkUltis.getDetailNewspaper(id);
             JSONObject jsonObject = new JSONObject(results);
-            JSONArray detail = jsonObject.getJSONArray("data");
-            for (int i = 0; i < detail.length(); i++) {
-                JSONObject item = detail.getJSONObject(i);
+            JSONObject item = jsonObject.getJSONObject("data");
                 Integer id = item.getInt("id");
                 String tieuDe = item.getString("TieuDe");
                 String danhMuc = item.getString("DanhMuc");
@@ -38,9 +36,10 @@ public class DetailNewspaperLoader extends AsyncTaskLoader<Newspaper> {
                 String hinhAnh = item.getString("HinhAnh");
                 String tieuDeHinhAnh = item.getString("TieuDeHinhAnh");
                 String tacGia = item.getString("TacGia");
-                Newspaper aNewspaper = new Newspaper(id, tieuDe, danhMuc, moTa, noiDung, ngayDang, hinhAnh, tieuDeHinhAnh, tacGia);
+                int luotXem = item.getInt("LuotXem");
+                Newspaper aNewspaper = new Newspaper(id, tieuDe, danhMuc, moTa, noiDung, ngayDang, hinhAnh, tieuDeHinhAnh, tacGia,luotXem);
                 return aNewspaper;
-            }
+
 
         } catch (JSONException jsonException) {
             jsonException.printStackTrace();

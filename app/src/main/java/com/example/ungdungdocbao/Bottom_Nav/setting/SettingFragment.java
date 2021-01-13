@@ -97,24 +97,13 @@ public class SettingFragment extends AppCompatActivity {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
     }
     public void nextActivityDangNhap(View view) {
-        imgBtnDangNhap=findViewById(R.id.imgBtn_dangnhap);
-        imgBtnDangNhap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent intent = new Intent(SettingFragment.this, DangNhap.class);
                 startActivity(intent);
-            }
-        });
+
     }
 
     public void nextActivityDangKy(View view) {
-        imgBtnDangKy=findViewById(R.id.imgBtn_dangky);
-        imgBtnDangKy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
                 Intent intent = new Intent(SettingFragment.this, DangKy.class);
                 startActivity(intent);
-            }
-        });
     }
 }

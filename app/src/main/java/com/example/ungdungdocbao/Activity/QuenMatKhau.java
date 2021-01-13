@@ -46,7 +46,7 @@ public class QuenMatKhau extends AppCompatActivity {
     private Button btnSubmit;
     SaveState saveState;
     private ProgressDialog progressDialog;
-    private EditText editTextEmail, editTextPass;
+    private EditText editTextEmail, editTextPass,editTextConfirmPass;
     private  static  String URL_QuenPass="http://10.0.2.2:8000/api/quenmatkhau";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -59,9 +59,9 @@ public class QuenMatKhau extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quen_mat_khau);
-
         editTextEmail = findViewById(R.id.editText_email);
         editTextPass=findViewById(R.id.editText_password);
+        editTextConfirmPass= findViewById(R.id.editText_confirmpassword);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolba_quenpass);
         setSupportActionBar(toolbar);
         ; //sudung toolbar nhu actionbar
@@ -86,10 +86,19 @@ public class QuenMatKhau extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog = new ProgressDialog(QuenMatKhau.this);
-                progressDialog.setMessage("Uploading, please wait...");
-                progressDialog.show();
-                quenMatKhau();
+                if(editTextPass.getText().length()==0){
+                    editTextPass.setError("Chưa nhập mật khẩu");
+                }else if(editTextConfirmPass.getText().length()==0){
+                    editTextPass.setError("Chưa nhập xác nhận mật khẩu");
+                }
+                else if(editTextPass.getText().toString().equals(editTextConfirmPass.getText().toString())){
+                    editTextConfirmPass.setError("Xác nhận mật khẩu chưa đúng...");
+                }else {
+                    progressDialog = new ProgressDialog(QuenMatKhau.this);
+                    progressDialog.setMessage("Vui lòng đợi");
+                    progressDialog.show();
+                    quenMatKhau();
+                }
             }
         });
     }

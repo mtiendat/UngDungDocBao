@@ -54,7 +54,7 @@ public class TrangChiTiet extends AppCompatActivity{
     ListCommentAdapter mAdapter;
     List<BinhLuan> listBinhLuan= new ArrayList<>();
     SaveState saveState;
-    TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA;
+    TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA,txtLuotXem;
     DetailNewspaperLoader dt;
     private  static  String URL_DangBL="http://10.0.2.2:8000/api/dang-binhluan";
     private String id, id_user,name, user_avatar;
@@ -76,6 +76,7 @@ public class TrangChiTiet extends AppCompatActivity{
         txt_tieudeHA = findViewById(R.id.txt_tieudeHA);
         txt_tacgia=findViewById(R.id.txt_tacgia);
         txtBinhLuan = findViewById(R.id.edit_binhluan);
+        txtLuotXem=findViewById(R.id.txt_luotxem);
         txt_tieude.setFocusable(true);
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
@@ -181,6 +182,7 @@ public class TrangChiTiet extends AppCompatActivity{
             txt_tieude.setText(data.getTieuDe());
             txt_tacgia.setText(data.getTacGia());
             txt_tieudeHA.setText(data.getTieuDeHinhAnh());
+            txtLuotXem.setText(data.getLuotXem().toString());
             Picasso.get()
                     .load(data.getHinhAnh())
                     .into(img);

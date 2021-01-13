@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,16 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.timkiem);
+        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar_timkiem);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        });
         mTieuDe=findViewById(R.id.edit_nhaptimkiem);
         saveState = new SaveState(this);
         if(saveState.getState()==true) {
@@ -54,11 +65,15 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
         recyclerView.setAdapter(mAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(10);
-        if (loader == null) {
-            loaderManager.initLoader(10, null, this);
-        } else {
-            loaderManager.restartLoader(10, null,this);
+        if(mTieuDe.getText().length()==0){
+            mTieuDe.setError("Chưa nhập tiêu đề...");
+        }else {
+            Loader loader = loaderManager.getLoader(10);
+            if (loader == null) {
+                loaderManager.initLoader(10, null, this);
+            } else {
+                loaderManager.restartLoader(10, null, this);
+            }
         }
 
     }
@@ -81,10 +96,5 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     @Override
     public void onLoaderReset(@NonNull Loader<List<Newspaper>> loader) {
 
-    }
-
-    public void nextActivity(View view) {
-        imgBack=findViewById(R.id.imgBack);
-        startActivity(new Intent(TimKiem.this,MainActivity.class));
     }
 }

@@ -10,8 +10,9 @@ public class Newspaper {
     private String HinhAnh;
     private String TieuDeHinhAnh;
     private String TacGia;
+    private Integer LuotXem;
 
-    public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh, String TacGia){
+    public Newspaper(Integer Id, String TieuDe, String DanhMuc, String MoTa, String NoiDung, String NgayDang, String HinhAnh, String TieuDeHinhAnh, String TacGia, Integer LuotXem){
         this.TieuDe=TieuDe;
         this.ID = Id;
         this.DanhMuc=DanhMuc;
@@ -21,6 +22,7 @@ public class Newspaper {
         this.HinhAnh = HinhAnh;
         this.TieuDeHinhAnh= TieuDeHinhAnh;
         this.TacGia = TacGia;
+        this.LuotXem = LuotXem;
 
     }
     public int getID() {
@@ -92,5 +94,13 @@ public class Newspaper {
 
     public void setTacGia(String tacGia) {
         TacGia = tacGia;
+    }
+
+    public Integer getLuotXem() {
+        return LuotXem;
+    }
+
+    public void setLuotXem(Integer luotXem) {
+        LuotXem = luotXem;
     }
 }

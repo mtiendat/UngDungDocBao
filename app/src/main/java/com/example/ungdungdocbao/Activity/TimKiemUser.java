@@ -80,12 +80,16 @@ public class TimKiemUser  extends AppCompatActivity implements LoaderManager.Loa
     }
     public void timKiemUser(View view) {
         Log.d("TAG_NAME","Click");
-        loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1000);
-        if (loader == null) {
-            loaderManager.initLoader(1000, null, this);
-        } else {
-            loaderManager.restartLoader(1000, null,this);
+        if(mTuKhoa.getText().length()==0) {
+            mTuKhoa.setError("Chưa nhập email...");
+        }else {
+            loaderManager = LoaderManager.getInstance(this);
+            Loader loader = loaderManager.getLoader(1000);
+            if (loader == null) {
+                loaderManager.initLoader(1000, null, this);
+            } else {
+                loaderManager.restartLoader(1000, null, this);
+            }
         }
     }
     @NonNull
@@ -96,36 +100,38 @@ public class TimKiemUser  extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<User> loader, final User data) {
-        mName.setText(data.getName());
-        mEmail.setText(data.getEmail());
-        Picasso.get().load(data.getAvatar()).into(mAvatar);
-        mEmail.setVisibility(View.VISIBLE);
-        mName.setVisibility(View.VISIBLE);
-        mAvatar.setVisibility(View.VISIBLE);
-        mEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TimKiemUser.this,QuenMatKhau.class);
-                intent.putExtra("EMAIL",data.getEmail());
-                startActivity(intent);
-            }
-        });
-        mAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TimKiemUser.this,QuenMatKhau.class);
-                intent.putExtra("EMAIL",data.getEmail());
-                startActivity(intent);
-            }
-        });
-        mName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(TimKiemUser.this,QuenMatKhau.class);
-                intent.putExtra("EMAIL",data.getEmail());
-                startActivity(intent);
-            }
-        });
+        if(data!=null) {
+            mName.setText("Username: "+ data.getName());
+            mEmail.setText("Email: " + data.getEmail());
+            Picasso.get().load(data.getAvatar()).into(mAvatar);
+            mEmail.setVisibility(View.VISIBLE);
+            mName.setVisibility(View.VISIBLE);
+            mAvatar.setVisibility(View.VISIBLE);
+            mEmail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(TimKiemUser.this, QuenMatKhau.class);
+                    intent.putExtra("EMAIL", data.getEmail());
+                    startActivity(intent);
+                }
+            });
+            mAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(TimKiemUser.this, QuenMatKhau.class);
+                    intent.putExtra("EMAIL", data.getEmail());
+                    startActivity(intent);
+                }
+            });
+            mName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(TimKiemUser.this, QuenMatKhau.class);
+                    intent.putExtra("EMAIL", data.getEmail());
+                    startActivity(intent);
+                }
+            });
+        }else Toast.makeText(this,"Không tìm thấy tài khoản này...",Toast.LENGTH_SHORT).show();
     }
 
     @Override
