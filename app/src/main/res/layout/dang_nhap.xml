@@ -29,7 +29,7 @@
         android:background="@drawable/vien"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="skrtt@gmail.com"
+        android:text="maitiendat09112000@gmail.com"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/Email"
         app:layout_constraintTop_toBottomOf="@+id/Email" />
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
-        tools:text="1234567" />
+        tools:text="12345678" />
 
 
     <com.facebook.login.widget.LoginButton
