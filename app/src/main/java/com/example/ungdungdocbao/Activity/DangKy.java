@@ -1,13 +1,20 @@
 package com.example.ungdungdocbao.Activity;
 
 import android.Manifest;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -20,9 +27,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.ungdungdocbao.Bottom_Nav.setting.SettingFragment;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
@@ -30,6 +40,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.android.volley.AuthFailureError;
@@ -56,16 +67,18 @@ public class DangKy extends AppCompatActivity {
 
     private TextView txtUsername,txtEmail,txtSdt,txtHoTen,txtDiaChi,txtMatKhau;
     private Button btnDangKy;
-    private ProgressBar Loadding;
     private ImageView imageUpload;
-    private Button uploadButton, selectImageButton;
+    private Button  selectImageButton;
     private Bitmap bitmap;
     private ProgressDialog progressDialog;
-    public String imageString, filePath;
-    String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    public String  filePath;
+    private NotificationManager mNotificationManager;
+    private static final String PRIMARY_ID = "primary_notifycation_chanel";
+    private static final int NOTIFICATION_ID =1;
+    private static final String ACTION_NOTIFICATION="com.example.android.ungdungdocbao.ACTION_NOTIFICATION";
+    private NotificationReceiver mReceiver = new NotificationReceiver();
     private static final int  REQUEST_PERMISSIONS = 10;
     private static final int PICK_IMAGE_REQUEST=1;
-    String boundary = "apiclient-" + System.currentTimeMillis();
     private  static  String URL_DangKy="http://10.0.2.2:8000/api/dang-ky";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -74,11 +87,11 @@ public class DangKy extends AppCompatActivity {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dang_ky);
-        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar_dangky);
         txtUsername = findViewById(R.id.txtUsername);
         txtEmail=findViewById(R.id.txtEmailDK);
         txtSdt=findViewById(R.id.txtSDTDangKy);
@@ -100,6 +113,7 @@ public class DangKy extends AppCompatActivity {
                             Manifest.permission.READ_EXTERNAL_STORAGE))) {
 
                     } else {
+
                         ActivityCompat.requestPermissions(DangKy.this,
                                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE},
                                 REQUEST_PERMISSIONS);
@@ -110,14 +124,14 @@ public class DangKy extends AppCompatActivity {
 
             }
         });
-       
+        Toolbar toolbar =(Toolbar)findViewById(R.id.toolbar_dangky);
         setSupportActionBar(toolbar);; //sudung toolbar nhu actionbar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); //set nut back cho toolbar
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
 
@@ -136,6 +150,7 @@ public class DangKy extends AppCompatActivity {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        createNotificationChannel();
     }
 
       public void Register(){
@@ -165,11 +180,13 @@ public class DangKy extends AppCompatActivity {
               progressDialog = new ProgressDialog(DangKy.this);
               progressDialog.setMessage("Uploading, please wait...");
               progressDialog.show();
+
               RequestQueue queue = Volley.newRequestQueue(this);
               VolleyMultipartRequest stringRequest = new VolleyMultipartRequest(Request.Method.POST, URL_DangKy,
                       new Response.Listener<NetworkResponse>() {
                           @Override
                           public void onResponse(NetworkResponse response) {
+                              sendNotification();
                               progressDialog.dismiss();
                               try {
                                   Log.i("tagconvertstr", "[" + new String(response.data) + "]");
@@ -290,5 +307,45 @@ public class DangKy extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.PNG, 80, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
     }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void createNotificationChannel()
+    {
+        mNotificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O);{
+        NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_ID,
+                "Mascot Notification", NotificationManager
+                .IMPORTANCE_HIGH);
+        notificationChannel.enableLights(true);
+        notificationChannel.setLightColor(Color.RED);
+        notificationChannel.enableVibration(true);
+        notificationChannel.setDescription("Notification from Mascot");
+        mNotificationManager.createNotificationChannel(notificationChannel);
+    }
+    }
+    public void sendNotification(){
+        NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+        mNotificationManager.notify(NOTIFICATION_ID,notifyBuilder.build());
 
+    }
+    public NotificationCompat.Builder getNotificationBuilder(){
+        Intent notificationIntent = new Intent(this,MainActivity.class);
+        PendingIntent notificationPendingIntent = PendingIntent.getActivity(this,NOTIFICATION_ID,notificationIntent,PendingIntent.FLAG_UPDATE_CURRENT);
+        NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this,PRIMARY_ID)
+                .setContentTitle("Tải hình lên thành công")
+                .setSmallIcon(R.drawable.ic_launcher_foreground)
+                .setContentIntent(notificationPendingIntent)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(bitmap))
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setDefaults(NotificationCompat.DEFAULT_ALL)
+                ;
+        return notifyBuilder;
+    }
+    public class NotificationReceiver extends BroadcastReceiver {
+        public  NotificationReceiver(){}
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+        }
+    }
 }
