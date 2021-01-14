@@ -182,6 +182,10 @@ public class DangNhap extends AppCompatActivity {
                                     public void run() {
                                         try {
                                             Thread.sleep(3000); // Set time LENGTH_LONG Toast
+                                            FirstFragment.USER_NAME=user_name;
+                                            FirstFragment.USER_EMAIL=user_email;
+                                            FirstFragment.USER_ID=user_id;
+                                            FirstFragment.USER_AVATAR=user_avatar;
                                             startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                         } catch (Exception e) {
                                             e.printStackTrace();
