@@ -79,7 +79,7 @@ public class DangKy extends AppCompatActivity {
     private NotificationReceiver mReceiver = new NotificationReceiver();
     private static final int  REQUEST_PERMISSIONS = 10;
     private static final int PICK_IMAGE_REQUEST=1;
-    private  static  String URL_DangKy="http://10.0.2.2:8000/api/dang-ky";
+    private  static  String URL_DangKy=MainActivity.URL+"dang-ky";
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.dang_ky, container, false);
@@ -180,7 +180,6 @@ public class DangKy extends AppCompatActivity {
               progressDialog = new ProgressDialog(DangKy.this);
               progressDialog.setMessage("Uploading, please wait...");
               progressDialog.show();
-
               RequestQueue queue = Volley.newRequestQueue(this);
               VolleyMultipartRequest stringRequest = new VolleyMultipartRequest(Request.Method.POST, URL_DangKy,
                       new Response.Listener<NetworkResponse>() {
@@ -189,7 +188,7 @@ public class DangKy extends AppCompatActivity {
                               sendNotification();
                               progressDialog.dismiss();
                               try {
-                                  Log.i("tagconvertstr", "[" + new String(response.data) + "]");
+                                  String kq = new String(response.data);
                                   String test = new String(response.data);
                                   JSONObject jsonObject = new JSONObject(new String(response.data));
                                   String status = jsonObject.getString("status");
@@ -220,7 +219,7 @@ public class DangKy extends AppCompatActivity {
                       new Response.ErrorListener() {
                           @Override
                           public void onErrorResponse(VolleyError error) {
-                              Toast.makeText(DangKy.this, "Email hoặc Username đã tồn tại", Toast.LENGTH_SHORT).show();
+                              Toast.makeText(DangKy.this, "Lỗi kết nối", Toast.LENGTH_SHORT).show();
                               progressDialog.dismiss();
                           }
                       }) {

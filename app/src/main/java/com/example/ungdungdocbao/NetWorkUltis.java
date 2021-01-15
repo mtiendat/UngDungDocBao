@@ -3,6 +3,8 @@ package com.example.ungdungdocbao;
 import android.net.Uri;
 import android.util.Log;
 
+import com.example.ungdungdocbao.Activity.MainActivity;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,7 +15,7 @@ import java.net.URL;
 
 public class NetWorkUltis {
     public static String getNewspaper(String danhMuc) throws MalformedURLException {
-        Uri builtlURI = Uri.parse("http://10.0.2.2:8000/api/bai-viet").buildUpon()
+        Uri builtlURI = Uri.parse(MainActivity.URL+"bai-viet").buildUpon()
                 .appendQueryParameter("danhmuc",danhMuc).build();
         try {
             URL requestURL = new URL(builtlURI.toString());
@@ -27,7 +29,7 @@ public class NetWorkUltis {
     }
 
     public static String getDetailNewspaper(int id) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/chitiet").buildUpon()
+        Uri builtURI = Uri.parse(MainActivity.URL+"chitiet").buildUpon()
                 .appendQueryParameter("id",String.valueOf(id)).build();
         try {
             URL requestURL = new URL(builtURI.toString());
@@ -39,7 +41,7 @@ public class NetWorkUltis {
         }
     }
     public static String getBinhLuanByID(String id) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/binhluanbyid").buildUpon()
+        Uri builtURI = Uri.parse(MainActivity.URL+"binhluanbyid").buildUpon()
                 .appendQueryParameter("id_user",id).build();
         try {
             URL requestURL = new URL(builtURI.toString());
@@ -51,7 +53,7 @@ public class NetWorkUltis {
         }
     }
     public static String getBinhLuan(int id) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/binhluan").buildUpon()
+        Uri builtURI = Uri.parse(MainActivity.URL+"binhluan").buildUpon()
                 .appendQueryParameter("id_baiviet",String.valueOf(id)).build();
         try {
             URL requestURL = new URL(builtURI.toString());
@@ -63,7 +65,7 @@ public class NetWorkUltis {
         }
     }
     public static String getTieuDe(String tukhoa) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/timkiem").buildUpon()
+        Uri builtURI = Uri.parse(MainActivity.URL+"timkiem").buildUpon()
                 .appendQueryParameter("tukhoa",tukhoa).build();
         try {
             URL requestURL = new URL(builtURI.toString());
@@ -75,7 +77,7 @@ public class NetWorkUltis {
         }
     }
     public static String getUser(String email) {
-        Uri builtURI = Uri.parse("http://10.0.2.2:8000/api/tim-kiem-user").buildUpon()
+        Uri builtURI = Uri.parse(MainActivity.URL+"tim-kiem-user").buildUpon()
                 .appendQueryParameter("email",email).build();
         try {
             URL requestURL = new URL(builtURI.toString());

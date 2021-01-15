@@ -56,7 +56,7 @@ public class TrangChiTiet extends AppCompatActivity{
     SaveState saveState;
     TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA,txtLuotXem;
     DetailNewspaperLoader dt;
-    private  static  String URL_DangBL="http://10.0.2.2:8000/api/dang-binhluan";
+    private  static  String URL_DangBL=MainActivity.URL+"dang-binhluan";
     private String id, id_user,name, user_avatar;
     ImageView img,btn_dangbl;
     LoaderManager loaderManager;

@@ -53,7 +53,7 @@ public class TrangTinDaXem  extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tindaxem);
-
+        saveState = new SaveState(this);
         toolbar=(Toolbar) findViewById(R.id.toolbar_tindaxem);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -64,8 +64,6 @@ public class TrangTinDaXem  extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
-
-
          progressDialog = new ProgressDialog(this);
          progressDialog.setMessage("Đang tải...");
          progressDialog.show();
@@ -74,12 +72,17 @@ public class TrangTinDaXem  extends AppCompatActivity {
          mAdapter=new NewspaperAdapter(this,dsTinDaXem);
          recyclerView.setLayoutManager(new LinearLayoutManager(this));
          recyclerView.setAdapter(mAdapter);
+         if(saveState.getState()==true) {
+             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+         }
+         else
+             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_NO);
          getList();
 
     }
     public void getList(){
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://10.0.2.2:8000/api/tin-da-xem",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, MainActivity.URL+"tin-da-xem",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

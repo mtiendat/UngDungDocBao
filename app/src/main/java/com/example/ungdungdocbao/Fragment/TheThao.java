@@ -126,12 +126,16 @@ public class TheThao extends Fragment implements LoaderManager.LoaderCallbacks<L
         Loader loader = loaderManager.getLoader(1000);
         if (loader == null) {
             loaderManager.initLoader(1000, null, this);
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Đang tải chờ tí nhé...");
-            progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
-            progressDialog.show();
+            progressDisplay();
         } else {
             loaderManager.restartLoader(1000, null,this);
+            progressDisplay();
         }
+    }
+    public void progressDisplay(){
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Đang tải chờ tí nhé...");
+        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+        progressDialog.show();
     }
 }

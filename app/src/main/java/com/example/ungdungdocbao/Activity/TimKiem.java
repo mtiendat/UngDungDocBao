@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +31,7 @@ import java.util.List;
 
 public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Newspaper>> {
     EditText mTieuDe;
+    TextView mSoLuong;
     LoaderManager loaderManager;
     RecyclerView recyclerView;
     private ImageButton imgBack;
@@ -50,6 +53,7 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
             }
         });
         mTieuDe=findViewById(R.id.edit_nhaptimkiem);
+        mSoLuong=findViewById(R.id.txt_soluongkq);
         saveState = new SaveState(this);
         if(saveState.getState()==true) {
             getDelegate().setLocalNightMode(AppCompatDelegate.MODE_NIGHT_YES);
@@ -88,8 +92,13 @@ public class TimKiem extends AppCompatActivity implements LoaderManager.LoaderCa
     public void onLoadFinished(@NonNull Loader<List<Newspaper>> loader, List<Newspaper> data) {
         dsTimKiem.clear();
         if(data!=null) {
+            mSoLuong.setVisibility(View.VISIBLE);
+            mSoLuong.setText("Tìm thấy "+ data.size()+" kết quả");
             dsTimKiem.addAll(data);
             mAdapter.notifyDataSetChanged();
+        }else {
+            mSoLuong.setVisibility(View.INVISIBLE);
+            Toast.makeText(this, "Không tìm thấy bài báo nào...", Toast.LENGTH_SHORT).show();
         }
     }
 

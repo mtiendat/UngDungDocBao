@@ -73,7 +73,7 @@ public class DangNhap extends AppCompatActivity {
     private TextView txtQuenPass;
     private Button btnDangNhap;
     String name,image,email,id;
-    private static String URL_DANGNHAP = "http://10.0.2.2:8000/api/dang-nhap";
+    private static String URL_DANGNHAP = MainActivity.URL+"dang-nhap";
     private final int RC_SIGN_IN = 999;
     SaveState saveState;
 

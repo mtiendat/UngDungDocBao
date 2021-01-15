@@ -47,7 +47,7 @@ public class QuenMatKhau extends AppCompatActivity {
     SaveState saveState;
     private ProgressDialog progressDialog;
     private EditText editTextEmail, editTextPass,editTextConfirmPass;
-    private  static  String URL_QuenPass="http://10.0.2.2:8000/api/quenmatkhau";
+    private  static  String URL_QuenPass=MainActivity.URL+"quenmatkhau";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -91,7 +91,7 @@ public class QuenMatKhau extends AppCompatActivity {
                 }else if(editTextConfirmPass.getText().length()==0){
                     editTextPass.setError("Chưa nhập xác nhận mật khẩu");
                 }
-                else if(editTextPass.getText().toString().equals(editTextConfirmPass.getText().toString())){
+                else if(!editTextPass.getText().toString().equals(editTextConfirmPass.getText().toString())){
                     editTextConfirmPass.setError("Xác nhận mật khẩu chưa đúng...");
                 }else {
                     progressDialog = new ProgressDialog(QuenMatKhau.this);

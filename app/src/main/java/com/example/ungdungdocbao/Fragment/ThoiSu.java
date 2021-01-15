@@ -128,13 +128,19 @@ public class ThoiSu extends Fragment implements LoaderManager.LoaderCallbacks<Li
     public void StartLoader(){
         Loader loader = loaderManager.getLoader(1000);
         if (loader == null) {
+
             loaderManager.initLoader(1000, null, this);
-            progressDialog = new ProgressDialog(getContext());
-            progressDialog.setMessage("Đang tải chờ tí nhé...");
-            progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
-            progressDialog.show();
+            progressDisplay();
+
         } else {
             loaderManager.restartLoader(1000, null,this);
+            progressDisplay();
         }
+    }
+    public void progressDisplay(){
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage("Đang tải chờ tí nhé...");
+        progressDialog.setProgressStyle(R.color.colorThemeVNExpress);
+        progressDialog.show();
     }
 }

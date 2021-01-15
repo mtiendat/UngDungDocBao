@@ -100,7 +100,7 @@
 
     <EditText
         android:id="@+id/editText_confirmpassword"
-        android:layout_width="350dp"
+        android:layout_width="362dp"
         android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
