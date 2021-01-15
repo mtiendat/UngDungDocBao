@@ -64,7 +64,6 @@ public class TrangTinDaXem  extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
-
          recyclerView =findViewById(R.id.recyclerView_tindaxem);
          mAdapter=new NewspaperAdapter(this,dsTinDaXem);
          recyclerView.setLayoutManager(new LinearLayoutManager(this));

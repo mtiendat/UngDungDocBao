@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     public static Integer tindaxem;
     public static List<Integer> dsTinDaXem = new ArrayList<>();
     public static List<Integer> dsTinYeuThich = new ArrayList<>();
-    public static final String URL = "http://192.168.170.24:8000/api/";
+    public static final String URL = "http://192.168.42.14:8000/api/";
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override

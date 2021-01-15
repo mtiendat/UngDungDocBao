@@ -164,6 +164,7 @@
                     android:drawableStart="@drawable/custom_lock_icon"
                     android:drawablePadding="12dp"
                     android:ems="10"
+                    android:hint="Mật khẩu"
                     android:inputType="textPassword"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
