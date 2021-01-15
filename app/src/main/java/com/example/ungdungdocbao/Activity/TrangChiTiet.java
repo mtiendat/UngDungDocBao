@@ -54,7 +54,7 @@ public class TrangChiTiet extends AppCompatActivity{
     ListCommentAdapter mAdapter;
     List<BinhLuan> listBinhLuan= new ArrayList<>();
     SaveState saveState;
-    TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA,txtLuotXem;
+    TextView txt_noidung,txt_motangan,txt_tieude,txt_tacgia,txt_tieudeHA,txtLuotXem,txt_NgayDang;
     DetailNewspaperLoader dt;
     private  static  String URL_DangBL=MainActivity.URL+"dang-binhluan";
     private String id, id_user,name, user_avatar;
@@ -78,6 +78,7 @@ public class TrangChiTiet extends AppCompatActivity{
         txtBinhLuan = findViewById(R.id.edit_binhluan);
         txtLuotXem=findViewById(R.id.txt_luotxem);
         txt_tieude.setFocusable(true);
+        txt_NgayDang = findViewById(R.id.txtNgayDang);
         Intent intent = getIntent();
         id = intent.getStringExtra("ID");
         id_user = intent.getStringExtra("id_user");
@@ -93,27 +94,33 @@ public class TrangChiTiet extends AppCompatActivity{
         progressDialog.show();
 
         loaderManager = LoaderManager.getInstance(this);
-        Loader loader = loaderManager.getLoader(1111);
-        if (loader == null) {
-            loaderManager.initLoader(1111, null, new CallBack1());
+        loaderTrangChiTiet();
+        loaderBinhLuan();
 
-        } else {
-            loaderManager.restartLoader(1111, null, new CallBack1());
-        }
-
-        Loader loader2 = loaderManager.getLoader(2222);
-        if (loader2 == null) {
-            loaderManager.initLoader(2222, null, new CallBack2());
-        } else {
-            loaderManager.restartLoader(2222, null, new CallBack2());
-        }
         recyclerView = findViewById(R.id.recyclerview_list_cmt);
         mAdapter = new ListCommentAdapter(this,listBinhLuan);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(mAdapter);
 
     }
+public void loaderTrangChiTiet(){
+    Loader loader = loaderManager.getLoader(1111);
+    if (loader == null) {
+        loaderManager.initLoader(1111, null, new CallBack1());
 
+    } else {
+        loaderManager.restartLoader(1111, null, new CallBack1());
+    }
+
+}
+public void loaderBinhLuan(){
+    Loader loader2 = loaderManager.getLoader(2222);
+    if (loader2 == null) {
+        loaderManager.initLoader(2222, null, new CallBack2());
+    } else {
+        loaderManager.restartLoader(2222, null, new CallBack2());
+    }
+}
     private void postBinhLuan() {
         final String noidung = txtBinhLuan.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -127,8 +134,12 @@ public class TrangChiTiet extends AppCompatActivity{
                             String status=jsonObject.getString("status");
                             String message=jsonObject.getString("message");
                             if(status.equals("success")){
+                                txtBinhLuan.setText("");
+                                loaderBinhLuan();
                                 Toast.makeText(getApplicationContext(),"Đăng thành công",Toast.LENGTH_SHORT).show();
                             }else Toast.makeText(getApplicationContext(),message+"",Toast.LENGTH_SHORT).show();
+
+
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -183,6 +194,7 @@ public class TrangChiTiet extends AppCompatActivity{
             txt_tacgia.setText(data.getTacGia());
             txt_tieudeHA.setText(data.getTieuDeHinhAnh());
             txtLuotXem.setText(data.getLuotXem().toString());
+            txt_NgayDang.setText(data.getNgayDang().toString());
             Picasso.get()
                     .load(data.getHinhAnh())
                     .into(img);

@@ -64,9 +64,6 @@ public class TrangTinDaXem  extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), SettingFragment.class));
             }
         });
-         progressDialog = new ProgressDialog(this);
-         progressDialog.setMessage("Đang tải...");
-         progressDialog.show();
 
          recyclerView =findViewById(R.id.recyclerView_tindaxem);
          mAdapter=new NewspaperAdapter(this,dsTinDaXem);
@@ -88,7 +85,6 @@ public class TrangTinDaXem  extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Display the first 500 characters of the response string.
                         Log.i("reponsestringrequest",response);
-                        progressDialog.dismiss();
                         try {
                             JSONObject jsonObject = new JSONObject(response);
                             JSONArray newspaper = jsonObject.getJSONArray("data");

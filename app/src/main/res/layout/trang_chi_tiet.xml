@@ -17,11 +17,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/txtNgayDang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="24/12/2000"
         android:textStyle="italic"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
         app:layout_constraintStart_toEndOf="@+id/textView13" />
@@ -169,8 +168,8 @@
         android:layout_marginStart="16dp"
         android:text="Lượt xem"
         android:textStyle="italic"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView14"
-        app:layout_constraintStart_toEndOf="@+id/textView14" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/txtNgayDang"
+        app:layout_constraintStart_toEndOf="@+id/txtNgayDang" />
 
     <TextView
         android:id="@+id/txt_luotxem"
